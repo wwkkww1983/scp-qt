@@ -21,4 +21,8 @@ add a history viewer
 add a history viewer
 	create a logo for historyViewer
 need a simple icon/logo for scp-qt
+
+add functionality to updateTransfer{'Get','Send'} to generate a current transfer log to track exactly what files/dirs have been copied and save the save log to a transfer-logs directory
+
+add functionality that detects the size of the history.json log, and when it reaches a certain size is moved to a history-archives directory that is not read from by the application, and the history.json is truncated back to 2 bytes/characters; this check should be done at program startup, with a warning dialog letting the user know what is going on and where the data is being sent for future ference.
 </pending>
