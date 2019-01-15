@@ -592,6 +592,6 @@ class Ui_scp_qt(object):
         self.menuFile.setTitle(_translate("scp_qt", "&File"))
         self.actionQuit.setText(_translate("scp_qt", "&Quit"))
         self.actionQuit.setShortcut(_translate("scp_qt", "Ctrl+Q"))
-        self.actionUse_Last_Transaction.setText(_translate("scp_qt", "Use Last Transaction"))
+        self.actionUse_Last_Transaction.setText(_translate("scp_qt", "Use &Last Transaction"))
         self.actionHistory.setText(_translate("scp_qt", "&History"))
 

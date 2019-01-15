@@ -130,10 +130,13 @@ class dest:
         if os.path.exists(self.historyFile):
             with open(self.historyFile,'r') as cnf:
                 log=json.load(cnf)
+        try:
             countLast=sorted([int(i) for i in log.keys()])[-1]
             self.in_config=log[str(countLast)]
             for tab in self.tabs:
                 self.loadFields(tab=tab)
+        except:
+            self.statusBar().showMessage('No Last History to use!')
 
     def openFile(self,mode='file',windowTitle='Open',defaultDir='~'):
         home=os.path.expandvars(os.path.expanduser(defaultDir))
