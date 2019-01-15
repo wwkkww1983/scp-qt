@@ -1,0 +1,7 @@
+{
+	"destination":"/home/carl/archives",
+	"ext":"tar.xz",
+	"source":"../scp-qt",
+	"fname":"scp-qt",
+	"log":"latest.txt"
+}

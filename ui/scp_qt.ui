@@ -1,0 +1,1136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>scp_qt</class>
+ <widget class="QMainWindow" name="scp_qt">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>859</width>
+    <height>693</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>scp-qt</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="send_tab">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <attribute name="title">
+        <string>Send</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_25">
+        <item row="1" column="1">
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="2" column="2">
+           <layout class="QGridLayout" name="gridLayout_5">
+            <item row="2" column="1">
+             <widget class="QScrollArea" name="scrollArea">
+              <property name="widgetResizable">
+               <bool>true</bool>
+              </property>
+              <widget class="QWidget" name="scrollAreaWidgetContents">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>0</y>
+                 <width>721</width>
+                 <height>576</height>
+                </rect>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_4">
+                <item row="1" column="0">
+                 <layout class="QGridLayout" name="gridLayout_15">
+                  <item row="1" column="0">
+                   <widget class="QFrame" name="frame_2">
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>200</height>
+                     </size>
+                    </property>
+                    <property name="frameShape">
+                     <enum>QFrame::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Raised</enum>
+                    </property>
+                    <layout class="QGridLayout" name="gridLayout_8">
+                     <item row="0" column="0">
+                      <widget class="QGroupBox" name="groupBox">
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>200</height>
+                        </size>
+                       </property>
+                       <property name="title">
+                        <string>Source</string>
+                       </property>
+                       <layout class="QGridLayout" name="gridLayout_7">
+                        <item row="1" column="0">
+                         <layout class="QGridLayout" name="gridLayout_6">
+                          <item row="0" column="1">
+                           <widget class="QPushButton" name="browse">
+                            <property name="text">
+                             <string>Browse</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="2" column="1">
+                           <widget class="QScrollArea" name="scrollArea_3">
+                            <property name="widgetResizable">
+                             <bool>true</bool>
+                            </property>
+                            <widget class="QWidget" name="scrollAreaWidgetContents_3">
+                             <property name="geometry">
+                              <rect>
+                               <x>0</x>
+                               <y>0</y>
+                               <width>98</width>
+                               <height>90</height>
+                              </rect>
+                             </property>
+                             <layout class="QGridLayout" name="gridLayout_22">
+                              <item row="1" column="0">
+                               <layout class="QGridLayout" name="gridLayout_21">
+                                <item row="0" column="0">
+                                 <widget class="QTextEdit" name="sources"/>
+                                </item>
+                               </layout>
+                              </item>
+                             </layout>
+                            </widget>
+                           </widget>
+                          </item>
+                          <item row="0" column="2">
+                           <widget class="QCheckBox" name="sendDirectory">
+                            <property name="text">
+                             <string>Send Directory</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="2" column="2">
+                           <layout class="QGridLayout" name="gridLayout_24">
+                            <item row="1" column="0">
+                             <widget class="QPushButton" name="appendSource">
+                              <property name="text">
+                               <string>&amp;Append To List</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="2" column="0">
+                             <widget class="QPushButton" name="clearSources">
+                              <property name="text">
+                               <string>&amp;Clear List</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item row="0" column="0">
+                             <spacer name="verticalSpacer_2">
+                              <property name="orientation">
+                               <enum>Qt::Vertical</enum>
+                              </property>
+                              <property name="sizeHint" stdset="0">
+                               <size>
+                                <width>20</width>
+                                <height>40</height>
+                               </size>
+                              </property>
+                             </spacer>
+                            </item>
+                           </layout>
+                          </item>
+                         </layout>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QGroupBox" name="groupBox_2">
+                    <property name="minimumSize">
+                     <size>
+                      <width>390</width>
+                      <height>350</height>
+                     </size>
+                    </property>
+                    <property name="title">
+                     <string>Destination</string>
+                    </property>
+                    <layout class="QGridLayout" name="gridLayout_10">
+                     <item row="0" column="0">
+                      <layout class="QGridLayout" name="gridLayout_9">
+                       <item row="0" column="0">
+                        <widget class="QScrollArea" name="scrollArea_2">
+                         <property name="widgetResizable">
+                          <bool>true</bool>
+                         </property>
+                         <widget class="QWidget" name="scrollAreaWidgetContents_2">
+                          <property name="geometry">
+                           <rect>
+                            <x>0</x>
+                            <y>0</y>
+                            <width>362</width>
+                            <height>275</height>
+                           </rect>
+                          </property>
+                          <layout class="QGridLayout" name="gridLayout_13">
+                           <item row="0" column="0">
+                            <layout class="QGridLayout" name="gridLayout_12">
+                             <item row="0" column="0">
+                              <widget class="QFrame" name="frame">
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                               <layout class="QGridLayout" name="gridLayout_14">
+                                <item row="0" column="0">
+                                 <layout class="QGridLayout" name="gridLayout_11">
+                                  <item row="0" column="0">
+                                   <widget class="QLabel" name="status">
+                                    <property name="minimumSize">
+                                     <size>
+                                      <width>320</width>
+                                      <height>200</height>
+                                     </size>
+                                    </property>
+                                    <property name="text">
+                                     <string>Status</string>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                 </layout>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                           <item row="1" column="0">
+                            <layout class="QGridLayout" name="gridLayout_17">
+                             <item row="0" column="0">
+                              <widget class="QPushButton" name="send">
+                               <property name="text">
+                                <string>Send</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="0" column="1">
+                              <widget class="QPushButton" name="connect">
+                               <property name="text">
+                                <string>Check Connection</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                          </layout>
+                         </widget>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QGroupBox" name="groupBox_3">
+                  <property name="title">
+                   <string>Destination Information</string>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_16">
+                   <item row="0" column="0">
+                    <widget class="QFrame" name="frame_3">
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Raised</enum>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_20">
+                      <item row="0" column="0">
+                       <layout class="QGridLayout" name="gridLayout_3">
+                        <item row="1" column="1">
+                         <widget class="QLineEdit" name="host_address">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="4" column="0">
+                         <widget class="QLabel" name="passwordLabel">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="text">
+                           <string>Password</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="2" column="1">
+                         <widget class="QSpinBox" name="port_remote">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="maximum">
+                           <number>65535</number>
+                          </property>
+                          <property name="value">
+                           <number>22</number>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="1" column="0">
+                         <widget class="QLabel" name="hostLabel">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="text">
+                           <string>Host</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="3" column="0">
+                         <widget class="QLabel" name="userLabel">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="text">
+                           <string>User</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="2" column="0">
+                         <widget class="QLabel" name="portLabel">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="text">
+                           <string>Port</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="3" column="1">
+                         <widget class="QLineEdit" name="user_remote">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="4" column="1">
+                         <widget class="QLineEdit" name="password_remote">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="echoMode">
+                           <enum>QLineEdit::PasswordEchoOnEdit</enum>
+                          </property>
+                          <property name="dragEnabled">
+                           <bool>true</bool>
+                          </property>
+                          <property name="clearButtonEnabled">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="5" column="1">
+                         <widget class="QLineEdit" name="destination">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="5" column="0">
+                         <widget class="QLabel" name="destinationLabel">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="text">
+                           <string>Destination</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="1" column="2">
+                         <widget class="QCheckBox" name="hostEdit">
+                          <property name="text">
+                           <string>edit</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="2" column="2">
+                         <widget class="QCheckBox" name="portEdit">
+                          <property name="text">
+                           <string>edit</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="3" column="2">
+                         <widget class="QCheckBox" name="userEdit">
+                          <property name="text">
+                           <string>edit</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="4" column="2">
+                         <widget class="QCheckBox" name="passwordEdit">
+                          <property name="text">
+                           <string>edit</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="5" column="2">
+                         <widget class="QCheckBox" name="destinationEdit">
+                          <property name="text">
+                           <string>edit</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="6" column="1">
+                         <spacer name="verticalSpacer">
+                          <property name="orientation">
+                           <enum>Qt::Vertical</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>20</width>
+                            <height>40</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="QGroupBox" name="groupBox_4">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>150</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="title">
+                      <string>HostKey</string>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_19">
+                      <item row="0" column="0">
+                       <layout class="QGridLayout" name="gridLayout_18">
+                        <property name="sizeConstraint">
+                         <enum>QLayout::SetDefaultConstraint</enum>
+                        </property>
+                        <item row="1" column="0">
+                         <widget class="QLabel" name="hostKeyLabel">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>16777215</width>
+                            <height>25</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>HostKey</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="1" column="1">
+                         <widget class="QLineEdit" name="hostKey">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>16777215</width>
+                            <height>25</height>
+                           </size>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="1" column="2">
+                         <widget class="QCheckBox" name="hostKeyEdit">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>16777215</width>
+                            <height>25</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>Edit</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="0" column="0">
+                         <widget class="QCheckBox" name="useKeys">
+                          <property name="maximumSize">
+                           <size>
+                            <width>16777215</width>
+                            <height>25</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>Use Host Key</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="0" column="1">
+                         <widget class="QPushButton" name="hostKeyBrowse">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="text">
+                           <string>Browse</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="1">
+         <layout class="QGridLayout" name="gridLayout_50">
+          <item row="0" column="1">
+           <widget class="QPushButton" name="send_transfer_cancel">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Cancel</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <layout class="QGridLayout" name="gridLayout_49">
+            <item row="0" column="0">
+             <widget class="QProgressBar" name="totalProgress_send">
+              <property name="value">
+               <number>0</number>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QProgressBar" name="progressBar">
+              <property name="value">
+               <number>0</number>
+              </property>
+              <property name="textVisible">
+               <bool>true</bool>
+              </property>
+              <property name="invertedAppearance">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="get_tab">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <attribute name="title">
+        <string>Get</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_47">
+        <item row="2" column="0">
+         <layout class="QGridLayout" name="gridLayout_23">
+          <item row="2" column="2">
+           <layout class="QGridLayout" name="gridLayout_26">
+            <item row="2" column="1">
+             <widget class="QScrollArea" name="scrollArea_4">
+              <property name="widgetResizable">
+               <bool>true</bool>
+              </property>
+              <widget class="QWidget" name="scrollAreaWidgetContents_4">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>0</y>
+                 <width>799</width>
+                 <height>576</height>
+                </rect>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_27">
+                <item row="1" column="0">
+                 <layout class="QGridLayout" name="gridLayout_28">
+                  <item row="1" column="0">
+                   <widget class="QFrame" name="frame_4">
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>200</height>
+                     </size>
+                    </property>
+                    <property name="frameShape">
+                     <enum>QFrame::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Raised</enum>
+                    </property>
+                    <layout class="QGridLayout" name="gridLayout_29">
+                     <item row="0" column="0">
+                      <widget class="QGroupBox" name="destination_get">
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>200</height>
+                        </size>
+                       </property>
+                       <property name="title">
+                        <string>Destination</string>
+                       </property>
+                       <layout class="QGridLayout" name="gridLayout_30">
+                        <item row="1" column="0">
+                         <layout class="QGridLayout" name="gridLayout_31">
+                          <item row="0" column="2">
+                           <widget class="QLineEdit" name="destination_get_le"/>
+                          </item>
+                          <item row="0" column="1">
+                           <widget class="QPushButton" name="browse_get">
+                            <property name="text">
+                             <string>Browse</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="1" column="1">
+                           <spacer name="verticalSpacer_3">
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>20</width>
+                              <height>40</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                         </layout>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QGroupBox" name="source_get">
+                    <property name="minimumSize">
+                     <size>
+                      <width>390</width>
+                      <height>350</height>
+                     </size>
+                    </property>
+                    <property name="title">
+                     <string>Source</string>
+                    </property>
+                    <layout class="QGridLayout" name="gridLayout_35">
+                     <item row="0" column="0">
+                      <layout class="QGridLayout" name="gridLayout_36">
+                       <item row="0" column="0">
+                        <widget class="QScrollArea" name="scrollArea_6">
+                         <property name="widgetResizable">
+                          <bool>true</bool>
+                         </property>
+                         <widget class="QWidget" name="scrollAreaWidgetContents_6">
+                          <property name="geometry">
+                           <rect>
+                            <x>0</x>
+                            <y>0</y>
+                            <width>362</width>
+                            <height>302</height>
+                           </rect>
+                          </property>
+                          <layout class="QGridLayout" name="gridLayout_37">
+                           <item row="0" column="0">
+                            <layout class="QGridLayout" name="gridLayout_38">
+                             <item row="0" column="0">
+                              <widget class="QFrame" name="frame_5">
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                               <layout class="QGridLayout" name="gridLayout_39">
+                                <item row="0" column="0">
+                                 <layout class="QGridLayout" name="gridLayout_40">
+                                  <item row="0" column="0">
+                                   <widget class="QLabel" name="status_get">
+                                    <property name="minimumSize">
+                                     <size>
+                                      <width>320</width>
+                                      <height>200</height>
+                                     </size>
+                                    </property>
+                                    <property name="text">
+                                     <string>Status</string>
+                                    </property>
+                                   </widget>
+                                  </item>
+                                 </layout>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                           <item row="1" column="0">
+                            <layout class="QGridLayout" name="gridLayout_41">
+                             <item row="0" column="0">
+                              <widget class="QPushButton" name="get_btn">
+                               <property name="text">
+                                <string>Get</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="0" column="1">
+                              <widget class="QPushButton" name="check_connection_get">
+                               <property name="text">
+                                <string>Check Connection</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                          </layout>
+                         </widget>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QGroupBox" name="source_info_get">
+                  <property name="title">
+                   <string>Source Information</string>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_42">
+                   <item row="0" column="0">
+                    <widget class="QFrame" name="frame_6">
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Raised</enum>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_43">
+                      <item row="0" column="0">
+                       <layout class="QGridLayout" name="gridLayout_44">
+                        <item row="1" column="1">
+                         <widget class="QLineEdit" name="host_address_get">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="4" column="0">
+                         <widget class="QLabel" name="passwordLabel_get">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="text">
+                           <string>Password</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="2" column="1">
+                         <widget class="QSpinBox" name="port_remote_get">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="maximum">
+                           <number>65535</number>
+                          </property>
+                          <property name="value">
+                           <number>22</number>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="1" column="0">
+                         <widget class="QLabel" name="hostLabel_get">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="text">
+                           <string>Host</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="3" column="0">
+                         <widget class="QLabel" name="userLabel_get">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="text">
+                           <string>User</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="2" column="0">
+                         <widget class="QLabel" name="portLabel_get">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="text">
+                           <string>Port</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="3" column="1">
+                         <widget class="QLineEdit" name="user_remote_get">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="4" column="1">
+                         <widget class="QLineEdit" name="password_remote_get">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="echoMode">
+                           <enum>QLineEdit::PasswordEchoOnEdit</enum>
+                          </property>
+                          <property name="dragEnabled">
+                           <bool>true</bool>
+                          </property>
+                          <property name="clearButtonEnabled">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="5" column="0">
+                         <widget class="QLabel" name="sourceLabel_get">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="text">
+                           <string>Source</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="1" column="2">
+                         <widget class="QCheckBox" name="hostEdit_get">
+                          <property name="text">
+                           <string>edit</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="3" column="2">
+                         <widget class="QCheckBox" name="userEdit_get">
+                          <property name="text">
+                           <string>edit</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="4" column="2">
+                         <widget class="QCheckBox" name="passwordEdit_get">
+                          <property name="text">
+                           <string>edit</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="5" column="2">
+                         <widget class="QCheckBox" name="sourceEdit_get">
+                          <property name="text">
+                           <string>edit</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="6" column="1">
+                         <spacer name="verticalSpacer_4">
+                          <property name="orientation">
+                           <enum>Qt::Vertical</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>20</width>
+                            <height>40</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                        <item row="2" column="2">
+                         <widget class="QCheckBox" name="portEdit_get">
+                          <property name="text">
+                           <string>edit</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="5" column="1">
+                         <widget class="QScrollArea" name="scrollArea_5">
+                          <property name="widgetResizable">
+                           <bool>true</bool>
+                          </property>
+                          <widget class="QWidget" name="scrollAreaWidgetContents_5">
+                           <property name="geometry">
+                            <rect>
+                             <x>0</x>
+                             <y>0</y>
+                             <width>211</width>
+                             <height>187</height>
+                            </rect>
+                           </property>
+                           <layout class="QGridLayout" name="gridLayout_33">
+                            <item row="0" column="0">
+                             <layout class="QGridLayout" name="gridLayout_32">
+                              <item row="0" column="0">
+                               <widget class="QTextEdit" name="source_le">
+                                <property name="enabled">
+                                 <bool>false</bool>
+                                </property>
+                               </widget>
+                              </item>
+                             </layout>
+                            </item>
+                           </layout>
+                          </widget>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="QGroupBox" name="groupBox_8">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>150</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="title">
+                      <string>HostKey</string>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_45">
+                      <item row="0" column="0">
+                       <layout class="QGridLayout" name="gridLayout_46">
+                        <property name="sizeConstraint">
+                         <enum>QLayout::SetDefaultConstraint</enum>
+                        </property>
+                        <item row="1" column="0">
+                         <widget class="QLabel" name="hostKeyLabel_get">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>16777215</width>
+                            <height>25</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>HostKey</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="1" column="1">
+                         <widget class="QLineEdit" name="hostKey_get">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>16777215</width>
+                            <height>25</height>
+                           </size>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="1" column="2">
+                         <widget class="QCheckBox" name="hostKeyEdit_get">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>16777215</width>
+                            <height>25</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>Edit</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="0" column="0">
+                         <widget class="QCheckBox" name="useKeys_get">
+                          <property name="maximumSize">
+                           <size>
+                            <width>16777215</width>
+                            <height>25</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>Use Host Key</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="0" column="1">
+                         <widget class="QPushButton" name="hostKeyBrowse_get">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="text">
+                           <string>Browse</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="0">
+         <layout class="QGridLayout" name="gridLayout_34">
+          <item row="1" column="1">
+           <layout class="QGridLayout" name="gridLayout_48">
+            <item row="1" column="0">
+             <widget class="QProgressBar" name="progressBar_get">
+              <property name="value">
+               <number>0</number>
+              </property>
+              <property name="textVisible">
+               <bool>true</bool>
+              </property>
+              <property name="invertedAppearance">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QProgressBar" name="totalProgress_get">
+              <property name="value">
+               <number>0</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="get_transfer_cancel">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Cancel</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>859</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="actionQuit"/>
+    <addaction name="actionUse_Last_Transaction"/>
+    <addaction name="actionHistory"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionQuit">
+   <property name="text">
+    <string>&amp;Quit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionUse_Last_Transaction">
+   <property name="text">
+    <string>Use Last Transaction</string>
+   </property>
+  </action>
+  <action name="actionHistory">
+   <property name="text">
+    <string>&amp;History</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

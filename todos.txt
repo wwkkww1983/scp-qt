@@ -1,0 +1,24 @@
+<done>
+work on get tab's cancel button
+	if sftp.sock.closed != True:
+		sftp.put('localfile','remotefile')
+	else:
+		return False
+add transfer transaction history via json logfile
+add load last-transaction from history
+change password fields to hide plaintext passwords
+add desktop icon/notification system for progress
+add a history viewer
+	options
+		clear history
+		load history
+	work on adding button functionality for 
+		remove
+		clear
+
+</done>
+<pending>
+add a history viewer
+	create a logo for historyViewer
+need a simple icon/logo for scp-qt
+</pending>

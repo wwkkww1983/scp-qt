@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0059)http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><title>QSystemTrayIcon Class Reference</title><style>h3.fn,span.fn { margin-left: 1cm; text-indent: -1cm }
+a:link { color: #004faf; text-decoration: none }
+a:visited { color: #672967; text-decoration: none }
+td.postheader { font-family: sans-serif }
+tr.address { font-family: sans-serif }
+body { background: #ffffff; color: black; }
+</style></head><body><div id="i4c-draggable-container" style="position: fixed; z-index: 1499; width: 0px; height: 0px;"><div data-reactroot="" class="resolved" style="all: initial;"></div></div><table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td align="left" valign="top" width="32"><img align="left" border="0" height="32" src="./QSystemTrayIcon Class Reference_files/rb-logo.png" width="32"></td><td width="1">&nbsp;&nbsp;</td><td class="postheader" valign="center"><a href="http://pyqt.sourceforge.net/Docs/PyQt4/index.html"><font color="#004faf">Home</font></a>&nbsp;· <a href="http://pyqt.sourceforge.net/Docs/PyQt4/classes.html"><font color="#004faf">All Classes</font></a>&nbsp;· <a href="http://pyqt.sourceforge.net/Docs/PyQt4/modules.html"><font color="#004faf">Modules</font></a></td></tr></tbody></table><h1 align="center">QSystemTrayIcon Class Reference<br><sup><sup>[<a href="http://pyqt.sourceforge.net/Docs/PyQt4/qtgui.html">QtGui</a> module]</sup></sup></h1><p>The QSystemTrayIcon class provides an icon for an application in
+the system tray. <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#details">More...</a></p>
+
+<p>Inherits <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qobject.html">QObject</a>.</p><h3>Types</h3><ul><li><div class="fn">enum <b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#ActivationReason-enum">ActivationReason</a></b> { Unknown, Context, DoubleClick, Trigger, MiddleClick }</div></li><li><div class="fn">enum <b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#MessageIcon-enum">MessageIcon</a></b> { NoIcon, Information, Warning, Critical }</div></li></ul><h3>Methods</h3><ul><li><div class="fn"><b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#QSystemTrayIcon">__init__</a></b> (<i>self</i>, QObject&nbsp;<i>parent</i>&nbsp;=&nbsp;None)</div></li><li><div class="fn"><b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#QSystemTrayIcon-2">__init__</a></b> (<i>self</i>, QIcon&nbsp;<i>icon</i>, QObject&nbsp;<i>parent</i>&nbsp;=&nbsp;None)</div></li><li><div class="fn">QMenu <b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#contextMenu">contextMenu</a></b> (<i>self</i>)</div></li><li><div class="fn">bool <b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#event">event</a></b> (<i>self</i>, QEvent&nbsp;<i>event</i>)</div></li><li><div class="fn">QRect <b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#geometry">geometry</a></b> (<i>self</i>)</div></li><li><div class="fn"><b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#hide">hide</a></b> (<i>self</i>)</div></li><li><div class="fn">QIcon <b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#icon">icon</a></b> (<i>self</i>)</div></li><li><div class="fn">bool <b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#isVisible">isVisible</a></b> (<i>self</i>)</div></li><li><div class="fn"><b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#setContextMenu">setContextMenu</a></b> (<i>self</i>, QMenu&nbsp;<i>menu</i>)</div></li><li><div class="fn"><b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#setIcon">setIcon</a></b> (<i>self</i>, QIcon&nbsp;<i>icon</i>)</div></li><li><div class="fn"><b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#setToolTip">setToolTip</a></b> (<i>self</i>, QString&nbsp;<i>tip</i>)</div></li><li><div class="fn"><b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#setVisible">setVisible</a></b> (<i>self</i>, bool&nbsp;<i>visible</i>)</div></li><li><div class="fn"><b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#show">show</a></b> (<i>self</i>)</div></li><li><div class="fn"><b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#showMessage">showMessage</a></b> (<i>self</i>, QString&nbsp;<i>title</i>, QString&nbsp;<i>msg</i>, MessageIcon&nbsp;<i>icon</i>&nbsp;=&nbsp;QSystemTrayIcon.Information, int&nbsp;<i>msecs</i>&nbsp;=&nbsp;10000)</div></li><li><div class="fn">QString <b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#toolTip">toolTip</a></b> (<i>self</i>)</div></li></ul><h3>Static Methods</h3><ul><li><div class="fn">bool <b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#isSystemTrayAvailable">isSystemTrayAvailable</a></b> ()</div></li><li><div class="fn">bool <b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#supportsMessages">supportsMessages</a></b> ()</div></li></ul><h3>Qt Signals</h3><ul><li><div class="fn">void <b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#activated">activated</a></b> ( ::QSystemTrayIcon::ActivationReason)</div></li><li><div class="fn">void <b><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#messageClicked">messageClicked</a></b> ()</div></li></ul><a name="details"><hr><h2>Detailed Description</h2><p>The QSystemTrayIcon class provides an icon for an application in
+the system tray.</p>
+<p>Modern operating systems usually provide a special area on the
+desktop, called the <i>system tray</i> or <i>notification area</i>,
+where long-running applications can display icons and short
+messages.</p>
+<p class="centerAlign"><img alt="The system tray on Windows XP." src="./QSystemTrayIcon Class Reference_files/system-tray.png"></p>
+<p>The QSystemTrayIcon class can be used on the following
+platforms:</p>
+</a><ul><a name="details">
+<li>All supported versions of Windows.</li>
+</a><li><a name="details">All window managers for X11 that implement the </a><a href="http://www.freedesktop.org/">freedesktop.org</a> system tray
+specification, including recent versions of KDE and GNOME.</li>
+<li>All supported versions of Mac OS X. Note that the Growl
+notification system must be installed for <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#showMessage">QSystemTrayIcon.showMessage</a>()
+to display messages.</li>
+</ul>
+<p>To check whether a system tray is present on the user's desktop,
+call the <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#isSystemTrayAvailable">QSystemTrayIcon.isSystemTrayAvailable</a>()
+static function.</p>
+<p>To add a system tray entry, create a QSystemTrayIcon object,
+call <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#setContextMenu">setContextMenu</a>() to
+provide a context menu for the icon, and call <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#show">show</a>() to make it visible in the
+system tray. Status notification messages ("balloon messages") can
+be displayed at any time using <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#showMessage">showMessage</a>().</p>
+<p>If the system tray is unavailable when a system tray icon is
+constructed, but becomes available later, QSystemTrayIcon will
+automatically add an entry for the application in the system tray
+if the icon is <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#visible-prop">visible</a>.</p>
+<p>The <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#activated">activated</a>()
+signal is emitted when the user activates the icon.</p>
+<p>Only on X11, when a tooltip is requested, the QSystemTrayIcon
+receives a <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qhelpevent.html">QHelpEvent</a> of type
+<a href="http://pyqt.sourceforge.net/Docs/PyQt4/qevent.html#Type-enum">QEvent.ToolTip</a>. Additionally,
+the QSystemTrayIcon receives wheel events of type <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qevent.html#Type-enum">QEvent.Wheel</a>. These are not supported
+on any other platform.</p>
+<hr><h2>Type Documentation</h2><h3 class="fn"><a name="ActivationReason-enum">QSystemTrayIcon.ActivationReason</a></h3><p><a name="ActivationReason-enum">This enum describes the reason the system tray was
+activated.</a></p><a name="ActivationReason-enum">
+<table class="valuelist">
+<tbody><tr class="odd" valign="top">
+<th class="tblConst">Constant</th>
+<th class="tblval">Value</th>
+<th class="tbldscr">Description</th>
+</tr>
+<tr>
+<td class="topAlign"><tt>QSystemTrayIcon.Unknown</tt></td>
+<td class="topAlign"><tt>0</tt></td>
+<td class="topAlign">Unknown reason</td>
+</tr>
+<tr>
+<td class="topAlign"><tt>QSystemTrayIcon.Context</tt></td>
+<td class="topAlign"><tt>1</tt></td>
+<td class="topAlign">The context menu for the system tray entry was
+requested</td>
+</tr>
+<tr>
+<td class="topAlign"><tt>QSystemTrayIcon.DoubleClick</tt></td>
+<td class="topAlign"><tt>2</tt></td>
+<td class="topAlign">The system tray entry was double clicked</td>
+</tr>
+<tr>
+<td class="topAlign"><tt>QSystemTrayIcon.Trigger</tt></td>
+<td class="topAlign"><tt>3</tt></td>
+<td class="topAlign">The system tray entry was clicked</td>
+</tr>
+<tr>
+<td class="topAlign"><tt>QSystemTrayIcon.MiddleClick</tt></td>
+<td class="topAlign"><tt>4</tt></td>
+<td class="topAlign">The system tray entry was clicked with the
+middle mouse button</td>
+</tr>
+</tbody></table>
+</a><p><a name="ActivationReason-enum"><b>See also</b> </a><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#activated">activated</a>().</p>
+
+
+<h3 class="fn"><a name="MessageIcon-enum">QSystemTrayIcon.MessageIcon</a></h3><p><a name="MessageIcon-enum">This enum describes the icon that is shown when a balloon
+message is displayed.</a></p><a name="MessageIcon-enum">
+<table class="valuelist">
+<tbody><tr class="odd" valign="top">
+<th class="tblConst">Constant</th>
+<th class="tblval">Value</th>
+<th class="tbldscr">Description</th>
+</tr>
+<tr>
+<td class="topAlign"><tt>QSystemTrayIcon.NoIcon</tt></td>
+<td class="topAlign"><tt>0</tt></td>
+<td class="topAlign">No icon is shown.</td>
+</tr>
+<tr>
+<td class="topAlign"><tt>QSystemTrayIcon.Information</tt></td>
+<td class="topAlign"><tt>1</tt></td>
+<td class="topAlign">An information icon is shown.</td>
+</tr>
+<tr>
+<td class="topAlign"><tt>QSystemTrayIcon.Warning</tt></td>
+<td class="topAlign"><tt>2</tt></td>
+<td class="topAlign">A standard warning icon is shown.</td>
+</tr>
+<tr>
+<td class="topAlign"><tt>QSystemTrayIcon.Critical</tt></td>
+<td class="topAlign"><tt>3</tt></td>
+<td class="topAlign">A critical warning icon is shown.</td>
+</tr>
+</tbody></table>
+</a><p><a name="MessageIcon-enum"><b>See also</b> </a><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qmessagebox.html">QMessageBox</a>.</p>
+<hr><h2>Method Documentation</h2><h3 class="fn"><a name="QSystemTrayIcon">QSystemTrayIcon.__init__ (<i>self</i>, </a><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qobject.html">QObject</a>&nbsp;<i>parent</i>&nbsp;=&nbsp;None)</h3><p>The <i>parent</i> argument, if not None, causes <i>self</i> to be owned by Qt instead of PyQt.</p><p>Constructs a <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html">QSystemTrayIcon</a>
+object with the given <i>parent</i>.</p>
+<p>The icon is initially invisible.</p>
+<p><b>See also</b> <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#visible-prop">visible</a>.</p>
+
+
+<h3 class="fn"><a name="QSystemTrayIcon-2">QSystemTrayIcon.__init__ (<i>self</i>, </a><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qicon.html">QIcon</a>&nbsp;<i>icon</i>, <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qobject.html">QObject</a>&nbsp;<i>parent</i>&nbsp;=&nbsp;None)</h3><p>The <i>parent</i> argument, if not None, causes <i>self</i> to be owned by Qt instead of PyQt.</p><p>Constructs a <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html">QSystemTrayIcon</a>
+object with the given <i>icon</i> and <i>parent</i>.</p>
+<p>The icon is initially invisible.</p>
+<p><b>See also</b> <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#visible-prop">visible</a>.</p>
+
+
+<h3 class="fn"><a name="contextMenu"></a><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qmenu.html">QMenu</a> QSystemTrayIcon.contextMenu (<i>self</i>)</h3><p>Returns the current context menu for the system tray entry.</p>
+<p><b>See also</b> <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#setContextMenu">setContextMenu</a>().</p>
+
+
+<h3 class="fn"><a name="event">bool QSystemTrayIcon.event (<i>self</i>, </a><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qevent.html">QEvent</a>&nbsp;<i>event</i>)</h3><p>Reimplemented from <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qobject.html#event">QObject.event</a>().</p>
+
+
+<h3 class="fn"><a name="geometry"></a><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qrect.html">QRect</a> QSystemTrayIcon.geometry (<i>self</i>)</h3><p>Returns the geometry of the system tray icon in screen
+coordinates.</p>
+<p>This function was introduced in Qt 4.3.</p>
+<p><b>See also</b> <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#visible-prop">visible</a>.</p>
+
+
+<h3 class="fn"><a name="hide">QSystemTrayIcon.hide (<i>self</i>)</a></h3><p><a name="hide">This method is also a Qt slot with the C++ signature <tt>void hide()</tt>.</a></p><p><a name="hide">Hides the system tray entry.</a></p><a name="hide">
+</a><p><a name="hide"><b>See also</b> </a><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#show">show</a>()
+and <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#visible-prop">visible</a>.</p>
+
+
+<h3 class="fn"><a name="icon"></a><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qicon.html">QIcon</a> QSystemTrayIcon.icon (<i>self</i>)</h3><h3 class="fn"><a name="isSystemTrayAvailable">bool QSystemTrayIcon.isSystemTrayAvailable ()</a></h3><p><a name="isSystemTrayAvailable">Returns true if the system tray is available; otherwise returns
+false.</a></p><a name="isSystemTrayAvailable">
+</a><p><a name="isSystemTrayAvailable">If the system tray is currently unavailable but becomes
+available later, </a><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html">QSystemTrayIcon</a>
+will automatically add an entry in the system tray if it is
+<a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#visible-prop">visible</a>.</p>
+
+
+<h3 class="fn"><a name="isVisible">bool QSystemTrayIcon.isVisible (<i>self</i>)</a></h3><h3 class="fn"><a name="setContextMenu">QSystemTrayIcon.setContextMenu (<i>self</i>, </a><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qmenu.html">QMenu</a>&nbsp;<i>menu</i>)</h3><p>Sets the specified <i>menu</i> to be the context menu for the
+system tray icon.</p>
+<p>The menu will pop up when the user requests the context menu for
+the system tray icon by clicking the mouse button.</p>
+<p>On Mac OS X, this is currenly converted to a NSMenu, so the
+aboutToHide() signal is not emitted.</p>
+<p><b>Note:</b> The system tray icon does not take ownership of the
+menu. You must ensure that it is deleted at the appropriate time
+by, for example, creating the menu with a suitable parent
+object.</p>
+<p><b>See also</b> <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#contextMenu">contextMenu</a>().</p>
+
+
+<h3 class="fn"><a name="setIcon">QSystemTrayIcon.setIcon (<i>self</i>, </a><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qicon.html">QIcon</a>&nbsp;<i>icon</i>)</h3><h3 class="fn"><a name="setToolTip">QSystemTrayIcon.setToolTip (<i>self</i>, QString&nbsp;<i>tip</i>)</a></h3><h3 class="fn"><a name="setVisible">QSystemTrayIcon.setVisible (<i>self</i>, bool&nbsp;<i>visible</i>)</a></h3><p><a name="setVisible">This method is also a Qt slot with the C++ signature <tt>void setVisible(bool)</tt>.</a></p><h3 class="fn"><a name="show">QSystemTrayIcon.show (<i>self</i>)</a></h3><p><a name="show">This method is also a Qt slot with the C++ signature <tt>void show()</tt>.</a></p><p><a name="show">Shows the icon in the system tray.</a></p><a name="show">
+</a><p><a name="show"><b>See also</b> </a><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#hide">hide</a>()
+and <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#visible-prop">visible</a>.</p>
+
+
+<h3 class="fn"><a name="showMessage">QSystemTrayIcon.showMessage (<i>self</i>, QString&nbsp;<i>title</i>, QString&nbsp;<i>msg</i>, </a><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#MessageIcon-enum">MessageIcon</a>&nbsp;<i>icon</i>&nbsp;=&nbsp;QSystemTrayIcon.Information, int&nbsp;<i>msecs</i>&nbsp;=&nbsp;10000)</h3><p>Shows a balloon message for the entry with the given
+<i>title</i>, <i>message</i> and <i>icon</i> for the time specified
+in <i>millisecondsTimeoutHint</i>. <i>title</i> and <i>message</i>
+must be plain text strings.</p>
+<p>Message can be clicked by the user; the <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#messageClicked">messageClicked</a>() signal
+will emitted when this occurs.</p>
+<p>Note that display of messages are dependent on the system
+configuration and user preferences, and that messages may not
+appear at all. Hence, it should not be relied upon as the sole
+means for providing critical information.</p>
+<p>On Windows, the <i>millisecondsTimeoutHint</i> is usually
+ignored by the system when the application has focus.</p>
+<p>On Mac OS X, the Growl notification system must be installed for
+this function to display messages.</p>
+<p>This function was introduced in Qt 4.3.</p>
+<p><b>See also</b> <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#show">show</a>()
+and <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#supportsMessages">supportsMessages</a>().</p>
+
+
+<h3 class="fn"><a name="supportsMessages">bool QSystemTrayIcon.supportsMessages ()</a></h3><p><a name="supportsMessages">Returns true if the system tray supports balloon messages;
+otherwise returns false.</a></p><a name="supportsMessages">
+</a><p><a name="supportsMessages"><b>See also</b> </a><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#showMessage">showMessage</a>().</p>
+<h3 class="fn"><a name="toolTip">QString QSystemTrayIcon.toolTip (<i>self</i>)</a></h3><hr><h2><a name="toolTip">Qt Signal Documentation</a></h2><h3 class="fn"><a name="activated">void activated ( ::QSystemTrayIcon::ActivationReason)</a></h3><p><a name="activated">This is the default overload of this signal.</a></p><p><a name="activated">This signal is emitted when the user activates the system tray
+icon. <i>reason</i> specifies the reason for activation. </a><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#ActivationReason-enum">QSystemTrayIcon.ActivationReason</a>
+enumerates the various reasons.</p>
+<p><b>See also</b> <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#ActivationReason-enum">QSystemTrayIcon.ActivationReason</a>.</p>
+
+
+<h3 class="fn"><a name="messageClicked">void messageClicked ()</a></h3><p><a name="messageClicked">This is the default overload of this signal.</a></p><p><a name="messageClicked">This signal is emitted when the message displayed using </a><a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#showMessage">showMessage</a>() was clicked by
+the user.</p>
+<p>Currently this signal is not sent on Mac OS X.</p>
+<p><b>Note:</b> We follow Microsoft Windows XP/Vista behavior, so
+the signal is also emitted when the user clicks on a tray icon with
+a balloon message displayed.</p>
+<p><b>See also</b> <a href="http://pyqt.sourceforge.net/Docs/PyQt4/qsystemtrayicon.html#activated">activated</a>().</p>
+
+
+<address><hr><div align="center"><table border="0" cellspacing="0" width="100%"><tbody><tr class="address"><td align="left" width="25%">PyQt&nbsp;4.12.3 for X11</td><td align="center" width="50%">Copyright © <a href="http://www.riverbankcomputing.com/">Riverbank&nbsp;Computing&nbsp;Ltd</a> and <a href="http://www.qt.io/">The Qt Company</a> 2015</td><td align="right" width="25%">Qt&nbsp;4.8.7</td></tr></tbody></table></div></address><div id="i4c-dialogs-container"></div></body></html>
