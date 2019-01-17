@@ -26,6 +26,8 @@ add a history viewer
 	create a logo for historyViewer
 need a simple icon/logo for scp-qt
 
+remove unix specific paths for windows interoperability
+ensure soft. can work on windows as wells as on linux [linux only is the current state]
 load config.json before anything else
 make config/default options available in config.json
 make default-mode source/destination dirs set in config.json [libssh.py line 181,]
