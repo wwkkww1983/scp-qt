@@ -12,6 +12,12 @@ class ssh:
             'send':True,
             'get':True,
             }
+    transfer_log='transfer_{}'
+    transfer_dir='./transfer_logs'
+    logname={
+            'send':None,
+            'get':None
+            }
     connection={
             'cfg':{
                 'date':time.strftime('%S:%M:%H-%d/%m/%Y',time.localtime()),
@@ -53,6 +59,7 @@ class ssh:
     mkdir_script='./scripts/mkdir.sh'
 
     def get_sources(self,tab,status_obj=None):
+        self.create_transfer_log(tab)
         self.untilComplete(tab,False)
         #to ease with removal of duplicates
         sources=[]
@@ -130,7 +137,16 @@ class ssh:
         except:
             return False
 
+    def create_transfer_log(self,tab):
+        name=os.path.join(self.transfer_dir,self.transfer_log.format(tab))
+        if not os.path.exists(self.transfer_dir):
+            os.mkdir(self.transfer_dir)
+        elif os.path.exists(self.transfer_dir) and not os.path.isdir(self.transfer_dir):
+            exit('transfer_dir is not a dir')
+        self.logname[tab]=name+"_"+time.strftime('%S.%M.%H-%m.%d.%Y',time.localtime())+".log"
+
     def send_sources(self,tab,status_obj=None):
+        self.create_transfer_log(tab)
         self.totalTransferred['send']=0
         self.totalTransfer['send']=0
         self.untilComplete(tab,False)
@@ -162,7 +178,7 @@ class ssh:
             return False
         if self.connection['cfg'][tab]['destination'] in ['',None]:
             #needs to be moved to more global location
-            remote_alt=os.path.join(self.connection['cfg'][tab]['remote_home'],'scp-qt')
+            remote_alt=os.path.join(self.connection['cfg'][tab]['remote_home'],'scp-qt-send')
             print('destination cannot be empty! creating "{}" on remote host so file can be transfered!'.format(remote_alt))
             self.connection['cfg'][tab]['destination']=remote_alt
             self.destination.setText(remote_alt)
@@ -261,8 +277,17 @@ class ssh:
         with open(self.mkdir_script,'r') as script:
             script_str=script.read()
         return script_str
+    def write_log_send(self,src,dest,tab):
+        with open(self.logname[tab],'a') as log:
+            log.write('{} -> {}@{}:{}\n'.format(
+                src,
+                self.connection['cfg'][tab]['user'],
+                self.connection['cfg'][tab]['host'],
+                dest
+                ))
 
     def sendData(self,src,dest,srcRoot,tab):
+        self.write_log_send(src,dest,tab=tab)
         #print(self.connection['connect'][tab]['clientSCP'].sock.closed)
         if self.connection['connect'][tab]['clientSCP'].sock.closed == True:
             return False
