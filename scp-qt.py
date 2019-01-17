@@ -12,6 +12,7 @@ import libsftp_getdirs
 import scp_qt_tray
 import libhistory
 import json
+import libconfig
 
 class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls,libdestination.dest,libsource.source,libsftp_getdirs.sftp_get):
     iconPathTray='./icons/icon-tray.png'
@@ -62,6 +63,10 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
                     
     def __init__(self):
         super(self.__class__,self).__init__()
+        cnf=libconfig.config_init()
+        res=cnf.configurator()
+        if res == False:
+            exit(1)
         self.setupUi(self) 
         self.controls_init()
         self.destination_init()
