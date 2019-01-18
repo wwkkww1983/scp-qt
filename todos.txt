@@ -32,4 +32,5 @@ load config.json before anything else
 make config/default options available in config.json
 make default-mode source/destination dirs set in config.json [libssh.py line 181,]
 
+add a json file called statements.json with various phrases and keys that are retrieved whenever a print statement is called using a random phrase and random color
 </pending>
