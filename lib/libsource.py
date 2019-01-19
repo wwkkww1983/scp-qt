@@ -17,7 +17,7 @@ class source:
         if self.sendDirectory.isChecked():
             files=self.openFile(mode='dirs',windowTitle='Open Directory')
         self.sources.setText('\n'.join(files))
-        print(self.in_config['sources'])
+        print('{} : {}'.format(self.sayit(tag=self.vul),self.in_config['sources']))
 
     def append_source(self):
         if not self.sendDirectory.isChecked():
@@ -25,11 +25,11 @@ class source:
         if self.sendDirectory.isChecked():
             files=self.openFile(mode='dirs',windowTitle='Open Directory')
         oldList=self.in_config['sources']
-        print(oldList)
+        print('{} : {} '.format(self.sayit(tag=self.vul),oldList))
         if files != False:
             oldList.extend(files)
         self.sources.setText('\n'.join(oldList))
-        print(self.in_config['sources'])
+        print('{} : {}'.format(self.sayit(tag=self.self.vul),self.in_config['sources']))
 
     def clear_sources(self):
         self.sources.setText('')

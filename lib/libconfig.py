@@ -25,16 +25,16 @@ class config_init:
             if os.path.isfile(file):
                 size=os.path.getsize(file)
             else:
-                print(file,"not a file")
+                print("{} : not a file {}".format(self.sayit(tag=self.vul),file))
                 return False
         else:
             self.newcfg(file)
             return True 
         if size >= self.maxSize:
-            print('{} exceeds recommended size ({})... moving to {}'.format(file,self.maxSize,newname))
+            print('{} : {} exceeds recommended size ({})... moving to {}'.format(self.sayit(tag=self.vul),file,self.maxSize,newname))
             if os.path.exists(bh):
                 if not os.path.isdir(bh):
-                    print(bh,"not a directory")
+                    print(bh,": {} : not a directory".format(self.sayit(tag=self.vul)))
                     return False
             else:
                 os.mkdir(bh)    

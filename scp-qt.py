@@ -13,8 +13,8 @@ import scp_qt_tray
 import libhistory
 import json
 import libconfig
-
-class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls,libdestination.dest,libsource.source,libsftp_getdirs.sftp_get):
+import libstatements as state
+class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls,libdestination.dest,libsource.source,libsftp_getdirs.sftp_get,state.statements):
     iconPathTray='./icons/icon-tray.png'
     tray_menu=None
     tray_maximize=None
@@ -22,7 +22,6 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
     tray_show=None
     hist=None
     hist_d=None
-
     def tray_actions_setup(self):
         self.tray_maximize=QtWidgets.QAction('&Maximize')
         self.tray_maximize.triggered.connect(lambda: self.setWindowState(QtCore.Qt.WindowMaximized))
@@ -60,9 +59,12 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
                 'Information',
                 25,
                 )
-                    
+     
     def __init__(self):
         super(self.__class__,self).__init__()
+        if self.enable_statements == False:
+            self.vul='disable'
+        print(self.sayit(tag=self.vul))
         cnf=libconfig.config_init()
         res=cnf.configurator()
         if res == False:

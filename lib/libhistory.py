@@ -6,8 +6,8 @@ for p in libs:
     sys.path.insert(0,p)
 
 import historyView,entryView
-
-class history:
+import libstatements as state
+class history(state.statements):
     history_file='history.json'
     path='.'
     def open_history(class_self):
@@ -52,7 +52,13 @@ class history:
                                 subChild=item.child(i)
                                 n=subChild.text(0)
                                 if n == cnf:
-                                    print(n,self.hist_d['entry'][em]['cfg'][mode][cnf],mode)
+                                    print('{} : {} {} {}'.format(
+                                        self.sayit(tag=self.vul),
+                                        n,
+                                        self.hist_d['entry'][em]['cfg'][mode][cnf]
+                                        ,mode
+                                        )
+                                        )
                                     if n != 'sources':
                                        subChild.setData(1,QtCore.Qt.EditRole,self.hist_d['entry'][em]['cfg'][mode][cnf])
                                     else:
@@ -109,14 +115,26 @@ class history:
                                 subChild=item.child(i)
                                 n=subChild.text(0)
                                 if n == cnf:
-                                    print(n,entry[em]['cfg'][mode][cnf],mode)
+                                    print('{}: {} {} {}'.format(
+                                        self.sayit(tag=self.vul),
+                                        n,
+                                        entry[em]['cfg'][mode][cnf],
+                                        mode
+                                        )
+                                        )
                                     if n != 'sources':
                                        subChild.setData(1,QtCore.Qt.EditRole,entry[em]['cfg'][mode][cnf])
                                     else:
                                         if entry[em]['cfg'][mode][cnf] != None:
                                             for src in entry[em]['cfg'][mode][cnf]:
                                                 if src not in [None,'']:
-                                                    print(src,mode,'srcs')
+                                                    print('{} : {} {} {}'.format(
+                                                        self.sayit(tag=self.vul),
+                                                        src,
+                                                        mode,
+                                                        'srcs'
+                                                        )
+                                                        )
                                                     newChild=QtWidgets.QTreeWidgetItem(subChild)
                                                     newChild.setData(1,QtCore.Qt.EditRole,src)
                                                     subChild.addChild(newChild)
@@ -140,7 +158,12 @@ class history:
 
     def loadEntry(class_self,self,cfg,mode):
         self.in_config=cfg
-        print(self.in_config,cfg,sep='\n')
+        print('{} : {} {}'.format(
+            self.sayit(tag=self.vul),
+            self.in_config,
+            cfg),
+            sep='\n'
+            )
         self.loadFields(tab=mode)
         self.get_creds_wrapped(tab=mode,updateHistory=False)
 
@@ -211,7 +234,7 @@ class history:
             elif key == 'port':
                 if cfg[key] == 22:
                     count+=1
-        print(count)
+        print('{} : {}'.format(self.sayit(tag=self.vul),count))
         if count >= len(cfg.keys())-1:
             item.setHidden(True)
         return item

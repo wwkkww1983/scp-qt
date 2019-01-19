@@ -5,8 +5,12 @@ class statements:
         pass
     dbname="statements.db"
     path="."
+    vul='fiendish'
+    enable_statements=True
 
-    def sayit(self,tag):
+    def sayit(self,tag,noPrint=True):
+        if tag == 'disable':
+            return ''
         randomColor=random.randint(30,37)
         
         db=sqlite3.connect(os.path.join(self.path,self.dbname))
@@ -29,14 +33,15 @@ class statements:
 
         if statement != None:
             phrase_color='''\033[1;{0};40m{1}\033[1;40;m'''.format(randomColor,statement)
-            print(phrase_color)
+            if noPrint == False:
+                print(phrase_color)
             return phrase_color
         else:
-            return False
+            return ''
 
 if __name__ == "__main__":
     app = statements()
     tags=['friendly','fiendish']
     for t in tags:
-        app.sayit(tag=t)
+        app.sayit(tag=t,noPrint=False)
         

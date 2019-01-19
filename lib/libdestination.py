@@ -46,16 +46,15 @@ class dest:
             log['0'][tab]['password']=None
 
         with open(self.historyFile,'w') as cnf:
-            print('log: {}'.format(log))
+            print('{} : log: {}'.format(self.sayit(self.vul),log))
             json.dump(log,cnf)
     
     def transHistory_save(self):
         log={}
         if os.path.exists(self.historyFile):
-            print('#########')
             with open(self.historyFile,'r') as cnf:
                 log=json.load(cnf)
-            print('loaded: {}'.format(log))
+            print('{} : loaded: {}'.format(self.sayit(tag=self.vul),log))
             try:
                 countLast=sorted([int(i) for i in log.keys()])[-1]
                 countLast+=1
@@ -160,7 +159,7 @@ class dest:
             hostKey.setText(key)
 
     def destination_checkbox_toggle(self,checkBox,lineEdit,label,tab='send'):
-        print(self.con)
+        print('{} : {}'.format(self.sayit(tag=self.vul),self.con))
         if checkBox.isChecked():
             lineEdit.setEnabled(True)
             label.setEnabled(True)
@@ -370,7 +369,7 @@ class dest:
 
     def enableHostKeys_v2(self,tab,useKeys,label,button,hostKeyEdit,hostKey):
         self.in_config[tab]['useHostKey']=useKeys.isChecked()
-        print('v2 run!')
+        print('{} : using enableHostKeys_v2()!'.format(self.sayit(tag=self.vul)))
         if useKeys.isChecked():
             hostKeyEdit.setEnabled(True)
         else:

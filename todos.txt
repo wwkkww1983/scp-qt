@@ -5,9 +5,13 @@ work on get tab's cancel button
 	else:
 		return False
 add transfer transaction history via json logfile
+
 add load last-transaction from history
+
 change password fields to hide plaintext passwords
+
 add desktop icon/notification system for progress
+
 add a history viewer
 	options
 		clear history
@@ -20,6 +24,8 @@ add functionality that detects the size of the history.json log, and when it rea
 
 add functionality to updateTransfer{'Get','Send'} to generate a current transfer log to track exactly what files/dirs have been copied and save the save log to a transfer-logs directory
 
+add a json file called statements.json with various phrases and keys that are retrieved whenever a print statement is called using a random phrase and random color
+
 </done>
 <pending>
 add a history viewer
@@ -31,6 +37,6 @@ ensure soft. can work on windows as wells as on linux [linux only is the current
 load config.json before anything else
 make config/default options available in config.json
 make default-mode source/destination dirs set in config.json [libssh.py line 181,]
-
-add a json file called statements.json with various phrases and keys that are retrieved whenever a print statement is called using a random phrase and random color
+need more phrases for statements.db
+make a sha512 checksum of file before transfer and save to transfer log
 </pending>

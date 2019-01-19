@@ -71,9 +71,9 @@ class ssh:
                     if os.path.exists(source):
                         if source not in sources:
                             sources.append(source)
-                            print(sources)
+                            print('{} : {}'.format(self.sayit(tag=self.vul),sources))
             else:
-                print('sources list is empty... not getting anything from the mothership!')
+                print('{} : sources list is empty... not getting anything from the mothership!'.format(self.sayit(tag=self.vul)))
         else:
             self.untilComplete(tab,True)
             return False
@@ -85,12 +85,12 @@ class ssh:
                 self.password_client(tab=tab)
             self.transferClient(tab='get')
         except OSError as e:
-            print(sys.exc_info())
+            print(self.sayit(tag=self.vul),sys.exc_info())
             self.untilComplete(tab,True)
             return False
         #more to come
         if self.connection['cfg'][tab]['destination'] in [None,'']:
-            print('setting default destination to "{}" since destination is blank!'.format(os.path.expanduser(defaultDest)))
+            print('{} : setting default destination to "{}" since destination is blank!'.format(self.sayit(tag=self.vul),os.path.expanduser(defaultDest)))
             self.destination_get_le.setText(os.path.expanduser(defaultDest))
             if not os.path.exists(os.path.expanduser(defaultDest)):
                 os.mkdir(os.path.expanduser(defaultDest))
@@ -158,9 +158,9 @@ class ssh:
                     if os.path.exists(source):
                         if source not in sources:
                             sources.append(source)
-                            print(source)
+                            print('{} : {}'.format(self.sayit(tag=self.vul),source))
             else:
-                print('sources list is empty... not sending anything!')
+                print('{} : sources list is empty... not sending anything!'.format(self.sayit(tag=self.vul)))
         else:
             self.untilComplete(tab,True)
             return False
@@ -173,13 +173,13 @@ class ssh:
                 self.password_client(tab=tab)
             self.transferClient(tab='send')
         except OSError as e:
-            print(sys.exc_info())
+            print(self.sayit(tag=self.vul),sys.exc_info())
             self.untilComplete(tab,True)
             return False
         if self.connection['cfg'][tab]['destination'] in ['',None]:
             #needs to be moved to more global location
             remote_alt=os.path.join(self.connection['cfg'][tab]['remote_home'],'scp-qt-send')
-            print('destination cannot be empty! creating "{}" on remote host so file can be transfered!'.format(remote_alt))
+            print('{} : destination cannot be empty! creating "{}" on remote host so file can be transfered!'.format(self.sayit(tag=self.vul),remote_alt))
             self.connection['cfg'][tab]['destination']=remote_alt
             self.destination.setText(remote_alt)
             if self.connection['connect'][tab]['clientSCP'].sock.closed != True:
@@ -188,7 +188,7 @@ class ssh:
                     if res == False:
                         self.connection['connect'][tab]['clientSCP'].mkdir(remote_alt)
                 except OSError as e:
-                    print('{} : {}'.format(remote_alt,str(e)))
+                    print('{} : {} : {}'.format(self.sayit(tag=self.vul),remote_alt,str(e)))
             
             '''
             chan=self.connection['connect'][tab]['clientSSH'].get_transport().open_session()
@@ -226,7 +226,7 @@ class ssh:
                                 ''
                                 )
                             )
-                print(dest)
+                print('{} : {}'.format(self.sayit(tag=self.vul),dest))
                 res=self.sendData(source,self.connection['cfg'][tab]['destination'],srcRoot=srcRoot,tab=tab)
                 if res == False:
                     break
@@ -298,12 +298,17 @@ class ssh:
                 return False
         except FileNotFoundError as e:
             if self.connection['connect'][tab]['clientSCP'].sock.closed != True:
-                print('{0} : mkdir({1})'.format(e,dest))
+                print('{2} : {0} : mkdir({1})'.format(e,dest,self.sayit(tag=self.vul)))
                 self.connection['connect'][tab]['clientSCP'].mkdir(dest)
             else:
                 return False
 
-        print('[start] {} -> {}'.format(src,os.path.join(src,os.path.join(dest,src.replace(srcRoot,'')))))
+        print('{} : [start] {} -> {}'.format(self.sayit(tag=self.vul),
+            src,
+            os.path.join(src,os.path.join(dest,src.replace(srcRoot,''))
+                )
+            )
+            )
         if os.path.isdir(src):
             try:
                 if self.connection['connect'][tab]['clientSCP'].sock.closed != True:
@@ -330,7 +335,10 @@ class ssh:
                     print(sys.exc_info())
             else:
                 return False
-        print('[stop] {} -> {}'.format(src,dest))
+        print('{} : [stop] {} -> {}'.format(self.sayit(tag=self.vul),
+            src,
+            dest
+            ))
 
 
     def rsa_client(self,tab='send'):
@@ -349,7 +357,7 @@ class ssh:
                     )
             return True
         except:
-            print(sys.exc_info())
+            print(self.sayit(tag=self.vul),sys.exc_info())
             return False
     
     def transferClient(self,tab):
@@ -374,7 +382,7 @@ class ssh:
             #self.connection['connect'][tab]['clientSCP']=self.connection['connect'][tab]['clientSSH'].open_sftp()
             return True
         except:
-            print(sys.exc_info())
+            print(self.sayit(tag=self.vul),sys.exc_info())
             return False
 
     def mkDate(self):
@@ -427,7 +435,7 @@ class ssh:
         print('checking connection!')
         #self.get_creds(tab=tab)
         self.get_creds_wrapped(tab=tab)
-        print(self.in_config[tab])
+        print('{} : {}'.format(self.sayit(tag=self.vul),self.in_config[tab]))
         '''
         self.connection['cfg'][tab]['host']=self.in_config[tab]['host']
         self.connection['cfg'][tab]['port']=self.in_config[tab]['port']
@@ -461,7 +469,7 @@ class ssh:
         '''
     def connect_init_test(self,tab): 
         try:
-            print(self.in_config[tab]['useHostKey'])
+            print('{} : {}'.format(self.sayit(tag=self.vul),self.in_config[tab]['useHostKey']))
             if self.in_config[tab]['useHostKey'] == True: 
                 return self.rsa_test_connection(tab=tab)
             else: 
@@ -473,7 +481,7 @@ class ssh:
         return True
 
     def rsa_test_connection(self,tab):
-        print('using host key!')
+        print('{} : using host key!'.format(self.sayit(tag=self.vul)))
         skipNext=False
         try:
             self.connection['connect'][tab]['clientSSH']=paramiko.SSHClient()
@@ -489,10 +497,10 @@ class ssh:
                     key_filename=self.connection['cfg'][tab]['hostKey']
                     )
         except paramiko.ssh_exception.AuthenticationException as e:
-            print(e)
+            print(self.sayit(tag=self.vul),e)
             skipNext=True
         except:
-            print(self.connection['cfg'][tab]['host'])
+            print(self.sayit(tag=self.vul),self.connection['cfg'][tab]['host'])
             print(sys.exc_info())
             skipNext=True
             
@@ -504,7 +512,7 @@ class ssh:
             if response:
                 response=response[0]
                 self.connection['cfg'][tab]['remote_home']=response.replace('\n','')
-                print('remote_home: {}'.format(self.connection['cfg'][tab]['remote_home']))
+                print('{} : remote_home: {}'.format(self.sayit(tag=self.vul),self.connection['cfg'][tab]['remote_home']))
             self.connection['connect'][tab]['clientSSH'].close()
             self.connection['connect'][tab]['clientSSH']=None
         except:
@@ -512,10 +520,10 @@ class ssh:
         return True
 
     def password_test_connection(self,tab):
-        print('using password')
+        print('{} : using password'.format(self.sayit(tag=self.vul)))
         skipNext=False
         try:
-            print(self.connection['cfg'])
+            print('{} : {}'.format(self.sayit(tag=self.vul),self.connection['cfg']))
             self.connection['connect'][tab]['clientSSH']=paramiko.SSHClient()
             self.connection['connect'][tab]['clientSSH'].load_host_keys(os.path.expanduser('~/.ssh/known_hosts'))
             self.connection['connect'][tab]['clientSSH'].set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -529,7 +537,7 @@ class ssh:
                     )
         except:
             skipNext=True
-            print(sys.exc_info())
+            print(self.sayit(tag=self.vul),sys.exc_info())
         if skipNext == True:
             return False
         try:
@@ -538,7 +546,7 @@ class ssh:
             if response:
                 response=response[0]
                 self.connection['cfg'][tab]['remote_home']=response.replace('\n','')
-                print('remote_home: {}'.format(self.connection['cfg'][tab]['remote_home']))
+                print('{} : remote_home: {}'.format(self.sayit(tag=self.vul),self.connection['cfg'][tab]['remote_home']))
             self.connection['connect'][tab]['clientSSH'].close()
             self.connection['connect'][tab]['clientSSH']=None
         except:

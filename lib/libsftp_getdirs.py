@@ -163,7 +163,7 @@ class sftp_get:
                     engfmt.quant_to_eng(self.totalTransfer['get'],prec=2)))
     
                 self.totalProgress_get.setValue(tp)
-                print(tp,self.totalTransferred['get'],self.totalTransfer['get'])
+                #print(tp,self.totalTransferred['get'],self.totalTransfer['get'])
                 QtWidgets.QApplication.processEvents()
             else:
                 return False

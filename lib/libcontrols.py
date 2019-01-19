@@ -6,15 +6,15 @@ class controls:
         pass
 
     def quitApp(self):
-        print('quitting application')
+        print('{} : quitting application'.format(self.sayit(tag=self.vul)))
         sys.exit()
 
     def actions_shortcuts(self):
-        print('setting up actions!')
+        print('{} : setting up actions!'.format(self.sayit(tag=self.vul)))
         self.actionQuit.triggered.connect(self.quitApp),   
         self.actionUse_Last_Transaction.triggered.connect(self.transHistory_loadLast)
         self.actionHistory.triggered.connect(self.loadHistory)
-        print('settings up actions done!')
+        print('{} : settings up actions done!'.format(self.sayit(tag=self.vul)))
 
     def buttons(self):
         self.check_connection_get.clicked.connect(lambda: self.check_connection(tab='get',obj=self.status_get))
