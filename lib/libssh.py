@@ -1,5 +1,5 @@
 import paramiko,engfmt
-import time,sys,os
+import time,sys,os,hashlib
 from PyQt5 import QtWidgets
 class ssh:
     def __init__(self):
@@ -277,9 +277,29 @@ class ssh:
         with open(self.mkdir_script,'r') as script:
             script_str=script.read()
         return script_str
+    
+    def checksum(self,file):
+        print('{} : {}'.format(self.sayit(tag=self.vul),'making checksum - check transfer log [START]'))
+        if os.path.exists(file):
+            if os.path.isfile(file):
+                h=hashlib.sha512()    
+                with open(file,'rb') as f:
+                    while True:
+                        d=f.read(4096)
+                        if not d:
+                            break
+                        h.update(d)
+                print('{} : {}'.format(self.sayit(tag=self.vul),'making checksum - check transfer log [DONE]'))
+                return h.hexdigest()
+            else:
+                return 'FILE_NOT_FILE'
+        else:
+            return 'FILE_NOT_LOCAL'
+
     def write_log_send(self,src,dest,tab):
         with open(self.logname[tab],'a') as log:
-            log.write('{} -> {}@{}:{}\n'.format(
+            log.write('{} : {} -> {}@{}:{}\n'.format(
+                self.checksum(src),
                 src,
                 self.connection['cfg'][tab]['user'],
                 self.connection['cfg'][tab]['host'],

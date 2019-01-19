@@ -109,11 +109,12 @@ class sftp_get:
 
     def write_log(self,remote,local_p,tab): 
         with open(self.logname['get'],'a') as log:
-                log.write('{}@{}:{} -> {}\n'.format(
+            log.write('{}@{}:{} -> {} : {}\n'.format(
                     self.connection['cfg'][tab]['user'],
                     self.connection['cfg'][tab]['host'],
                     remote,
-                    local_p
+                    local_p,
+                    self.checksum(remote)
                     ))
 
     def get_list(self,local_p,remote_list,sftp):
@@ -196,8 +197,8 @@ class sftp_get:
                 where=os.path.join(local_p,lroot)
                 try:
                     if sftp.sock.closed != True:
-                        self.write_log(remote,where,tab='get')
                         sftp.get(remote,where,callback=self.progressUpdateGet)
+                        self.write_log(remote,where,tab='get')
                         self.get_transfer_update_total(remote,sftp)
                     else:
                         return True
@@ -234,8 +235,8 @@ class sftp_get:
                             self.getFileStatus(directions['remote']['path+file'])
                             try:
                                 if sftp.sock.closed != True:
-                                    self.write_log(directions['remote']['path+file'],directions['local']['path+file'],'get')
                                     sftp.get(directions['remote']['path+file'],directions['local']['path+file'],self.progressUpdateGet)
+                                    self.write_log(directions['remote']['path+file'],directions['local']['path+file'],'get')
                                     res=self.get_transfer_update_total(directions['remote']['path+file'],sftp)
                                     print('line 197: {}'.format(res))
                                     if res == False:
@@ -253,8 +254,8 @@ class sftp_get:
 if __name__ == "__main__":
     host = "localhost"
     port = 22
-    password = "avalon"
-    username = "root"
+    password = ""
+    username = ""
 
     client=paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
