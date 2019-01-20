@@ -287,10 +287,15 @@ class ssh:
         return script_str
     
     def checksum(self,file):
+        if self.configJson['skipChecksumLog'] == True:
+            return 'CHECKSUM_SKIPPED_IN_CONFIG_JSON'
         print('{} : {}'.format(self.sayit(tag=self.vul),'making checksum - check transfer log [START]'))
         if os.path.exists(file):
             if os.path.isfile(file):
-                h=hashlib.sha512()    
+                if self.configJson['checksumType'] in [None,''] or self.configJson['checksumType'] not in hashlib.algorithms_available:
+                    h=hashlib.sha512() 
+                else:
+                    h=hashlib.new(self.configJson['checksumType'])
                 with open(file,'rb') as f:
                     while True:
                         QtWidgets.QApplication.processEvents()

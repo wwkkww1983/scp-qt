@@ -4,5 +4,7 @@
 		"send":"~/scp-qt-SEND"
 	},
 	"beColorful":true,
-	"beColorful-tag":"fiendish"
+	"beColorful-tag":"fiendish",
+	"skipChecksumLog":false,
+	"checksumType":"sha512"
 }
