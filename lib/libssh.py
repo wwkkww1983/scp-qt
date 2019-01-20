@@ -63,7 +63,7 @@ class ssh:
         self.untilComplete(tab,False)
         #to ease with removal of duplicates
         sources=[]
-        defaultDest='~/scp-qt-get'
+        defaultDest=self.setDefaultDestinations(tab)
         status=self.check_connection(tab=tab,obj=status_obj)
         if status == True:
             if not self.connection['cfg'][tab]['sources'] in [[],['']]:
@@ -145,6 +145,31 @@ class ssh:
             exit('transfer_dir is not a dir')
         self.logname[tab]=name+"_"+time.strftime('%S.%M.%H-%m.%d.%Y',time.localtime())+".log"
 
+    def setDefaultDestinations(self,tab):
+        #load default destinations for tab
+        print(self.configJson['default-dirs'][tab])
+        if self.configJson['default-dirs'][tab][0] != '/':
+            if self.configJson['default-dirs'][tab][0] == '~':
+                if tab == 'send':
+                    remote_alt=os.path.join(
+                        self.connection['cfg'][tab]['remote_home'],
+                            os.path.basename(
+                                os.path.expanduser(
+                                    self.configJson['default-dirs'][tab]
+                                    )
+                                )
+                            )
+                if tab == 'get':
+                    remote_alt=os.path.expandvars(os.path.expanduser(self.configJson['default-dirs'][tab]))
+            else:
+                if tab == 'send':
+                    remote_alt=os.path.join(self.connection['cfg'][tab]['remote_home'],'scp-qt-{}'.format(tab))
+                elif tab == 'get':
+                    remote_alt=os.path.join(os.environ['HOME'],'scp-qt-{}'.format(tab))
+        else:
+            remote_alt=self.configJson['default-dirs'][tab]
+        return remote_alt
+
     def send_sources(self,tab,status_obj=None):
         self.create_transfer_log(tab)
         self.totalTransferred['send']=0
@@ -177,8 +202,10 @@ class ssh:
             self.untilComplete(tab,True)
             return False
         if self.connection['cfg'][tab]['destination'] in ['',None]:
-            #needs to be moved to more global location
-            remote_alt=os.path.join(self.connection['cfg'][tab]['remote_home'],'scp-qt-send')
+
+            #set default director when destination field is empty
+            remote_alt=self.setDefaultDestinations(tab) 
+
             print('{} : destination cannot be empty! creating "{}" on remote host so file can be transfered!'.format(self.sayit(tag=self.vul),remote_alt))
             self.connection['cfg'][tab]['destination']=remote_alt
             self.destination.setText(remote_alt)
@@ -189,27 +216,8 @@ class ssh:
                         self.connection['connect'][tab]['clientSCP'].mkdir(remote_alt)
                 except OSError as e:
                     print('{} : {} : {}'.format(self.sayit(tag=self.vul),remote_alt,str(e)))
-            
-            '''
-            chan=self.connection['connect'][tab]['clientSSH'].get_transport().open_session()
-            chan.exec_command(self.remote_script())
-            status=chan.recv_exit_status()
-            chan.close()
-            if status == 0:
-                self.statusColor(status=True,tab=tab,obj=status_obj)
-            else:
-                self.statusColor(status=False,tab=tab,obj=status_obj)
-                if status == 1:
-                    print('could not mkdir "{}"'.format(remote_alt))
-                elif status == 2:
-                    print('something already exists as "{}" that is not a directory!'.format(remote_alt))
-                else:
-                    print("something went wrong and I do not know what that may be!")
-                self.untilComplete(tab,True)
-                return False
-            '''
+           
         self.totalProgress_send.setMaximum(100)
-        #total=0
         
         self.send_transfer_cancel.setEnabled(False)
         for source in sources:
@@ -285,6 +293,7 @@ class ssh:
                 h=hashlib.sha512()    
                 with open(file,'rb') as f:
                     while True:
+                        QtWidgets.QApplication.processEvents()
                         d=f.read(4096)
                         if not d:
                             break

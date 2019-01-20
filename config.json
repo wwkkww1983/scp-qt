@@ -1,0 +1,8 @@
+{
+	"default-dirs":{
+		"get":"~/scp-qt-GET",
+		"send":"~/scp-qt-SEND"
+	},
+	"beColorful":true,
+	"beColorful-tag":"fiendish"
+}

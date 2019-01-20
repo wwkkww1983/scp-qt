@@ -22,6 +22,15 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
     tray_show=None
     hist=None
     hist_d=None
+    configJson={}
+    #needs a path other than .
+    configJsonFile='./config.json'
+
+    def load_config(self):
+        if os.path.exists(self.configJsonFile) and os.path.isfile(self.configJsonFile):
+            with open(self.configJsonFile,'r') as cfg:
+                self.configJson=json.load(cfg)
+
     def tray_actions_setup(self):
         self.tray_maximize=QtWidgets.QAction('&Maximize')
         self.tray_maximize.triggered.connect(lambda: self.setWindowState(QtCore.Qt.WindowMaximized))
@@ -62,9 +71,14 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
      
     def __init__(self):
         super(self.__class__,self).__init__()
-        if self.enable_statements == False:
+        self.load_config()
+        
+        if self.configJson['beColorful'] == False:
+            #this is the tag that is used in the db to pull the phrases set
             self.vul='disable'
-        print(self.sayit(tag=self.vul))
+        else:
+            self.vul=self.configJson['beColorful-tag']
+        print('{} : starting scp-qt.py'.format(self.sayit(tag=self.vul)))
         cnf=libconfig.config_init()
         res=cnf.configurator()
         if res == False:

@@ -27,6 +27,10 @@ add functionality to updateTransfer{'Get','Send'} to generate a current transfer
 add a json file called statements.json with various phrases and keys that are retrieved whenever a print statement is called using a random phrase and random color
 
 make a sha512 checksum of file before transfer and save to transfer log
+
+make default-mode source/destination dirs set in config.json [libssh.py line 181,]
+load config.json before anything else
+
 </done>
 <pending>
 add a history viewer
@@ -35,9 +39,8 @@ need a simple icon/logo for scp-qt
 
 remove unix specific paths for windows interoperability
 ensure soft. can work on windows as wells as on linux [linux only is the current state]
-load config.json before anything else
-make config/default options available in config.json
-make default-mode source/destination dirs set in config.json [libssh.py line 181,]
+
+*make config/default options available in config.json
 need more phrases for statements.db
 
 </pending>
