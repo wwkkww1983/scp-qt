@@ -8,6 +8,10 @@ import libtotal_progress_send
 
 class sftp_get:
     fileGet=''
+    state={
+            'get':True,
+            'send':True
+            }
     totalTransfer={
             'get':0,
             'send':0
@@ -47,16 +51,22 @@ class sftp_get:
 
 
     def get_remote_total(self,remotepath,sftp):
-        if not S_ISDIR(sftp.lstat(remotepath).st_mode) and S_ISREG(sftp.lstat(remotepath).st_mode):
-            self.totalTransfer['get']+=sftp.lstat(remote).st_size
-            self.statusBar().showMessage(engfmt.quant_to_eng(self.totalTransfer['get'],prec=2))
-            QtWidgets.QApplication.processEvents()
-        else:
-            for path,files in self.sftp_walk(remotepath,sftp):
-                for file in files:
-                    self.totalTransfer['get']+=sftp.lstat(os.path.join(path,file)).st_size
-                    self.statusBar().showMessage(engfmt.quant_to_eng(self.totalTransfer['get'],prec=2))
-                    QtWidgets.QApplication.processEvents()
+        self.state['get']=True
+        try:
+            if not S_ISDIR(sftp.lstat(remotepath).st_mode) and S_ISREG(sftp.lstat(remotepath).st_mode):
+                self.totalTransfer['get']+=sftp.lstat(remote).st_size
+                self.statusBar().showMessage(engfmt.quant_to_eng(self.totalTransfer['get'],prec=2))
+                QtWidgets.QApplication.processEvents()
+            else:
+                for path,files in self.sftp_walk(remotepath,sftp):
+                    for file in files:
+                        self.totalTransfer['get']+=sftp.lstat(os.path.join(path,file)).st_size
+                        self.statusBar().showMessage(engfmt.quant_to_eng(self.totalTransfer['get'],prec=2))
+                        QtWidgets.QApplication.processEvents()
+        except FileNotFoundError as e:
+            print(e)
+            self.state['get']=False
+            self.statusBar().showMessage("no such source")
 
     def mkLocal_path(self,local_p):
         if not os.path.exists(local_p):
@@ -130,7 +140,11 @@ class sftp_get:
         #exit()
         for remote in remote_list:                   
             self.statusBarMessage['get']=remote
-            self.get_items(local_p,remote,sftp)
+            try:
+                self.get_items(local_p,remote,sftp)
+            except FileNotFoundError as e:
+                print(e)
+                self.statusBar().showMessage('no such source')
 
             #total+=1
             #self.totalProgress_get.setValue(total)

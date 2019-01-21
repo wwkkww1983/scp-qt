@@ -104,7 +104,9 @@ class ssh:
         self.progressBar_get.setValue(0)
         self.progressBar_get.setFormat('%p%')
         self.totalProgress_get.setValue(0)
-        self.statusBar().showMessage('Done!')
+        if self.state['get'] == True:
+            self.statusBar().showMessage('Done!')
+
         self.untilComplete(tab,True)
 
     def stopTransfer(self,tab):
@@ -254,8 +256,8 @@ class ssh:
             #total+=1
             #self.totalProgress_send.setValue(total)
             QtWidgets.QApplication.processEvents()
-        
-        self.statusBar().showMessage('Done!')
+        if self.state['send'] == True:
+            self.statusBar().showMessage('Done!')
         self.progressBar.setFormat('%p%')
         self.totalProgress_send.setFormat('%p%')
         self.progressBar.setValue(0)
