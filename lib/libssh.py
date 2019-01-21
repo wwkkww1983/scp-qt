@@ -18,6 +18,10 @@ class ssh:
             'send':None,
             'get':None
             }
+    stopTRX={
+            'send':False,
+            'get':False,
+            }
     connection={
             'cfg':{
                 'date':time.strftime('%S:%M:%H-%d/%m/%Y',time.localtime()),
@@ -106,10 +110,11 @@ class ssh:
         self.totalProgress_get.setValue(0)
         if self.state['get'] == True:
             self.statusBar().showMessage('Done!')
-
+        self.stopTRX[tab]=False
         self.untilComplete(tab,True)
 
     def stopTransfer(self,tab):
+        self.stopTRX[tab]=True
         if tab == 'get':
             self.totalProgress_get.setValue(0)
             self.progressBar_get.setValue(0)
@@ -227,6 +232,8 @@ class ssh:
         self.send_transfer_cancel.setEnabled(True)
 
         for source in sources:
+            if self.stopTRX[tab] == True:
+                break
             self.statusBarMessage['send']=source
             srcRoot=source.replace(os.path.basename(source),'')
             if os.path.isdir(source):
@@ -241,13 +248,19 @@ class ssh:
                 if res == False:
                     break
                 for root,dirs,fnames in os.walk(source,topdown=True):
+                    if self.stopTRX[tab] == True:
+                        break
                     for d in dirs:
                         res=self.sendData(os.path.join(root,d),self.connection['cfg'][tab]['destination'],srcRoot=srcRoot,tab=tab)
                         if res == False:
                             break
+                        if self.stopTRX[tab] == True:
+                            break
                     for fname in fnames:
                         res=self.sendData(os.path.join(root,fname),self.connection['cfg'][tab]['destination'],srcRoot=srcRoot,tab=tab)
                         if res == False:
+                            break
+                        if self.stopTRX[tab] == True:
                             break
             if os.path.isfile(source):
                 res=self.sendData(source,self.connection['cfg'][tab]['destination'],srcRoot=srcRoot,tab=tab)
@@ -266,6 +279,7 @@ class ssh:
         self.totalProgress_send.setValue(0)
         #get a responce
         self.untilComplete(tab,True)
+        self.stopTRX[tab]=False
         return True
    
     def progressUpdateSend(self,transferred,toBeTransferred):
@@ -288,10 +302,10 @@ class ssh:
             script_str=script.read()
         return script_str
     
-    def checksum(self,file):
+    def checksum(self,file,tab):
         if self.configJson['skipChecksumLog'] == True:
             return 'CHECKSUM_SKIPPED_IN_CONFIG_JSON'
-        print('{} : {}'.format(self.sayit(tag=self.vul),'making checksum - check transfer log [START]'))
+        print('{} : {} {}'.format(self.sayit(tag=self.vul),'making checksum - check transfer log [START]',file))
         if os.path.exists(file):
             if os.path.isfile(file):
                 if self.configJson['checksumType'] in [None,''] or self.configJson['checksumType'] not in hashlib.algorithms_available:
@@ -304,19 +318,27 @@ class ssh:
                     while True: 
                         d=f.read(4096)
                         count+=4096
-                        percent=round((count/fsize)*100,2)
+                        try:
+                            percent=round((count/fsize)*100,2)
+                        except ZeroDivisionError as e:
+                            percent=100
                         if not d:
                             break
+                        if self.stopTRX[tab] == True:
+                                break
                         h.update(d)
                         self.statusBar().showMessage('Checksumming {} : {}%'.format(os.path.basename(file),percent))
                         QtWidgets.QApplication.processEvents()
 
                 print('{} : {}'.format(self.sayit(tag=self.vul),'making checksum - check transfer log [DONE]'))
                 return h.hexdigest()
+            elif os.path.isdir(file):
+                #make a checksum of the dir's contents
+                return 'IS_A_DIR'
             else:
-                return 'FILE_NOT_FILE'
+                return 'NOT_FILE_OR_DIR'
         else:
-            return 'FILE_NOT_LOCAL'
+            return 'FILE_NOT_LOCAL_OR_NON_EXISTANT'
 
     def write_log_send(self,src,dest,tab):
         if os.path.exists(self.logname[tab]):
@@ -325,7 +347,7 @@ class ssh:
             mode = 'w'
         with open(self.logname[tab],mode) as log:
             log.write('{} : {} -> {}@{}:{}\n'.format(
-                self.checksum(src),
+                self.checksum(src,tab='send'),
                 src,
                 self.connection['cfg'][tab]['user'],
                 self.connection['cfg'][tab]['host'],

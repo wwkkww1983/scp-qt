@@ -110,7 +110,7 @@ class history(state.statements):
                         children=item.childCount()
                         entry[em]['num']=str(em)
                         class_self.entry_buttons_connect(self,entry[em],entry,mode,viewer)
-                        item=class_self.countConf(entry[em]['cfg'][mode],item,tree,mode)
+                        item=class_self.countConf(self,entry[em]['cfg'][mode],item,tree,mode)
                         for cnf in entry[em]['cfg'][mode].keys():
                             for i in range(children):
                                 subChild=item.child(i)
@@ -213,14 +213,18 @@ class history(state.statements):
     def history_clear(class_self,self,viewer,entry):
         class_self.removeAll(self,viewer,entry)
         cfg={}
-        with open(os.path.join(class_self.path,class_self.history_file),'w') as cnf:
+        if os.path.exists(self.configJson['historyFile']):
+            mode='a'
+        else:
+            mode='w'
+        with open(self.configJson['historyFile'],mode) as cnf:
             json.dump(cfg,cnf)
 
     def viewer_buttons_connect(class_self,self,viewer,entry):
         viewer['0']['obj'].close.clicked.connect(lambda: class_self.viewer_destroy(self,viewer))
         viewer['0']['obj'].clear.clicked.connect(lambda: class_self.history_clear(self,viewer,entry))
 
-    def countConf(self,cfg,item,tree,mode):
+    def countConf(class_self,self,cfg,item,tree,mode):
         count=0
         for key in cfg.keys():
             if key != 'port':

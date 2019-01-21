@@ -124,7 +124,7 @@ class sftp_get:
                     self.connection['cfg'][tab]['host'],
                     remote,
                     local_p,
-                    self.checksum(remote)
+                    self.checksum(remote,tab='get')
                     ))
 
     def get_list(self,local_p,remote_list,sftp):
@@ -133,12 +133,16 @@ class sftp_get:
         self.totalTransferred['get']=0
         self.get_transfer_cancel.setEnabled(False)
         for remote in remote_list:
+            if self.stopTRX['get'] == True:
+                break
             self.statusBar().showMessage('Getting total to Transfer!')
             self.get_remote_total(remote,sftp)
         self.get_transfer_cancel.setEnabled(True)
         #print(self.totalTransfer['get'])
         #exit()
-        for remote in remote_list:                   
+        for remote in remote_list:  
+            if self.stopTRX['get'] == True:
+                break
             self.statusBarMessage['get']=remote
             try:
                 self.get_items(local_p,remote,sftp)
@@ -156,7 +160,7 @@ class sftp_get:
 
     def transfer_total_send(self,local):
         progress=libtotal_progress_send.itemize()
-        self.totalTransfer['send']=progress.total_transfer_send(local,gui=self)
+        self.totalTransfer['send']+=progress.total_transfer_send(local,gui=self)
 
     def send_transfer_update_total(self,file):
         self.totalTransferred['send']+=os.stat(file).st_size
@@ -222,7 +226,11 @@ class sftp_get:
             else:
                 if sftp.sock.closed != True:
                     for path,files  in self.sftp_walk(remote,sftp):
+                        if self.stopTRX['get'] == True:
+                            break
                         for file in files:
+                            if self.stopTRX['get']  == True:
+                                break
                             #sftp.get(remote, local) line for dowloading.
                             if remote_root != '/':
                                 stripped=path.replace(remote_root,'')[1:]
