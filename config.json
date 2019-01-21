@@ -3,8 +3,28 @@
 		"get":"~/scp-qt-GET",
 		"send":"~/scp-qt-SEND"
 	},
+	"beColorfulDB":"./statements.db",
 	"beColorful":true,
 	"beColorful-tag":"fiendish",
 	"skipChecksumLog":false,
-	"checksumType":"sha512"
+	"checksumType":"sha512",
+	"icon-tray-path":"./icons/icon-tray.png",
+	"dateformat":"%S.%M.%H-%d.%m.%Y",
+	"maxHistorySize":1048576,
+	"historyCache":"./back_history",
+	"historyFile":"./history.json",
+	"ssh-dir":"~/.ssh",
+	"statusColor-bad":{
+		"core":[255,0,20],
+		"ring":[200,10,0]
+	},
+	"statusColor-inprogress":{
+		"core":[255,0,0],
+		"ring":[255,120,0]
+	},
+	"statusColor-good":{
+		"core":[73,73,73],
+		"ring":[10,190,20]
+	},
+	"known-hosts":"~/.ssh/known_hosts"
 }

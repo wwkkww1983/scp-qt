@@ -25,7 +25,7 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
     configJson={}
     #needs a path other than .
     configJsonFile='./config.json'
-
+    dateformat='%S.%M.%H-%d.%m.%Y'
     def load_config(self):
         if os.path.exists(self.configJsonFile) and os.path.isfile(self.configJsonFile):
             with open(self.configJsonFile,'r') as cfg:
@@ -68,18 +68,113 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
                 'Information',
                 25,
                 )
-     
-    def __init__(self):
-        super(self.__class__,self).__init__()
-        self.load_config()
-        
+
+    def init_config(self):
+        fails=[False,None,'',0]
+        if 'icon-tray-path' in self.configJson.keys():
+            if self.configJson['icon-tray-path'] not in [False,None,'']:
+                iconPathConfig=os.path.abspath(
+                        os.path.expanduser(
+                            os.path.expandvars(
+                                self.configJson['icon-tray-path']
+                                )
+                            )
+                        )
+            if os.path.exists(iconPathConfig):
+                self.IconPathTray=iconPathConfig
+
         if self.configJson['beColorful'] == False:
             #this is the tag that is used in the db to pull the phrases set
             self.vul='disable'
         else:
             self.vul=self.configJson['beColorful-tag']
+        if 'dateformat' in self.configJson.keys():
+            if self.configJson['dateformat'] in [False,None,'']:
+                self.configJson['dateformat']=self.dateformat
+        if 'maxHistorySize' in self.configJson.keys():
+            if self.configJson['maxHistorySize'] in [False,None,'',0]:
+                self.configJson['maxHistorySize']=1024**2
+        else:
+            self.configJson['maxHistorySize']=1024**2
+
+        if 'beColorfulDB' in self.configJson.keys():
+            if self.configJson['beColorfulDB'] in fails:
+                self.configJson['beColorfulDB']='./statements.db'
+        else:
+            self.configJson['beColorfulDB']='./statements.db'
+
+
+        if 'historyCache' in self.configJson.keys():
+            if self.configJson['historyCache'] in fails:
+                self.configJson['historyCache']='./back_history'
+        else:
+            self.configJson['historyCache']='./back_history'
+
+        if 'historyFile' in self.configJson.keys():
+            if self.configJson['historyFile'] in fails:
+                self.configJson['historyFile']='./history.json'
+        else:
+            self.configJson['historyFile']='./history.json'
+        
+        if 'ssh-dir' in self.configJson.keys():
+            if self.configJson['ssh-dir'] in fails:
+                self.configJson['ssh-dir']='~/.ssh'
+        else:
+            self.configJson['ssh-dir']='~/.ssh'
+        
+        if 'known-hosts' in self.configJson.keys():
+            if self.configJson['known-hosts'] in fails:
+                self.configJson['known-hosts']='~/.ssh/known-hosts'
+        else:
+            self.configJson['known-hosts']='~/.ssh/known-hosts'
+
+        parts=[
+                [
+                    'statusColor-bad',
+                    [255,10,0],
+                    [255,10,0]],
+                [
+                    'statusColor-inprogress',
+                    [255,0,0],
+                    [255,120,0],
+                    ],
+                [
+                    'statusColor-good',
+                    [73,73,73],
+                    [10,190,20],
+                    ],
+            ]
+        for t,r,c in parts:
+            self.setColors(t,r,c,fails)
+
+        for key in self.configJson.keys():
+            print('{} : {} = {}'.format(self.sayit(tag=self.vul),key,self.configJson[key]))
+
+    def setColors(self,Type,r,c,fails):
+        if Type in self.configJson.keys():
+            if self.configJson[Type] in fails:
+                self.configJson[Type]['ring']=tuple(r)
+                self.configJson[Type]['core']=tuple(c)
+            else:
+                self.configJson[Type]['ring']=tuple(
+                        self.configJson[Type]['ring']
+                        )
+                self.configJson[Type]['core']=tuple(
+                        self.configJson[Type]['core']
+                        )
+        else:
+            self.configJson[Type]={}
+            self.configJson[Type]['ring']=tuple(r)
+            self.configJson[Type]['core']=tuple(c)
+
+
+    def __init__(self):
+        super(self.__class__,self).__init__()
+        self.load_config()
+        self.init_config()
+
         print('{} : starting scp-qt.py'.format(self.sayit(tag=self.vul)))
-        cnf=libconfig.config_init()
+        cnf=libconfig.config_init(self)
         res=cnf.configurator()
         if res == False:
             exit(1)

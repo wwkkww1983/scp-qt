@@ -36,7 +36,7 @@ class dest:
             'get':0
             }
     tabs=['get','send']
-    historyFile='./history.json'
+    #historyFile='./history.json'
     def __init__(self):
         pass
     
@@ -45,14 +45,14 @@ class dest:
         for tab in self.tabs:
             log['0'][tab]['password']=None
 
-        with open(self.historyFile,'w') as cnf:
+        with open(self.configJson['historyFile'],'w') as cnf:
             print('{} : log: {}'.format(self.sayit(self.vul),log))
             json.dump(log,cnf)
     
     def transHistory_save(self):
         log={}
-        if os.path.exists(self.historyFile):
-            with open(self.historyFile,'r') as cnf:
+        if os.path.exists(self.configJson['historyFile']):
+            with open(self.configJson['historyFile'],'r') as cnf:
                 log=json.load(cnf)
             print('{} : loaded: {}'.format(self.sayit(tag=self.vul),log))
             try:
@@ -62,7 +62,7 @@ class dest:
                 #passwords are not to be stored in the history log
                 for tab in self.tabs:
                     log[str(countLast)][tab]['password']=None
-                with open(self.historyFile,'w') as cnf:
+                with open(self.configJson['historyFile'],'w') as cnf:
                     json.dump(log,cnf)
             except:
                 self.newLog(log)
@@ -126,8 +126,8 @@ class dest:
 
     def transHistory_loadLast(self):
         log={}
-        if os.path.exists(self.historyFile):
-            with open(self.historyFile,'r') as cnf:
+        if os.path.exists(self.configJson['historyFile']):
+            with open(self.configJson['historyFile'],'r') as cnf:
                 log=json.load(cnf)
         try:
             countLast=sorted([int(i) for i in log.keys()])[-1]
@@ -154,7 +154,7 @@ class dest:
             return False
 
     def get_rsa(self,hostKey,tab='send'):
-        key=self.openFile(mode='file',windowTitle='Open Host Key',defaultDir='~/.ssh')
+        key=self.openFile(mode='file',windowTitle='Open Host Key',defaultDir=self.configJson['ssh-dir'])
         if key != False:
             hostKey.setText(key)
 
@@ -227,14 +227,14 @@ class dest:
         im=Image.new('RGB',(320,200))
         draw=ImageDraw.Draw(im)
         if status == False:
-            draw.rectangle([(0,0),(320,200)],(255,0,20))
-            draw.rectangle([(10,10),(310,190)],(200,10,0))
+            draw.rectangle([(0,0),(320,200)],self.configJson['statusColor-bad']['ring'])
+            draw.rectangle([(10,10),(310,190)],self.configJson['statusColor-bad']['core'])
         elif status == True:
-            draw.rectangle([(0,0),(320,200)],(73,73,73))
-            draw.rectangle([(10,10),(310,190)],(10,190,20))
+            draw.rectangle([(0,0),(320,200)],self.configJson['statusColor-good']['core'])
+            draw.rectangle([(10,10),(310,190)],self.configJson['statusColor-good']['ring'])
         else:
-            draw.rectangle([(0,0),(320,200)],fill=(255,0,0))
-            draw.rectangle([(10,10),(310,190)],fill=(255,120,0))
+            draw.rectangle([(0,0),(320,200)],fill=self.configJson['statusColor-inprogress']['core'])
+            draw.rectangle([(10,10),(310,190)],fill=self.configJson['statusColor-inprogress'][['ring']])
         nim=numpy.array(im,dtype=numpy.uint8)
         ##this returns None... why?
         #cimTest=cv2.imdecode(nim,cv2.IMREAD_COLOR)

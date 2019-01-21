@@ -56,7 +56,7 @@ class ssh:
                 }
             }
     fileSend=''
-    mkdir_script='./scripts/mkdir.sh'
+    #mkdir_script='./scripts/mkdir.sh'
 
     def get_sources(self,tab,status_obj=None):
         self.create_transfer_log(tab)
@@ -143,7 +143,7 @@ class ssh:
             os.mkdir(self.transfer_dir)
         elif os.path.exists(self.transfer_dir) and not os.path.isdir(self.transfer_dir):
             exit('transfer_dir is not a dir')
-        self.logname[tab]=name+"_"+time.strftime('%S.%M.%H-%m.%d.%Y',time.localtime())+".log"
+        self.logname[tab]=name+"_"+time.strftime(self.configJson['dateformat'],time.localtime())+".log"
 
     def setDefaultDestinations(self,tab):
         #load default destinations for tab
@@ -296,13 +296,19 @@ class ssh:
                     h=hashlib.sha512() 
                 else:
                     h=hashlib.new(self.configJson['checksumType'])
+                fsize=os.path.getsize(file)
+                count=0
                 with open(file,'rb') as f:
-                    while True:
-                        QtWidgets.QApplication.processEvents()
+                    while True: 
                         d=f.read(4096)
+                        count+=4096
+                        percent=round((count/fsize)*100,2)
                         if not d:
                             break
                         h.update(d)
+                        self.statusBar().showMessage('Checksumming {} : {}%'.format(os.path.basename(file),percent))
+                        QtWidgets.QApplication.processEvents()
+
                 print('{} : {}'.format(self.sayit(tag=self.vul),'making checksum - check transfer log [DONE]'))
                 return h.hexdigest()
             else:
@@ -378,7 +384,7 @@ class ssh:
     def rsa_client(self,tab='send'):
         try:
             self.connection['connect'][tab]['clientSSH']=paramiko.SSHClient()
-            self.connection['connect'][tab]['clientSSH'].load_host_keys(os.path.expanduser('~/.ssh/known_hosts'))                    
+            self.connection['connect'][tab]['clientSSH'].load_host_keys(os.path.expanduser(self.configJson['known-hosts']))                    
             self.connection['connect'][tab]['clientSSH'].set_missing_host_key_policy(paramiko.AutoAddPolicy())
             #self.connection['connect']['clientSSH'].load_system_host_keys(self.connection['cfg']['hostKey']) 
             
@@ -401,7 +407,7 @@ class ssh:
     def password_client(self,tab='send'):
         try:
             self.connection['connect'][tab]['clientSSH']=paramiko.SSHClient()
-            self.connection['connect'][tab]['clientSSH'].load_host_keys(os.path.expanduser('~/.ssh/known_hosts'))                    
+            self.connection['connect'][tab]['clientSSH'].load_host_keys(os.path.expanduser(self.configJson['known-hosts']))                    
             self.connection['connect'][tab]['clientSSH'].set_missing_host_key_policy(paramiko.AutoAddPolicy())
             #self.connection['connect']['clientSSH'].load_system_host_keys(self.connection['cfg']['hostKey']) 
             
@@ -420,7 +426,7 @@ class ssh:
             return False
 
     def mkDate(self):
-        return time.strftime('%S:%M:%H-%d/%m/%Y',time.localtime())
+        return time.strftime(self.configJson['dateformat'],time.localtime())
 
     def get_creds_wrapped(self,tab,updateHistory=True):
         self.connection['cfg']['date']=self.mkDate()
@@ -519,7 +525,7 @@ class ssh:
         skipNext=False
         try:
             self.connection['connect'][tab]['clientSSH']=paramiko.SSHClient()
-            self.connection['connect'][tab]['clientSSH'].load_host_keys(os.path.expanduser('~/.ssh/known_hosts'))                    
+            self.connection['connect'][tab]['clientSSH'].load_host_keys(os.path.expanduser(self.configJson['known-hosts']))                    
             self.connection['connect'][tab]['clientSSH'].set_missing_host_key_policy(paramiko.AutoAddPolicy())
             #self.connection['connect']['clientSSH'].load_system_host_keys(self.connection['cfg']['hostKey']) 
             
@@ -559,7 +565,7 @@ class ssh:
         try:
             print('{} : {}'.format(self.sayit(tag=self.vul),self.connection['cfg']))
             self.connection['connect'][tab]['clientSSH']=paramiko.SSHClient()
-            self.connection['connect'][tab]['clientSSH'].load_host_keys(os.path.expanduser('~/.ssh/known_hosts'))
+            self.connection['connect'][tab]['clientSSH'].load_host_keys(os.path.expanduser(self.configJson['known-hosts']))
             self.connection['connect'][tab]['clientSSH'].set_missing_host_key_policy(paramiko.AutoAddPolicy())
             self.connection['connect'][tab]['clientSSH'].connect(
                     hostname=self.connection['cfg'][tab]['host'],

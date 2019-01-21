@@ -13,7 +13,7 @@ class statements:
             return ''
         randomColor=random.randint(30,37)
         
-        db=sqlite3.connect(os.path.join(self.path,self.dbname))
+        db=sqlite3.connect(self.configJson['beColorfulDB'])
         cursor=db.cursor()
 
         sql='select count(rowid) from statements;'

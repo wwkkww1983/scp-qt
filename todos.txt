@@ -30,6 +30,7 @@ make a sha512 checksum of file before transfer and save to transfer log
 
 make default-mode source/destination dirs set in config.json [libssh.py line 181,]
 load config.json before anything else
+do a progress counter for the checksumming of a file
 
 </done>
 <pending>
@@ -43,4 +44,5 @@ ensure soft. can work on windows as wells as on linux [linux only is the current
 *make config/default options available in config.json
 need more phrases for statements.db
 add a dialog to configure config.json
+
 </pending>

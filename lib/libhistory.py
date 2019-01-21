@@ -8,11 +8,12 @@ for p in libs:
 import historyView,entryView
 import libstatements as state
 class history(state.statements):
-    history_file='history.json'
-    path='.'
-    def open_history(class_self):
+    #history_file=None
+    #path='.'
+
+    def open_history(class_self,self):
         keys={}
-        with open(os.path.join(class_self.path,class_self.history_file),'r') as c:
+        with open(self.configJson['historyFile'],'r') as c:
             keys=json.load(c)
         return keys
 
@@ -90,7 +91,7 @@ class history(state.statements):
             '''
 
     def viewer_setup(class_self,self):
-            keys=class_self.open_history()
+            keys=class_self.open_history(self)
 
             entry={}
             viewer=class_self.create_viewer(self)
