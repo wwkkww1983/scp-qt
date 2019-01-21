@@ -319,7 +319,11 @@ class ssh:
             return 'FILE_NOT_LOCAL'
 
     def write_log_send(self,src,dest,tab):
-        with open(self.logname[tab],'a') as log:
+        if os.path.exists(self.logname[tab]):
+            mode = 'a'
+        else:
+            mode = 'w'
+        with open(self.logname[tab],mode) as log:
             log.write('{} : {} -> {}@{}:{}\n'.format(
                 self.checksum(src),
                 src,
