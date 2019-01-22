@@ -27,7 +27,7 @@ class history(state.statements):
 
     def reload_history(class_self,self):
             #this will need to be converted to work specifically on the already existing gui in self
-            keys=class_self.open_history()
+            keys=class_self.open_history(self)
 
             self.hist_d['entry']={}
             #viewer=class_self.create_viewer(self)
@@ -40,14 +40,18 @@ class history(state.statements):
                 self.hist_d['entry'][em]['obj'].setupUi(self.hist_d['entry'][em]['dialog'])
                 self.hist_d['entry'][em]['cfg']=keys[em] 
                 tree=self.hist_d['entry'][em]['obj'].treeWidget
+
+                modes=class_self.modesUseable(self,self.hist_d['entry'][em]['cfg'])
+                class_self.entry_buttons_connect(self,self.hist_d['entry'][em],self.hist_d['entry'],modes,self.hist_d['viewer'])
+                
                 for mode in self.hist_d['entry'][em]['cfg'].keys():
                     if mode != 'date':
                         item=self.hist_d['entry'][em]['obj'].treeWidget.findItems(mode,QtCore.Qt.MatchExactly)[0]
                         #item_parts=[getattr(item,i) for i in dir(item)]
                         children=item.childCount()
                         self.hist_d['entry'][em]['num']=str(em)
-                        class_self.entry_buttons_connect(self,self.hist_d['entry'][em],self.hist_d['entry'],mode,self.hist_d['viewer'])
-                        item=class_self.countConf(self.hist_d['entry'][em]['cfg'][mode],item,tree,mode)
+                        
+                        item=class_self.countConf(self,self.hist_d['entry'][em]['cfg'][mode],item,tree,mode)
                         for cnf in self.hist_d['entry'][em]['cfg'][mode].keys():
                             for i in range(children):
                                 subChild=item.child(i)
@@ -199,7 +203,7 @@ class history(state.statements):
         viewer['0']['obj'].gridLayout_6.removeWidget(entry_bottom['dialog'])
         entry_bottom['dialog'].deleteLater()
        
-        keys=class_self.open_history()
+        keys=class_self.open_history(self)
         print(keys.keys())
         #keys.pop(entry_bottom['num'])
 
@@ -209,7 +213,7 @@ class history(state.statements):
             if entry_bottom['num'] != entry_top[i]['num']:
                 newCfg[str(num)]=entry_top[i]['cfg']
         
-        with open(os.path.join(class_self.path,class_self.history_file),'w') as cnf:
+        with open(self.configJson['historyFile'],'w') as cnf:
             json.dump(newCfg,cnf)
 
         class_self.removeAll(self,self.hist_d['viewer'],self.hist_d['entry'])
