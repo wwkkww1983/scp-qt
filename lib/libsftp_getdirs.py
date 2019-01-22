@@ -60,7 +60,7 @@ class sftp_get:
         self.state['get']=True
         try:
             if not S_ISDIR(sftp.lstat(remotepath).st_mode) and S_ISREG(sftp.lstat(remotepath).st_mode):
-                self.totalTransfer['get']+=sftp.lstat(remote).st_size
+                self.totalTransfer['get']+=sftp.lstat(remotepath).st_size
                 self.statusBar().showMessage(engfmt.quant_to_eng(self.totalTransfer['get'],prec=2))
                 QtWidgets.QApplication.processEvents()
             else:
@@ -132,7 +132,7 @@ class sftp_get:
                     self.connection['cfg'][tab]['host'],
                     remote,
                     local_p,
-                    self.checksum(remote,tab='get')
+                    self.checksum(local_p,tab='get')
                     ))
 
     def get_list(self,local_p,remote_list,sftp):
@@ -228,7 +228,7 @@ class sftp_get:
                         self.get_transfer_update_total(remote,sftp)
                     else:
                         return True
-                except OSError as e:
+                except Exception as e:
                     print(e)
                     pass
             else:

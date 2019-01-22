@@ -66,6 +66,7 @@ class history(state.statements):
                                         )
                                     if n != 'sources':
                                        subChild.setData(1,QtCore.Qt.EditRole,self.hist_d['entry'][em]['cfg'][mode][cnf])
+                                       subChild.setFlags(item.flags())
                                     else:
                                         if self.hist_d['entry'][em]['cfg'][mode][cnf] != None:
                                             for src in self.hist_d['entry'][em]['cfg'][mode][cnf]:
@@ -73,6 +74,7 @@ class history(state.statements):
                                                     print(src,mode,'srcs')
                                                     newChild=QtWidgets.QTreeWidgetItem(subChild)
                                                     newChild.setData(1,QtCore.Qt.EditRole,src)
+                                                    newChild.setFlags(item.flags())
                                                     subChild.addChild(newChild)
                                                 else:
                                                     break
@@ -153,6 +155,7 @@ class history(state.statements):
                                         )
                                     if n != 'sources':
                                        subChild.setData(1,QtCore.Qt.EditRole,entry[em]['cfg'][mode][cnf])
+                                       subChild.setFlags(item.flags())
                                     else:
                                         if entry[em]['cfg'][mode][cnf] != None:
                                             for src in entry[em]['cfg'][mode][cnf]:
@@ -165,7 +168,8 @@ class history(state.statements):
                                                         )
                                                         )
                                                     newChild=QtWidgets.QTreeWidgetItem(subChild)
-                                                    newChild.setData(1,QtCore.Qt.EditRole,src)
+                                                    newChild.setData(1,QtCore.Qt.EditRole,src) 
+                                                    newChild.setFlags(item.flags())
                                                     subChild.addChild(newChild)
                                                 else:
                                                     break
