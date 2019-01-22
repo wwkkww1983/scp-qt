@@ -32,7 +32,7 @@ make default-mode source/destination dirs set in config.json [libssh.py line 181
 load config.json before anything else
 do a progress counter for the checksumming of a file
 *make config/default options available in config.json
-
+add warning dialog for history viewer to warn user before clearing the history, allowing for a cancellation if necessary
 </done>
 <pending>
 add a history viewer
@@ -44,5 +44,5 @@ ensure soft. can work on windows as wells as on linux [linux only is the current
 
 need more phrases for statements.db
 add a dialog to configure config.json
-add warning dialog for history viewer to warn user before clearing the history, allowing for a cancellation if necessary
+add a warning dialog to remove-entry in history dialog to warn user about remove of entry and allow cancellation
 </pending>
