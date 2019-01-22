@@ -68,7 +68,7 @@ class ssh:
         #to ease with removal of duplicates
         sources=[]
         defaultDest=self.setDefaultDestinations(tab)
-        status=self.check_connection(tab=tab,obj=status_obj)
+        status=self.check_connection(tab=tab,obj=status_obj,writeHist=True)
         if status == True:
             if not self.connection['cfg'][tab]['sources'] in [[],['']]:
                 for source in self.connection['cfg'][tab]['sources']:
@@ -183,7 +183,7 @@ class ssh:
         self.totalTransfer['send']=0
         self.untilComplete(tab,False)
         sources=[]
-        status=self.check_connection(tab=tab,obj=status_obj)
+        status=self.check_connection(tab=tab,obj=status_obj,writeHist=True)
         if status == True:
             if not self.connection['cfg'][tab]['sources'] in [[],['']]:
                 for source in self.connection['cfg'][tab]['sources']:
@@ -499,10 +499,10 @@ class ssh:
                 if self.in_config[tab][key] == None:
                     self.get_creds_wrapped(tab=tab)
 
-    def check_connection(self,tab,obj=None):
+    def check_connection(self,tab,obj=None,writeHist=False):
         print('checking connection!')
         #self.get_creds(tab=tab)
-        self.get_creds_wrapped(tab=tab)
+        self.get_creds_wrapped(tab=tab,updateHistory=writeHist)
         print('{} : {}'.format(self.sayit(tag=self.vul),self.in_config[tab]))
         '''
         self.connection['cfg'][tab]['host']=self.in_config[tab]['host']

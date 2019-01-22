@@ -17,13 +17,13 @@ class controls:
         print('{} : settings up actions done!'.format(self.sayit(tag=self.vul)))
 
     def buttons(self):
-        self.check_connection_get.clicked.connect(lambda: self.check_connection(tab='get',obj=self.status_get))
+        self.check_connection_get.clicked.connect(lambda: self.check_connection(tab='get',obj=self.status_get,writeHist=True))
         self.get_btn.clicked.connect(lambda: self.get_sources(tab='get',status_obj=self.status_get))
         
         self.get_transfer_cancel.clicked.connect(lambda: self.stopTransfer(tab='get'))
         self.send_transfer_cancel.clicked.connect(lambda: self.stopTransfer(tab='send'))
 
-        self.connect.clicked.connect(lambda: self.check_connection(tab='send',obj=self.status))
+        self.connect.clicked.connect(lambda: self.check_connection(tab='send',obj=self.status,writeHist=True))
         self.send.clicked.connect(lambda: self.send_sources(tab='send',status_obj=self.status))
 
     def controls_init(self):

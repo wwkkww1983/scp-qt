@@ -5,7 +5,13 @@ class itemize:
         size=0
         #p='/home/carl/Downloads'
         for root,dirs,fnames in os.walk(p,topdown=True):
+            if gui != None:
+                if gui.stopTRX['send'] == True:
+                    break
             for fname in fnames:
+                if gui != None:
+                    if gui.stopTRX['send'] == True:
+                        break
                 path=os.path.join(root,fname)
                 path=os.path.abspath(os.path.realpath(path))
                 if os.path.exists(path):

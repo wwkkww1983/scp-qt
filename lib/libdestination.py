@@ -93,6 +93,7 @@ class dest:
         if cnf['hostKey'] != None:
             hostKey.setText(cnf['hostKey'])
         if cnf['useHostKey'] != None:
+            print(useKeys.objectName())
             useKeys.setChecked(cnf['useHostKey'])
         if cnf['sources'] not in [[""],None]:
             sources.setText('\n'.join(cnf['sources']))

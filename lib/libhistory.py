@@ -89,6 +89,27 @@ class history(state.statements):
             historyViewer_dict['entry']=entry
             return historyViewer_dict
             '''
+            class_self.setClearState(self)
+    
+    def modesUseable(class_self,self,cfg):
+        modes=[]
+        print(cfg)
+        for keys in cfg.keys():
+            count=0
+            if keys != 'date':
+                for skeys in cfg[keys].keys():
+                    if skeys != 'port' or skeys != 'useHostKey':
+                        if cfg[keys][skeys] in ['',None]:
+                            count+=1
+                    if skeys == 'port':
+                        if cfg[keys][skeys] in [22,None]:
+                            count+=1
+                    if skeys == 'useHostKey':
+                        if cfg[keys][skeys] in [False,None]:
+                            count+=1
+                if count < len(cfg[keys].keys()):
+                    modes.append(keys)
+        return modes    
 
     def viewer_setup(class_self,self):
             keys=class_self.open_history(self)
@@ -103,13 +124,16 @@ class history(state.statements):
                 entry[em]['obj'].setupUi(entry[em]['dialog'])
                 entry[em]['cfg']=keys[em] 
                 tree=entry[em]['obj'].treeWidget
+                modes=class_self.modesUseable(self,entry[em]['cfg'])
+                class_self.entry_buttons_connect(self,entry[em],entry,modes,viewer)
                 for mode in entry[em]['cfg'].keys():
                     if mode != 'date':
                         item=entry[em]['obj'].treeWidget.findItems(mode,QtCore.Qt.MatchExactly)[0]
                         item_parts=[getattr(item,i) for i in dir(item)]
                         children=item.childCount()
                         entry[em]['num']=str(em)
-                        class_self.entry_buttons_connect(self,entry[em],entry,mode,viewer)
+                        #here is the problem 
+                        #class_self.entry_buttons_connect(self,entry[em],entry,mode,viewer)
                         item=class_self.countConf(self,entry[em]['cfg'][mode],item,tree,mode)
                         for cnf in entry[em]['cfg'][mode].keys():
                             for i in range(children):
@@ -158,6 +182,7 @@ class history(state.statements):
             return historyViewer_dict
 
     def loadEntry(class_self,self,cfg,mode):
+        #this is gettings run 2x not suposed to be. why?!
         self.in_config=cfg
         print('{} : {} {}'.format(
             self.sayit(tag=self.vul),
@@ -165,8 +190,9 @@ class history(state.statements):
             cfg),
             sep='\n'
             )
-        self.loadFields(tab=mode)
-        self.get_creds_wrapped(tab=mode,updateHistory=False)
+        for m in mode:
+            self.loadFields(tab=m)
+            self.get_creds_wrapped(tab=m,updateHistory=False)
 
     def removeEntry(class_self,self,entry_bottom,entry_top,viewer):
         entry_bottom['dialog'].hide()
@@ -205,26 +231,65 @@ class history(state.statements):
 
     def removeAll(class_self,self,viewer,entry):
         for i in entry.keys():
-            entry[i]['dialog'].hide()
-            viewer['0']['obj'].gridLayout_6.removeWidget(entry[i]['dialog'])
-            entry[i]['dialog'].deleteLater()
+            try:
+                entry[i]['dialog'].hide()
+                viewer['0']['obj'].gridLayout_6.removeWidget(entry[i]['dialog'])
+                entry[i]['dialog'].deleteLater()
+            except Exception as e:
+                print(e)
 
+
+    def history_clear_warn(class_self,self):
+        warn={}
+        warn['box']=QtWidgets.QMessageBox()
+        warn['box'].setStandardButtons(QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+        warn['box'].setWindowTitle('Warning')
+        warn['box'].setText('You are about to clear your transaction History. Are You sure')
+        warn['box'].setIcon(QtWidgets.QMessageBox.Warning)
+        warn['box'].setDefaultButton(QtWidgets.QMessageBox.Yes)
+        warn['box'].setEscapeButton(QtWidgets.QMessageBox.No)
+        warn['box'].buttonClicked.connect(lambda arg: class_self.historyWarn(self,arg))
+        return warn['box'].exec_()
+
+    def historyWarn(class_self,self,arg):
+        print('{} : user selected history clear : {} '.format(self.sayit(tag=self.vul),arg.text()))
 
     def history_clear(class_self,self,viewer,entry):
-        class_self.removeAll(self,viewer,entry)
-        cfg={}
-        if os.path.exists(self.configJson['historyFile']):
-            mode='a'
-        else:
+        warn=class_self.history_clear_warn(self)
+        if warn == 16384:
+            class_self.removeAll(self,viewer,entry)
+            cfg={} 
             mode='w'
-        with open(self.configJson['historyFile'],mode) as cnf:
-            json.dump(cfg,cnf)
+            with open(self.configJson['historyFile'],mode) as cnf:
+                json.dump(cfg,cnf)
+            self.hist_d['entry']={}
+        else:
+            msg='User cancelled clearing history!'
+            print(msg)
+            self.statusBar().showMessage(msg)
+        class_self.setClearState(self)
+
+    def setClearState(class_self,self):
+        h=class_self.historyLen(self)
+        if h < 1:
+            class_self.clearEnable(self,False)
+        else:
+            class_self.clearEnable(self,True)
+
+    def historyLen(class_self,self):
+        if self.hist_d == None:
+            return 0
+        else:
+            return len(self.hist_d['entry'].keys())
+
+    def clearEnable(class_self,self,state):
+        self.hist_d['viewer']['0']['obj'].clear.setEnabled(state)
 
     def viewer_buttons_connect(class_self,self,viewer,entry):
         viewer['0']['obj'].close.clicked.connect(lambda: class_self.viewer_destroy(self,viewer))
         viewer['0']['obj'].clear.clicked.connect(lambda: class_self.history_clear(self,viewer,entry))
 
-    def countConf(class_self,self,cfg,item,tree,mode):
+    def countConf(class_self,self,cfg,item,tree,mode,returnItem=True):
         count=0
         for key in cfg.keys():
             if key != 'port':
@@ -241,6 +306,8 @@ class history(state.statements):
                     count+=1
         print('{} : {}'.format(self.sayit(tag=self.vul),count))
         if count >= len(cfg.keys())-1:
-            item.setHidden(True)
-        return item
+            if returnItem == True:
+                item.setHidden(True)
+        if returnItem == True:
+            return item
 

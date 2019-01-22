@@ -31,6 +31,8 @@ class sftp_get:
         try:
             if sftp.sock.closed != True:
                 for f in sftp.listdir_attr(remotepath):
+                    if self.stopTRX['get'] == True:
+                        break
                     if sftp.sock.closed != True:
                         if S_ISDIR(f.st_mode):
                             folders.append(f.filename)
@@ -40,9 +42,13 @@ class sftp_get:
             if files:
                 yield path, files
             for folder in folders:
+                if self.stopTRX['get'] == True:
+                    break
                 new_path=os.path.join(remotepath,folder)
                 if sftp.sock.closed != True:
                     for x in self.sftp_walk(new_path,sftp):
+                        if self.stopTRX['get'] == True:
+                            break
                         yield x
                 else:
                     break
@@ -60,6 +66,8 @@ class sftp_get:
             else:
                 for path,files in self.sftp_walk(remotepath,sftp):
                     for file in files:
+                        if self.stopTRX['get'] == True:
+                            break
                         self.totalTransfer['get']+=sftp.lstat(os.path.join(path,file)).st_size
                         self.statusBar().showMessage(engfmt.quant_to_eng(self.totalTransfer['get'],prec=2))
                         QtWidgets.QApplication.processEvents()

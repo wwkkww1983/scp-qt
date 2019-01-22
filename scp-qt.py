@@ -195,10 +195,21 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
         tray.setContextMenu(self.tray_menu)
         tray.show()
 
+    def closeAll(self):
+        print('SCREAM! : User is Quitting!')
+        self.stopTRX['get']=True
+        self.stopTRX['send']=True
+
     def loadHistory(self):
         self.hist=libhistory.history()
         self.hist_d=self.hist.viewer_setup(self)
+        self.hist.setClearState(self)
         self.hist_d['viewer']['0']['dialog'].show() 
+
+    def closeEvent(self,event):
+        for tab in ['get','send']:
+            self.stopTransfer(tab)
+        self.closeAll()
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
