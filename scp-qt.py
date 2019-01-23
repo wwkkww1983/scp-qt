@@ -178,7 +178,8 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
         res=cnf.configurator()
         if res == False:
             exit(1)
-        self.setupUi(self) 
+        self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon('./icons/scp-qt.png'))
         self.controls_init()
         self.destination_init()
         self.source_init()
