@@ -15,16 +15,34 @@
 	"historyFile":"./history.json",
 	"ssh-dir":"~/.ssh",
 	"statusColor-bad":{
-		"core":[255,0,20],
-		"ring":[200,10,0]
+		"core":{
+			"rgb":[255,0,20],
+			"alpha":255
+		},
+		"ring":{
+			"rgb":[200,10,0],
+			"alpha":255
+		}
 	},
 	"statusColor-inprogress":{
-		"core":[255,0,0],
-		"ring":[255,120,0]
+		"core":{
+			"rgb":[255,0,0],
+			"alpha":255
+		},
+		"ring":{
+			"rgb":[255,120,0],
+			"alpha":255
+		}
 	},
 	"statusColor-good":{
-		"core":[73,73,73],
-		"ring":[10,190,20]
+		"core":{
+			"rgb":[73,73,73],
+			"alpha":255
+		},
+		"ring":{
+			"rgb":[10,190,20],
+			"alpha":255
+		}
 	},
 	"known-hosts":"~/.ssh/known_hosts"
 }

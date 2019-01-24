@@ -228,14 +228,14 @@ class dest:
         im=Image.new('RGB',(320,200))
         draw=ImageDraw.Draw(im)
         if status == False:
-            draw.rectangle([(0,0),(320,200)],self.configJson['statusColor-bad']['ring'])
-            draw.rectangle([(10,10),(310,190)],self.configJson['statusColor-bad']['core'])
+            draw.rectangle([(0,0),(320,200)],self.configJson['statusColor-bad']['ring']['rgb'])
+            draw.rectangle([(10,10),(310,190)],self.configJson['statusColor-bad']['core']['rgb'])
         elif status == True:
-            draw.rectangle([(0,0),(320,200)],self.configJson['statusColor-good']['core'])
-            draw.rectangle([(10,10),(310,190)],self.configJson['statusColor-good']['ring'])
+            draw.rectangle([(0,0),(320,200)],self.configJson['statusColor-good']['core']['rgb'])
+            draw.rectangle([(10,10),(310,190)],self.configJson['statusColor-good']['ring']['rgb'])
         else:
-            draw.rectangle([(0,0),(320,200)],fill=self.configJson['statusColor-inprogress']['core'])
-            draw.rectangle([(10,10),(310,190)],fill=self.configJson['statusColor-inprogress'][['ring']])
+            draw.rectangle([(0,0),(320,200)],fill=self.configJson['statusColor-inprogress']['core']['rgb'])
+            draw.rectangle([(10,10),(310,190)],fill=self.configJson['statusColor-inprogress']['ring']['rgb'])
         nim=numpy.array(im,dtype=numpy.uint8)
         ##this returns None... why?
         #cimTest=cv2.imdecode(nim,cv2.IMREAD_COLOR)

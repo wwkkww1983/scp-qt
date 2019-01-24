@@ -14,6 +14,8 @@ import libhistory
 import json
 import libconfig
 import libstatements as state
+import config,libconfigure
+
 class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls,libdestination.dest,libsource.source,libsftp_getdirs.sftp_get,state.statements):
     iconPathTray='./icons/icon-tray.png'
     tray_menu=None
@@ -26,6 +28,7 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
     #needs a path other than .
     configJsonFile='./config.json'
     dateformat='%S.%M.%H-%d.%m.%Y'
+    conf_d={}
     def load_config(self):
         if os.path.exists(self.configJsonFile) and os.path.isfile(self.configJsonFile):
             with open(self.configJsonFile,'r') as cfg:
@@ -153,25 +156,30 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
     def setColors(self,Type,r,c,fails):
         if Type in self.configJson.keys():
             if self.configJson[Type] in fails:
-                self.configJson[Type]['ring']=tuple(r)
-                self.configJson[Type]['core']=tuple(c)
+                self.configJson[Type]['ring']['rgb']=tuple(r)
+                self.configJson[Type]['core']['rgb']=tuple(c)
             else:
-                self.configJson[Type]['ring']=tuple(
-                        self.configJson[Type]['ring']
+                self.configJson[Type]['ring']['rgb']=tuple(
+                        self.configJson[Type]['ring']['rgb']
                         )
-                self.configJson[Type]['core']=tuple(
-                        self.configJson[Type]['core']
+                self.configJson[Type]['core']['rgb']=tuple(
+                        self.configJson[Type]['core']['rgb']
                         )
         else:
             self.configJson[Type]={}
-            self.configJson[Type]['ring']=tuple(r)
-            self.configJson[Type]['core']=tuple(c)
+            self.configJson[Type]['ring']['rgb']=tuple(r)
+            self.configJson[Type]['core']['rgb']=tuple(c)
 
 
     def __init__(self):
         super(self.__class__,self).__init__()
         self.load_config()
         self.init_config()
+        
+        self.conf_d['dialog']=QtWidgets.QDialog(self)
+        self.conf_d['obj']=config.Ui_configure()
+        self.conf_d['obj'].setupUi(self.conf_d['dialog'])
+        self.conf_d['controls']=libconfigure.configure(self)
 
         print('{} : starting scp-qt.py'.format(self.sayit(tag=self.vul)))
         cnf=libconfig.config_init(self)

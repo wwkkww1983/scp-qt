@@ -526,9 +526,12 @@ class Ui_scp_qt(object):
         self.actionUse_Last_Transaction.setObjectName("actionUse_Last_Transaction")
         self.actionHistory = QtWidgets.QAction(scp_qt)
         self.actionHistory.setObjectName("actionHistory")
+        self.action_Configure = QtWidgets.QAction(scp_qt)
+        self.action_Configure.setObjectName("action_Configure")
         self.menuFile.addAction(self.actionQuit)
         self.menuFile.addAction(self.actionUse_Last_Transaction)
         self.menuFile.addAction(self.actionHistory)
+        self.menuFile.addAction(self.action_Configure)
         self.menubar.addAction(self.menuFile.menuAction())
 
         self.retranslateUi(scp_qt)
@@ -594,4 +597,5 @@ class Ui_scp_qt(object):
         self.actionQuit.setShortcut(_translate("scp_qt", "Ctrl+Q"))
         self.actionUse_Last_Transaction.setText(_translate("scp_qt", "Use &Last Transaction"))
         self.actionHistory.setText(_translate("scp_qt", "&History"))
+        self.action_Configure.setText(_translate("scp_qt", "&Configure"))
 

@@ -48,10 +48,12 @@ add a history viewer
 
 remove unix specific paths for windows interoperability
 
-ensure soft. can work on windows as wells as on linux [linux only is the current state]
+ensure soft. can work on windows as wells as on linux [linux only is the current state] -- engfmt needs windows support, so a wrapper will need to be created
 
 need more phrases for statements.db
-add a dialog to configure config.json
+
+*add a dialog to configure config.json
+
 add a warning dialog to remove-entry in history dialog to warn user about remove of entry and allow cancellation
 create a dialog to generate ssh-keys for users on windows (pycryptodome from Crypto.PublicKey import RSA) -- look at code block below
 <codeblock 

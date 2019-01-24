@@ -14,7 +14,9 @@ class controls:
         self.actionQuit.triggered.connect(self.quitApp),   
         self.actionUse_Last_Transaction.triggered.connect(self.transHistory_loadLast)
         self.actionHistory.triggered.connect(self.loadHistory)
+        self.action_Configure.triggered.connect(self.conf_d['dialog'].show)
         print('{} : settings up actions done!'.format(self.sayit(tag=self.vul)))
+
 
     def buttons(self):
         self.check_connection_get.clicked.connect(lambda: self.check_connection(tab='get',obj=self.status_get,writeHist=True))
