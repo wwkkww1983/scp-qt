@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>configure</class>
+ <widget class="QDialog" name="configure">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>833</width>
+    <height>538</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="1" column="0">
+    <widget class="QFrame" name="frame_7">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_26">
+      <item row="0" column="0">
+       <layout class="QGridLayout" name="gridLayout_25">
+        <item row="0" column="1">
+         <widget class="QPushButton" name="reset">
+          <property name="text">
+           <string>Reset</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="close">
+          <property name="text">
+           <string>Close</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="save">
+          <property name="text">
+           <string>Save</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QScrollArea" name="scrollArea">
+       <property name="widgetResizable">
+        <bool>true</bool>
+       </property>
+       <widget class="QWidget" name="scrollAreaWidgetContents">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>797</width>
+          <height>519</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_4">
+         <item row="1" column="0">
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="1" column="0">
+            <widget class="QFrame" name="frame_2">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_8">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_7">
+                <item row="0" column="2">
+                 <widget class="QPushButton" name="browse_statementsDB">
+                  <property name="text">
+                   <string>Browse</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_3">
+                  <property name="text">
+                   <string>Statements DB</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLineEdit" name="statementsDB"/>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QCheckBox" name="beColorful">
+                  <property name="text">
+                   <string>BeColorful</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_4">
+                  <property name="text">
+                   <string>BeColorful Tag</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLineEdit" name="statements_tag"/>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QFrame" name="frame_6">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_16">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_15">
+                <item row="1" column="2">
+                 <widget class="QPushButton" name="browse_historyCache">
+                  <property name="text">
+                   <string>Browse</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_7">
+                  <property name="text">
+                   <string>Max History File Size</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLineEdit" name="historyCache"/>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_8">
+                  <property name="text">
+                   <string>History Cache Dir.</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QSpinBox" name="maxHistorySize">
+                  <property name="maximum">
+                   <number>999999999</number>
+                  </property>
+                  <property name="value">
+                   <number>1048576</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="2">
+                 <widget class="QPushButton" name="browse_historyFile">
+                  <property name="text">
+                   <string>Browse</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QLineEdit" name="historyFile"/>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="label_9">
+                  <property name="text">
+                   <string>History File</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QFrame" name="frame_4">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_12">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_11">
+                <item row="0" column="1">
+                 <widget class="QLineEdit" name="icon_tray_path"/>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QPushButton" name="browse_iconTrayPath">
+                  <property name="text">
+                   <string>Browse</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_5">
+                  <property name="text">
+                   <string>Tray Icon</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QFrame" name="frame_3">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_10">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_9">
+                <item row="0" column="0">
+                 <widget class="QCheckBox" name="useChecksum">
+                  <property name="text">
+                   <string>Use Checksum</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QComboBox" name="checksumType"/>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QFrame" name="frame_5">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_14">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_13">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_6">
+                  <property name="text">
+                   <string>Date Format</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLineEdit" name="dateformat">
+                  <property name="toolTipDuration">
+                   <number>10</number>
+                  </property>
+                  <property name="statusTip">
+                   <string comment="month %m, day %d, year [4 digit %Y][2 digit %y]"/>
+                  </property>
+                  <property name="accessibleName">
+                   <string/>
+                  </property>
+                  <property name="dragEnabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QFrame" name="frame_8">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_18">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_17">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_10">
+                  <property name="text">
+                   <string>SSH Dir.</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QPushButton" name="browse_sshDir">
+                  <property name="text">
+                   <string>Browse</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLineEdit" name="ssh_dir"/>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_11">
+                  <property name="text">
+                   <string>Known Hosts File</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLineEdit" name="knwon_hosts"/>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QPushButton" name="browse_knownHosts">
+                  <property name="text">
+                   <string>Browse</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QFrame" name="frame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_6">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_5">
+                <item row="1" column="2">
+                 <widget class="QPushButton" name="browse_get">
+                  <property name="text">
+                   <string>Browse</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLineEdit" name="defaultDir_send"/>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLineEdit" name="defaultDir_get"/>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QPushButton" name="browse_send">
+                  <property name="text">
+                   <string>Browse</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label">
+                  <property name="text">
+                   <string>Send Default Dir.</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_2">
+                  <property name="text">
+                   <string>Get Default Dir.</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QFrame" name="frame_9">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_20">
+              <item row="1" column="0">
+               <layout class="QGridLayout" name="gridLayout_19">
+                <item row="0" column="1">
+                 <widget class="QLabel" name="statusColor_ring_bad">
+                  <property name="text">
+                   <string>ColorView</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLabel" name="statusColor_core_bad">
+                  <property name="text">
+                   <string>ColorView</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QPushButton" name="select_statusColor_ring_bad">
+                  <property name="text">
+                   <string>Select</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_12">
+                  <property name="text">
+                   <string>Status Color Ring:Bad</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QPushButton" name="select_statusColor_core_bad">
+                  <property name="text">
+                   <string>Select</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_13">
+                  <property name="text">
+                   <string>Status Color Core:Bad</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QFrame" name="frame_10">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_22">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_21">
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_17">
+                  <property name="text">
+                   <string>Status Color Core:Good</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLabel" name="statusColor_core_good">
+                  <property name="text">
+                   <string>ColorView</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QPushButton" name="select_statusColor_core_good">
+                  <property name="text">
+                   <string>Select</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLabel" name="statusColor_ring_good">
+                  <property name="text">
+                   <string>ColorView</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QPushButton" name="select_statusColor_ring_good">
+                  <property name="text">
+                   <string>Select</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_16">
+                  <property name="text">
+                   <string>Status Color Ring:Good</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QFrame" name="frame_11">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_24">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_23">
+                <item row="0" column="1">
+                 <widget class="QLabel" name="statusColor_ring_inProgress">
+                  <property name="text">
+                   <string>ColorView</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QPushButton" name="select_statusColor_core_inProgress">
+                  <property name="text">
+                   <string>Select</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_20">
+                  <property name="text">
+                   <string>Status Color Ring:InProgress</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QPushButton" name="select_statusColor_ring_inProgress">
+                  <property name="text">
+                   <string>Select</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLabel" name="statusColor_core_inProgress">
+                  <property name="text">
+                   <string>ColorView</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_21">
+                  <property name="text">
+                   <string>Status Color Core:InProgress</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
