@@ -1,8 +1,10 @@
 #! /usr/bin/env python3
-import os,time,json
-from PyQt5 import QtWidgets,QtGui
+import os,time,json,sys
+from PyQt5 import QtWidgets,QtGui,QtCore
+import copy,hashlib
 
 class configure:
+    config='config.json'
     config_temp={
 	"default-dirs":{
 		"get":"~/scp-qt-GET",
@@ -53,11 +55,32 @@ class configure:
     }
     def __init__(class_self,self):
         class_self.parent=self
-        class_self.config_temp=class_self.parent.configJson
-        class_self.connect_buttons_colors()
-        class_self.setDefaultsColorView()
-        #class_self.connect_buttons_main()
         
+        #load config defaults
+        class_self.load_config()
+
+        #set buttons for color selection
+        class_self.connect_buttons_colors()
+        
+        #class_self.connect_buttons_main() below
+        class_self.buttons_connect()
+  
+    def setChecksumTypes(self):
+        available=hashlib.algorithms_available
+        for t in available:
+            cb=self.parent.conf_d['dialog'].findChild(QtWidgets.QComboBox,'checksumType')
+            if cb != None:
+                cb.addItem(t)
+
+    def load_config(self):
+        #print(self.parent.configJson)
+        self.setDefaultsColorView()
+        self.config_temp=copy.deepcopy(self.parent.configJson)
+        self.setChecksumTypes()
+
+        self.load_fields()
+        #print(id(self.config_temp),id(self.parent.configJson))
+
     def setDefaultsColorView(self):
         viewer=self.parent.conf_d['dialog']
         objects=[
@@ -70,16 +93,135 @@ class configure:
         ]
         for obj in objects:
             color=QtGui.QColor(obj[1][0],obj[1][1],obj[1][2])
-            #color.setRed(obj[1][0])
-            #color.setBlue(obj[1][1])
-            #color.setGreen(obj[1][2])
             label=viewer.findChild(QtWidgets.QLabel,obj[0])
             label.setAutoFillBackground(True)
             pal=QtGui.QPalette()
             pal.setColor(QtGui.QPalette.Background,color)
             label.setPalette(pal)
             label.setText('')
-            print('init : {} {}'.format(obj[0],label))
+            #print('init : {} {}'.format(obj[0],label))
+
+    def show(self):
+        self.load_config()
+        self.parent.conf_d['dialog'].show()
+
+    def reset_config(self):
+        print('reset clicked')
+
+    def close_config(self):
+        print('close clicked')
+        self.parent.conf_d['dialog'].close()
+
+    def load_fields(self):
+        fields=[
+                [
+                    'defaultDir_send',
+                    QtWidgets.QLineEdit,
+                    self.config_temp['default-dirs']['send']
+                ],
+                [
+                    'defaultDir_get',
+                    QtWidgets.QLineEdit,
+                    self.config_temp['default-dirs']['get']    
+                ],
+                [
+                    'statementsDB',
+                    QtWidgets.QLineEdit,
+                    self.config_temp['beColorfulDB']
+                ],
+                [
+                    'statements_tag',
+                    QtWidgets.QLineEdit,
+                    self.config_temp['beColorful-tag']
+                ],
+                [
+                    'beColorful',
+                    QtWidgets.QCheckBox,
+                    self.config_temp['beColorful']
+                ],
+                [
+                    'useChecksum',
+                    QtWidgets.QCheckBox,
+                    self.config_temp['skipChecksumLog']
+                ],
+                [
+                    'checksumType',
+                    QtWidgets.QComboBox,
+                    self.config_temp['checksumType']
+                ],
+                [
+                    'icon_tray_path',
+                    QtWidgets.QLineEdit,
+                    self.config_temp['icon-tray-path']
+                ],
+                [
+                    'dateformat',
+                    QtWidgets.QLineEdit,
+                    self.config_temp['dateformat']
+                ],
+                [
+                    'maxHistorySize',
+                    QtWidgets.QSpinBox,
+                    self.config_temp['maxHistorySize']
+                ],
+                [
+                    'historyCache',
+                    QtWidgets.QLineEdit,
+                    self.config_temp['historyCache']
+                ],
+                [
+                    'historyFile',
+                    QtWidgets.QLineEdit,
+                    self.config_temp['historyFile']
+                ],
+                [
+                    'ssh_dir',
+                    QtWidgets.QLineEdit,
+                    self.config_temp['ssh-dir']
+                ],
+                [
+                    'known_hosts',
+                    QtWidgets.QLineEdit,
+                    self.config_temp['known-hosts']
+                ],
+            ]
+        for obj in fields:
+            obj.append(self.parent.conf_d['dialog'].findChild(obj[1],obj[0]))
+            if obj[1] == QtWidgets.QLineEdit:
+                obj[-1].setText(obj[2])
+            if obj[1] == QtWidgets.QCheckBox:
+                if obj[0] in ['useChecksum']:
+                    state=not obj[2]
+                else:
+                    state=obj[2]
+                obj[-1].setChecked(state)
+
+            if obj[1] == QtWidgets.QSpinBox:
+                obj[-1].setValue(obj[2])
+            if obj[1] == QtWidgets.QComboBox:
+                index=obj[-1].findText(obj[2],QtCore.Qt.MatchExactly)
+                if index != None:
+                    obj[-1].setCurrentIndex(index)
+                
+        #print(fields)
+
+    def save_config(self):
+        print('save clicked : {}'.format(self.config_temp))
+        self.parent.configJson=copy.deepcopy(self.config_temp)
+        with open(self.config,'w') as cnf:
+            json.dump(self.parent.configJson,cnf)
+        python=sys.executable
+        os.execl(python,python,* sys.argv)
+
+    def buttons_connect(self):
+        buttons=[
+                ['reset',self.reset_config],
+                ['close',self.close_config],
+                ['save',self.save_config],
+                ]
+        for obj in buttons:
+            obj.append(self.parent.conf_d['dialog'].findChild(QtWidgets.QPushButton,obj[0]))
+            obj[2].clicked.connect(obj[1])
 
     def colorChanged(self,label,color):
         color_as_tuple=color.getRgb()
@@ -89,13 +231,14 @@ class configure:
         self.parent.conf_d['dialog'].findChild(QtWidgets.QLabel,label).setPalette(pal)
         self.parent.conf_d['dialog'].findChild(QtWidgets.QLabel,label).setText('')
         parts=label.split('_')
-        key1='{}-{}'.format(parts[0],parts[2])
-        self.config_temp[key1][parts[1]]=color.getRgb()[:3]
-        print(self.config_temp[key1][parts[1]])
+        key1='{}-{}'.format(parts[0],parts[2].lower())
+        self.config_temp[key1][parts[1]]['rgb']=color.getRgb()[:3]
+        self.config_temp[key1][parts[1]]['alpha']=color.getRgb()[-1]
+        #print(id(self.parent.configJson),id(self.config_temp))
         
     def colors(self):
         label=self.parent.sender().objectName().replace("select_","")
-        print('selecting color: {}'.format(label))
+        #print('selecting color: {}'.format(label))
         dialog=QtWidgets.QColorDialog() 
         #dialog.setStandardColor(0,self.parent.conf_d['dialog'].findChild(QtWidgets.QLabel,label).palette().color(QtGui.QPalette.Background))
         dialog.setCustomColor(0,self.parent.conf_d['dialog'].findChild(QtWidgets.QLabel,label).palette().color(QtGui.QPalette.Background))
@@ -103,10 +246,7 @@ class configure:
         color=dialog.getColor(initial)
         if color.isValid() == True:
             self.colorChanged(label,color)
-
-    def p(self):
-        print(self.parent.sender())
-
+ 
     def connect_buttons_colors(self):
         objects=[
         ['select_statusColor_ring_bad'],
@@ -120,7 +260,7 @@ class configure:
             obj.append(self.parent.conf_d['dialog'].findChild(QtWidgets.QPushButton,obj[0]))
             obj.append(self.parent.conf_d['dialog'].findChild(QtWidgets.QLabel,obj[0].replace('select_','')))
             obj[1].clicked.connect(self.colors)
-            print(obj)
+            #print(obj)
 
         #.clicked.connect(lambda: self.colors(obj[0]))
         #print(button,obj[0])

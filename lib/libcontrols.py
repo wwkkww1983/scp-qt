@@ -14,7 +14,7 @@ class controls:
         self.actionQuit.triggered.connect(self.quitApp),   
         self.actionUse_Last_Transaction.triggered.connect(self.transHistory_loadLast)
         self.actionHistory.triggered.connect(self.loadHistory)
-        self.action_Configure.triggered.connect(self.conf_d['dialog'].show)
+        self.action_Configure.triggered.connect(self.conf_d['controls'].show)
         print('{} : settings up actions done!'.format(self.sayit(tag=self.vul)))
 
 
