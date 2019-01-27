@@ -63,6 +63,7 @@ class ssh:
     #mkdir_script='./scripts/mkdir.sh'
 
     def get_sources(self,tab,status_obj=None):
+        self.common_transfer_disables(True)
         self.create_transfer_log(tab)
         self.untilComplete(tab,False)
         #to ease with removal of duplicates
@@ -112,6 +113,9 @@ class ssh:
             self.statusBar().showMessage('Done!')
         self.stopTRX[tab]=False
         self.untilComplete(tab,True)
+        self.get_transfer_cancel.setEnabled(False)
+        self.common_transfer_disables(False)
+        return True
 
     def stopTransfer(self,tab):
         self.stopTRX[tab]=True
@@ -178,6 +182,7 @@ class ssh:
         return remote_alt
 
     def send_sources(self,tab,status_obj=None):
+        self.common_transfer_disables(True)
         self.create_transfer_log(tab)
         self.totalTransferred['send']=0
         self.totalTransfer['send']=0
@@ -280,8 +285,15 @@ class ssh:
         #get a responce
         self.untilComplete(tab,True)
         self.stopTRX[tab]=False
+        self.send_transfer_cancel.setEnabled(False)
+        self.common_transfer_disables(False)
         return True
-   
+  
+    def common_transfer_disables(self,state):
+        self.actionUse_Last_Transaction.setEnabled(not state)
+        self.actionHistory.setEnabled(not state)
+        self.action_Configure.setEnabled(not state)
+
     def progressUpdateSend(self,transferred,toBeTransferred):
         self.progressBar.setFormat('{}/{} {} - %p%'.format(engfmt.quant_to_eng(transferred,prec=2),engfmt.quant_to_eng(toBeTransferred,prec=2),self.fileSend))
         p=int((transferred/toBeTransferred)*100)
@@ -303,7 +315,7 @@ class ssh:
         return script_str
     
     def checksum(self,file,tab):
-        if self.configJson['skipChecksumLog'] == True:
+        if self.configJson['ChecksumLog'] == False:
             return 'CHECKSUM_SKIPPED_IN_CONFIG_JSON'
         print('{} : {} {}'.format(self.sayit(tag=self.vul),'making checksum - check transfer log [START]',file))
         if os.path.exists(file):

@@ -238,7 +238,7 @@ class configure:
                 [
                     'useChecksum',
                     QtWidgets.QCheckBox,
-                    self.config_temp['skipChecksumLog']
+                    self.config_temp['ChecksumLog']
                 ],
                 [
                     'checksumType',

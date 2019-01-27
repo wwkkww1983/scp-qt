@@ -83,8 +83,8 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
                                 )
                             )
                         )
-            if os.path.exists(iconPathConfig):
-                self.IconPathTray=iconPathConfig
+                if os.path.exists(iconPathConfig): 
+                    self.iconPathTray=iconPathConfig
 
         if self.configJson['beColorful'] == False:
             #this is the tag that is used in the db to pull the phrases set
@@ -203,7 +203,8 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
         qdialog=QtWidgets.QDialog(self)
         dialog=scp_qt_tray.Ui_tray()
         dialog.setupUi(qdialog)
-
+        
+        print('tray icon is: {}'.format(self.iconPathTray))
         tray=QtWidgets.QSystemTrayIcon(QtGui.QIcon(self.iconPathTray),self)
         tray.activated.connect(lambda reason: self.tray_message(tray,reason) )
         self.tray_context_menu()
