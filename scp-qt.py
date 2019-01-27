@@ -131,6 +131,12 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
         else:
             self.configJson['known-hosts']='~/.ssh/known-hosts'
 
+        if 'app-icon-path' in self.configJson.keys():
+            if self.configJson['app-icon-path'] in fails:
+                self.configJson['app-icon-path']='./icons/scp-qt.png'
+        else:
+            self.configJson['app-icon-path']='./icons/scp-qt.png'
+
         parts=[
                 [
                     'statusColor-bad',
@@ -187,7 +193,7 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
         if res == False:
             exit(1)
         self.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon('./icons/scp-qt.png'))
+        self.setWindowIcon(QtGui.QIcon(self.configJson['app-icon-path']))
         self.controls_init()
         self.destination_init()
         self.source_init()
