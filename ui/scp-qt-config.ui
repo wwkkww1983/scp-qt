@@ -62,7 +62,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>0</y>
+          <y>-56</y>
           <width>751</width>
           <height>519</height>
          </rect>
@@ -96,7 +96,14 @@
                  </widget>
                 </item>
                 <item row="0" column="1">
-                 <widget class="QLineEdit" name="statementsDB"/>
+                 <widget class="QLineEdit" name="statementsDB">
+                  <property name="dragEnabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
                 </item>
                 <item row="1" column="2">
                  <widget class="QCheckBox" name="beColorful">
@@ -113,7 +120,14 @@
                  </widget>
                 </item>
                 <item row="1" column="1">
-                 <widget class="QLineEdit" name="statements_tag"/>
+                 <widget class="QLineEdit" name="statements_tag">
+                  <property name="dragEnabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </item>
@@ -146,7 +160,14 @@
                  </widget>
                 </item>
                 <item row="1" column="1">
-                 <widget class="QLineEdit" name="historyCache"/>
+                 <widget class="QLineEdit" name="historyCache">
+                  <property name="dragEnabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
                 </item>
                 <item row="1" column="0">
                  <widget class="QLabel" name="label_8">
@@ -173,7 +194,14 @@
                  </widget>
                 </item>
                 <item row="2" column="1">
-                 <widget class="QLineEdit" name="historyFile"/>
+                 <widget class="QLineEdit" name="historyFile">
+                  <property name="dragEnabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
                 </item>
                 <item row="2" column="0">
                  <widget class="QLabel" name="label_9">
@@ -199,7 +227,14 @@
               <item row="0" column="0">
                <layout class="QGridLayout" name="gridLayout_11">
                 <item row="0" column="1">
-                 <widget class="QLineEdit" name="icon_tray_path"/>
+                 <widget class="QLineEdit" name="icon_tray_path">
+                  <property name="dragEnabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
                 </item>
                 <item row="0" column="2">
                  <widget class="QPushButton" name="browse_iconTrayPath">
@@ -223,7 +258,14 @@
                  </widget>
                 </item>
                 <item row="1" column="1">
-                 <widget class="QLineEdit" name="app_icon_path"/>
+                 <widget class="QLineEdit" name="app_icon_path">
+                  <property name="dragEnabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
                 </item>
                 <item row="1" column="0">
                  <widget class="QLabel" name="label_14">
@@ -252,6 +294,9 @@
                  <widget class="QCheckBox" name="useChecksum">
                   <property name="text">
                    <string>Use Checksum</string>
+                  </property>
+                  <property name="tristate">
+                   <bool>false</bool>
                   </property>
                  </widget>
                 </item>
@@ -331,7 +376,14 @@
                  </widget>
                 </item>
                 <item row="0" column="1">
-                 <widget class="QLineEdit" name="ssh_dir"/>
+                 <widget class="QLineEdit" name="ssh_dir">
+                  <property name="dragEnabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
                 </item>
                 <item row="1" column="0">
                  <widget class="QLabel" name="label_11">
@@ -341,7 +393,14 @@
                  </widget>
                 </item>
                 <item row="1" column="1">
-                 <widget class="QLineEdit" name="known_hosts"/>
+                 <widget class="QLineEdit" name="known_hosts">
+                  <property name="dragEnabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
                 </item>
                 <item row="1" column="2">
                  <widget class="QPushButton" name="browse_knownHosts">
@@ -374,10 +433,24 @@
                  </widget>
                 </item>
                 <item row="0" column="1">
-                 <widget class="QLineEdit" name="defaultDir_send"/>
+                 <widget class="QLineEdit" name="defaultDir_send">
+                  <property name="dragEnabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
                 </item>
                 <item row="1" column="1">
-                 <widget class="QLineEdit" name="defaultDir_get"/>
+                 <widget class="QLineEdit" name="defaultDir_get">
+                  <property name="dragEnabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
                 </item>
                 <item row="0" column="2">
                  <widget class="QPushButton" name="browse_send">

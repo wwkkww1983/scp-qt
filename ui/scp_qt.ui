@@ -45,7 +45,7 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>721</width>
+                 <width>799</width>
                  <height>576</height>
                 </rect>
                </property>
@@ -98,15 +98,19 @@
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>98</width>
-                               <height>90</height>
+                               <width>253</width>
+                               <height>121</height>
                               </rect>
                              </property>
                              <layout class="QGridLayout" name="gridLayout_22">
                               <item row="1" column="0">
                                <layout class="QGridLayout" name="gridLayout_21">
                                 <item row="0" column="0">
-                                 <widget class="QTextEdit" name="sources"/>
+                                 <widget class="QTextEdit" name="sources">
+                                  <property name="tabChangesFocus">
+                                   <bool>true</bool>
+                                  </property>
+                                 </widget>
                                 </item>
                                </layout>
                               </item>
@@ -184,8 +188,8 @@
                            <rect>
                             <x>0</x>
                             <y>0</y>
-                            <width>362</width>
-                            <height>275</height>
+                            <width>401</width>
+                            <height>302</height>
                            </rect>
                           </property>
                           <layout class="QGridLayout" name="gridLayout_13">
@@ -273,6 +277,12 @@
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
+                          <property name="dragEnabled">
+                           <bool>true</bool>
+                          </property>
+                          <property name="clearButtonEnabled">
+                           <bool>true</bool>
+                          </property>
                          </widget>
                         </item>
                         <item row="4" column="0">
@@ -333,6 +343,12 @@
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
+                          <property name="dragEnabled">
+                           <bool>true</bool>
+                          </property>
+                          <property name="clearButtonEnabled">
+                           <bool>true</bool>
+                          </property>
                          </widget>
                         </item>
                         <item row="4" column="1">
@@ -355,6 +371,12 @@
                          <widget class="QLineEdit" name="destination">
                           <property name="enabled">
                            <bool>false</bool>
+                          </property>
+                          <property name="dragEnabled">
+                           <bool>true</bool>
+                          </property>
+                          <property name="clearButtonEnabled">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>
@@ -470,6 +492,12 @@
                             <width>16777215</width>
                             <height>25</height>
                            </size>
+                          </property>
+                          <property name="dragEnabled">
+                           <bool>true</bool>
+                          </property>
+                          <property name="clearButtonEnabled">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>
@@ -589,7 +617,7 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>0</y>
+                 <y>-66</y>
                  <width>799</width>
                  <height>576</height>
                 </rect>
@@ -627,7 +655,14 @@
                         <item row="1" column="0">
                          <layout class="QGridLayout" name="gridLayout_31">
                           <item row="0" column="2">
-                           <widget class="QLineEdit" name="destination_get_le"/>
+                           <widget class="QLineEdit" name="destination_get_le">
+                            <property name="dragEnabled">
+                             <bool>true</bool>
+                            </property>
+                            <property name="clearButtonEnabled">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
                           </item>
                           <item row="0" column="1">
                            <widget class="QPushButton" name="browse_get">
@@ -770,6 +805,12 @@
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
+                          <property name="dragEnabled">
+                           <bool>true</bool>
+                          </property>
+                          <property name="clearButtonEnabled">
+                           <bool>true</bool>
+                          </property>
                          </widget>
                         </item>
                         <item row="4" column="0">
@@ -829,6 +870,12 @@
                          <widget class="QLineEdit" name="user_remote_get">
                           <property name="enabled">
                            <bool>false</bool>
+                          </property>
+                          <property name="dragEnabled">
+                           <bool>true</bool>
+                          </property>
+                          <property name="clearButtonEnabled">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>
@@ -916,7 +963,7 @@
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>211</width>
+                             <width>212</width>
                              <height>187</height>
                             </rect>
                            </property>
@@ -927,6 +974,9 @@
                                <widget class="QTextEdit" name="source_le">
                                 <property name="enabled">
                                  <bool>false</bool>
+                                </property>
+                                <property name="tabChangesFocus">
+                                 <bool>true</bool>
                                 </property>
                                </widget>
                               </item>
@@ -990,6 +1040,12 @@
                             <width>16777215</width>
                             <height>25</height>
                            </size>
+                          </property>
+                          <property name="dragEnabled">
+                           <bool>true</bool>
+                          </property>
+                          <property name="clearButtonEnabled">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>

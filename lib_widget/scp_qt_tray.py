@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui/scp_qt_tray.ui'
+# Form implementation generated from reading ui file './ui/scp_qt_tray.ui'
 #
 # Created by: PyQt5 UI code generator 5.11.3
 #
