@@ -40,6 +40,7 @@ do a progress counter for the checksumming of a file
 add warning dialog for history viewer to warn user before clearing the history, allowing for a cancellation if necessary
 
 need a simple icon/logo for scp-qt
+add a dialog to configure config.json
 
 </done>
 <pending>
@@ -52,7 +53,7 @@ ensure soft. can work on windows as wells as on linux [linux only is the current
 
 need more phrases for statements.db
 
-*add a dialog to configure config.json
+add a method to lib/libconfigure.py to get supported image formats for PyQt5 icons
 
 add a warning dialog to remove-entry in history dialog to warn user about remove of entry and allow cancellation
 create a dialog to generate ssh-keys for users on windows (pycryptodome from Crypto.PublicKey import RSA) -- look at code block below

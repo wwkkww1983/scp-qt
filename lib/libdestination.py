@@ -138,19 +138,26 @@ class dest:
         except:
             self.statusBar().showMessage('No Last History to use!')
 
-    def openFile(self,mode='file',windowTitle='Open',defaultDir='~'):
+    def openFile(self,mode='file',windowTitle='Open',defaultDir='~',Filter='All Files (*)'):
         home=os.path.expandvars(os.path.expanduser(defaultDir))
+        stringMode=False
         if mode == 'file':
-            files=QtWidgets.QFileDialog.getOpenFileName(self,windowTitle,home,options=QtWidgets.QFileDialog.DontUseNativeDialog)
+            files=QtWidgets.QFileDialog.getOpenFileName(self,windowTitle,home,Filter,options=QtWidgets.QFileDialog.DontUseNativeDialog)
         if mode == 'files':
-            files=QtWidgets.QFileDialog.getOpenFileNames(self,windowTitle,home,options=QtWidgets.QFileDialog.DontUseNativeDialog)
+            files=QtWidgets.QFileDialog.getOpenFileNames(self,windowTitle,home,Filter,options=QtWidgets.QFileDialog.DontUseNativeDialog)
         if mode == 'dirs':
             files=QtWidgets.QFileDialog.getExistingDirectory(self,windowTitle,home,options=QtWidgets.QFileDialog.DontUseNativeDialog)
             if files != None:
                 files=([files],)
+        if mode == 'dir':
+            files=QtWidgets.QFileDialog.getExistingDirectory(self,windowTitle,home,options=QtWidgets.QFileDialog.DontUseNativeDialog,)
+            stringMode=True
 
         if files != None:
-            return files[0]
+            if stringMode == False:
+                return files[0]
+            else:
+                return files
         else:
             return False
 

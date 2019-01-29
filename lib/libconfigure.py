@@ -3,7 +3,16 @@ import os,time,json,sys
 from PyQt5 import QtWidgets,QtGui,QtCore
 import copy,hashlib
 
+path='.'
+lib=('{}/lib','{}/lib_widget')
+for i in lib:
+    sys.path.insert(0,i.format(path))
+
+from libdestination import dest 
+openFile=dest.openFile
+
 class configure:
+    supportedImgs='PNG (*.png);;JPG (*.jpg);;JPEG (*.jpeg)'
     config='config.json'
     config_temp={
         "app-icon-path":"./icons/scp-qt.png",
@@ -67,6 +76,7 @@ class configure:
         class_self.buttons_connect()
         #non-button connections
         class_self.setConnections()
+        class_self.timed()
 
     def setConnections(self):
         self.parent.conf_d['obj'].defaultDir_send.textChanged.connect(lambda: self.assignVal(self.parent.conf_d['obj'].defaultDir_send,self.parent.conf_d['obj'].defaultDir_send.text()))
@@ -86,7 +96,7 @@ class configure:
         self.parent.conf_d['obj'].app_icon_path.textChanged.connect(lambda: self.assignVal(self.parent.conf_d['obj'].app_icon_path,self.parent.conf_d['obj'].app_icon_path.text()))
 
     def assignVal(self,widget,val=None):
-        print(widget,val)
+        #print(widget,val)
         conv=[
                 [
                     'defaultDir_send',
@@ -151,7 +161,7 @@ class configure:
             ]
         for field in conv: 
             if widget.objectName() == field[0]:
-                print(field,widget,val)
+                #print(field,widget,val)
                 if type(field[1]) == type(str()):
                     self.config_temp[field[1]]=val
                 if type(field[1]) == type(list()):
@@ -167,22 +177,21 @@ class configure:
 
     def load_config(self):
         #print(self.parent.configJson)
-        self.setDefaultsColorView()
         self.config_temp=copy.deepcopy(self.parent.configJson)
+        self.setDefaultsColorView()
         self.setChecksumTypes()
-
         self.load_fields()
         #print(id(self.config_temp),id(self.parent.configJson))
 
     def setDefaultsColorView(self):
         viewer=self.parent.conf_d['dialog']
         objects=[
-        ['statusColor_ring_bad',self.parent.configJson["statusColor-bad"]["ring"]["rgb"]],
-        ['statusColor_core_bad',self.parent.configJson["statusColor-bad"]["core"]["rgb"]],
-        ['statusColor_ring_good',self.parent.configJson["statusColor-good"]["ring"]["rgb"]],
-        ['statusColor_core_good',self.parent.configJson["statusColor-good"]["core"]["rgb"]],
-        ['statusColor_ring_inProgress',self.parent.configJson["statusColor-inprogress"]["ring"]["rgb"]],
-        ['statusColor_core_inProgress',self.parent.configJson["statusColor-inprogress"]["core"]["rgb"]],
+        ['statusColor_ring_bad',self.config_temp["statusColor-bad"]["ring"]["rgb"]],
+        ['statusColor_core_bad',self.config_temp["statusColor-bad"]["core"]["rgb"]],
+        ['statusColor_ring_good',self.config_temp["statusColor-good"]["ring"]["rgb"]],
+        ['statusColor_core_good',self.config_temp["statusColor-good"]["core"]["rgb"]],
+        ['statusColor_ring_inProgress',self.config_temp["statusColor-inprogress"]["ring"]["rgb"]],
+        ['statusColor_core_inProgress',self.config_temp["statusColor-inprogress"]["core"]["rgb"]],
         ]
         for obj in objects:
             color=QtGui.QColor(obj[1][0],obj[1][1],obj[1][2])
@@ -201,6 +210,10 @@ class configure:
     def reset_config(self):
         print('reset clicked')
         #read config-default.json
+        with open(os.path.join(path,'defaults/config.json'),'r') as default:
+            self.config_temp=json.load(default)
+        self.load_fields()
+        self.setDefaultsColorView()
         #adjust config-default for current user
         #save new config
 
@@ -314,7 +327,13 @@ class configure:
         python=sys.executable
         os.execl(python,python,* sys.argv)
 
+    def op(self,fmethod,setMethod):
+        #print(fmethod)
+        if fmethod not in [False,'']:
+            setMethod(fmethod)
+
     def buttons_connect(self):
+        supportedImgs=self.supportedImgs
         buttons=[
                 ['reset',self.reset_config],
                 ['close',self.close_config],
@@ -323,6 +342,32 @@ class configure:
         for obj in buttons:
             obj.append(self.parent.conf_d['dialog'].findChild(QtWidgets.QPushButton,obj[0]))
             obj[2].clicked.connect(obj[1])
+
+        dialog=self.parent.conf_d['obj']
+        #automate this option later
+        dialog.browse_iconTrayPath.clicked.connect(lambda: self.op(openFile(None,mode='file',Filter="{0};;All Files (*)".format(supportedImgs),defaultDir=path),dialog.icon_tray_path.setText))
+        dialog.browse_statementsDB.clicked.connect(lambda: self.op(openFile(None,mode='file',Filter="sqliteDB (*.db);;All Files (*)",defaultDir=path),dialog.statementsDB.setText))
+        dialog.browse_historyCache.clicked.connect(lambda: self.op(openFile(None,mode='dir',defaultDir=path),dialog.historyCache.setText))
+        dialog.browse_historyFile.clicked.connect(lambda: self.op(openFile(None,mode='file',Filter='JSON (*.json);;All Files (*)',defaultDir=path),dialog.historyFile.setText))
+        dialog.browse_app_icon_path.clicked.connect(lambda: self.op(openFile(None,mode='file',Filter=supportedImgs,defaultDir=path),dialog.app_icon_path.setText))
+        dialog.browse_sshDir.clicked.connect(lambda: self.op(openFile(None,mode='dir',defaultDir=os.environ['HOME']),dialog.ssh_dir.setText))
+        dialog.browse_knownHosts.clicked.connect(lambda: self.op(openFile(None,mode='file',defaultDir=os.path.join(os.environ['HOME'],'.ssh')),dialog.known_hosts.setText))
+        dialog.browse_get.clicked.connect(lambda: self.op(openFile(None,mode='dir',defaultDir=os.environ['HOME']),dialog.defaultDir_get.setText))
+
+    def timerActions(self):
+        dialog=self.parent.conf_d['obj']
+        f=dialog.dateformat.text()
+        try:
+            dialog.dateformat_view.setText(time.strftime(f,time.localtime()))
+        except:
+            dialog.dateFormat_view.setText('Invalid Date Format!')
+
+    def timed(self):
+        dialog=self.parent.conf_d['obj']
+        self.timer=QtCore.QTimer()
+        self.timer.setSingleShot(False)
+        self.timer.timeout.connect(self.timerActions)
+        self.timer.start(100)
 
     def colorChanged(self,label,color):
         color_as_tuple=color.getRgb()
