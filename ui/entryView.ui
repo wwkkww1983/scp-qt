@@ -173,6 +173,11 @@
                   <string>remote_home</string>
                  </property>
                 </item>
+                <item>
+                 <property name="text">
+                  <string>keyEncrypted</string>
+                 </property>
+                </item>
                </item>
                <item>
                 <property name="text">
@@ -216,6 +221,11 @@
                 <item>
                  <property name="text">
                   <string>remote_home</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>keyEncrypted</string>
                  </property>
                 </item>
                </item>

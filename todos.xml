@@ -70,5 +70,6 @@ pubkey = key.publickey()
 with open("/tmp/public.key", 'w') as content_file:
     content_file.write(pubkey.exportKey('OpenSSH'))
 </codeblock>
+need to add functionality to detect if keyfile is encrypted, and if so decrypt by prompt
 </pending>
 </xml>

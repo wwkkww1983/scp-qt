@@ -29,3 +29,5 @@ config.json:
 	set tag for message set from statements.db
 	skipChecksumLog -- enable/disable checksumming
 	checksumType -- set a hashing algorithm `python3 <<< "import hashlib ; print(hashlib.algorithms_available)"` will provide available options
+
+if you wish to use an encrypted rsa key, provide the private key name, toggled the checkbox for enrypted, and use the password field to set the password to decrypt the rsakey.

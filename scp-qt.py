@@ -136,7 +136,18 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
                 self.configJson['app-icon-path']='./icons/scp-qt.png'
         else:
             self.configJson['app-icon-path']='./icons/scp-qt.png'
-
+        #belongs in history
+        '''
+        if 'keyEncrypted' in self.configJson.keys():
+            if self.configJson['keyEncrypted'] in fails:
+                self.configJson['keyEncrypted']={'get':False,'send':False}
+            else:
+                for i in ['send','get']:
+                    if i not in self.configJson['keyEncrypted'].keys():
+                        self.configJson['keyEncrypted'][i]=False
+        else:
+            self.configJson['keyEncrypted']={'send':False,'get':False}
+        '''
         parts=[
                 [
                     'statusColor-bad',

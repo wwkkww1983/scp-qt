@@ -21,7 +21,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="send_tab">
        <property name="enabled">
@@ -98,7 +98,7 @@
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>253</width>
+                               <width>232</width>
                                <height>121</height>
                               </rect>
                              </property>
@@ -188,7 +188,7 @@
                            <rect>
                             <x>0</x>
                             <y>0</y>
-                            <width>401</width>
+                            <width>380</width>
                             <height>302</height>
                            </rect>
                           </property>
@@ -540,6 +540,16 @@
                           </property>
                          </widget>
                         </item>
+                        <item row="0" column="2">
+                         <widget class="QCheckBox" name="keyEncrypted">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="text">
+                           <string>Encrypted</string>
+                          </property>
+                         </widget>
+                        </item>
                        </layout>
                       </item>
                      </layout>
@@ -617,7 +627,7 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>-66</y>
+                 <y>0</y>
                  <width>799</width>
                  <height>576</height>
                 </rect>
@@ -963,7 +973,7 @@
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>212</width>
+                             <width>211</width>
                              <height>187</height>
                             </rect>
                            </property>
@@ -1088,6 +1098,16 @@
                           </property>
                          </widget>
                         </item>
+                        <item row="0" column="2">
+                         <widget class="QCheckBox" name="keyEncrypted_get">
+                          <property name="enabled">
+                           <bool>false</bool>
+                          </property>
+                          <property name="text">
+                           <string>Encrypted</string>
+                          </property>
+                         </widget>
+                        </item>
                        </layout>
                       </item>
                      </layout>
@@ -1166,7 +1186,14 @@
     <addaction name="actionHistory"/>
     <addaction name="action_Configure"/>
    </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionGenerate_RSA_Keys"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuTools"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionQuit">
@@ -1190,6 +1217,11 @@
   <action name="action_Configure">
    <property name="text">
     <string>&amp;Configure</string>
+   </property>
+  </action>
+  <action name="actionGenerate_RSA_Keys">
+   <property name="text">
+    <string>Generate RSA Keys</string>
    </property>
   </action>
  </widget>

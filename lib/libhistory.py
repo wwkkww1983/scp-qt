@@ -65,8 +65,9 @@ class history(state.statements):
                                         )
                                         )
                                     if n != 'sources':
-                                       subChild.setData(1,QtCore.Qt.EditRole,self.hist_d['entry'][em]['cfg'][mode][cnf])
-                                       subChild.setFlags(item.flags())
+                                        print(n)
+                                        subChild.setData(1,QtCore.Qt.EditRole,self.hist_d['entry'][em]['cfg'][mode][cnf])
+                                        subChild.setFlags(item.flags())
                                     else:
                                         if self.hist_d['entry'][em]['cfg'][mode][cnf] != None:
                                             for src in self.hist_d['entry'][em]['cfg'][mode][cnf]:

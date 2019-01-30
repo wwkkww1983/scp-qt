@@ -19,6 +19,7 @@ class dest:
                 'hostKey':None,
                 'useHostKey':False,
                 'sources':[],
+                'keyEncrypted':False
             },
             'get':{
                 'host':None,
@@ -29,6 +30,7 @@ class dest:
                 'hostKey':None,
                 'useHostKey':False,
                 'sources':[],
+                'keyEncrypted':False
                 }
             }
     con={
@@ -79,7 +81,7 @@ class dest:
                 json.dump(log,cnf)
             '''
 
-    def fields(self,cnf,host,port,user,password,destination,hostKey,useKeys,sources):
+    def fields(self,cnf,host,port,user,password,destination,hostKey,useKeys,sources,encrypted):
         if cnf['host'] != None:
             host.setText(cnf['host'])
         if cnf['port'] != None:
@@ -95,6 +97,9 @@ class dest:
         if cnf['useHostKey'] != None:
             print(useKeys.objectName())
             useKeys.setChecked(cnf['useHostKey'])
+        if 'keyEncrypted' in cnf.keys():
+            if cnf['keyEncrypted'] != None:
+                encrypted.setChecked(cnf['keyEncrypted'])
         if cnf['sources'] not in [[""],None]:
             sources.setText('\n'.join(cnf['sources']))
 
@@ -111,6 +116,7 @@ class dest:
                     hostKey=self.hostKey,
                     useKeys=self.useKeys,
                     sources=self.sources,
+                    encrypted=self.keyEncrypted
                     )
         elif tab == 'get':
             self.fields(
@@ -123,6 +129,7 @@ class dest:
                     hostKey=self.hostKey_get,
                     useKeys=self.useKeys_get,
                     sources=self.source_le,
+                    encrypted=self.keyEncrypted_get
                     )
 
     def transHistory_loadLast(self):
@@ -218,6 +225,7 @@ class dest:
             self.appendSource.setEnabled(enable_state)
             self.clearSources.setEnabled(enable_state)
             self.hostKeyEdit.setEnabled(enable_state)
+            self.keyEncrypted.setEnabled(enable_state)
         if tab == 'get':
             self.get_btn.setEnabled(enable_state)
             self.check_connection_get.setEnabled(enable_state)
@@ -230,6 +238,7 @@ class dest:
             self.destination_get_le.setEnabled(enable_state)
             self.browse_get.setEnabled(enable_state)
             self.hostKeyEdit_get.setEnabled(enable_state)
+            self.keyEncrypted_get.setEnabled(enable_state)
 
     def statusColor(self,status=False,tab='send',obj=None):
         im=Image.new('RGB',(320,200))
@@ -269,7 +278,7 @@ class dest:
         cnf['sources']=self.sources.toPlainText().split(',\n')
         self.in_config[tab]=cnf
 
-    def get_creds_v2(self,tab,host_address,port_remote,user_remote,password_remote,destination,hostKey,useKeys,sources):
+    def get_creds_v2(self,tab,host_address,port_remote,user_remote,password_remote,destination,hostKey,useKeys,sources,encrypted):
         cnf={}
         cnf['host']=host_address.text()
         cnf['port']=port_remote.value()
@@ -279,6 +288,7 @@ class dest:
         cnf['hostKey']=hostKey.text()
         cnf['useHostKey']=useKeys.isChecked()
         cnf['sources']=sources.toPlainText().split('\n')
+        cnf['keyEncrypted']=encrypted.isChecked()
         self.in_config[tab]=cnf
  
     def set_in_cfg(self,tab,edit,key,value):
@@ -378,14 +388,32 @@ class dest:
     def enableHostKeys_v2(self,tab,useKeys,label,button,hostKeyEdit,hostKey):
         self.in_config[tab]['useHostKey']=useKeys.isChecked()
         print('{} : using enableHostKeys_v2()!'.format(self.sayit(tag=self.vul)))
+        passwordLock=None
+        keyEncrypted=None
+        if tab == 'send':
+            passwordLock=self.passwordEdit
+            keyEncrypted=self.keyEncrypted
+        elif tab == 'get':
+            passwordLock=self.passwordEdit_get
+            keyEncrypted=self.keyEncrypted_get
+
+        if passwordLock != None:
+            if keyEncrypted.isChecked() == False:
+                state=not useKeys.isChecked()
+            else:
+                state=useKeys.isChecked()
+            passwordLock.setEnabled(state)    
+
         if useKeys.isChecked():
             hostKeyEdit.setEnabled(True)
+            keyEncrypted.setEnabled(True)
         else:
+            keyEncrypted.setEnabled(False)
             hostKeyEdit.setEnabled(False)
             hostKey.setEnabled(False)
             label.setEnabled(False)
             button.setEnabled(False)
-            
+
     def source_get_init(self):
         self.source_get_checkboxes()
         self.source_get_fields()
@@ -457,6 +485,7 @@ class dest:
                     hostKey=self.hostKey_get
                     )
                 )
+        self.keyEncrypted_get.toggled.connect(lambda:self.passwordEdit_get.setEnabled(self.keyEncrypted_get.isChecked()))
 
     def destination_checkboxes(self):
         self.hostEdit.toggled.connect(
@@ -508,5 +537,13 @@ class dest:
                     )
                 )
         self.useKeys.toggled.connect(
-                lambda: self.enableHostKeys(tab='send')
+                lambda: self.enableHostKeys_v2(
+                    tab='send',
+                    useKeys=self.useKeys,
+                    label=self.hostKeyLabel,
+                    button=self.hostKeyBrowse,
+                    hostKeyEdit=self.hostKeyEdit,
+                    hostKey=self.hostKey
+                    )
                 )
+        self.keyEncrypted.toggled.connect(lambda:self.passwordEdit.setEnabled(self.keyEncrypted.isChecked()))

@@ -1,5 +1,6 @@
 import paramiko,engfmt
-import time,sys,os,hashlib
+import time,sys,os,hashlib,io
+from Crypto.PublicKey import RSA
 from PyQt5 import QtWidgets
 class ssh:
     def __init__(self):
@@ -35,6 +36,7 @@ class ssh:
                     'destination':None,
                     'remote_home':None,
                     'user':None,
+                    'keyEncrypted':None,
                     },
                 'get':{
                     'host':None,
@@ -46,6 +48,7 @@ class ssh:
                     'destination':None,
                     'remote_home':None,
                     'user':None,
+                    'keyEncryped':None,
                     }
                 },
             'connect':{
@@ -424,17 +427,40 @@ class ssh:
     def rsa_client(self,tab='send'):
         try:
             self.connection['connect'][tab]['clientSSH']=paramiko.SSHClient()
-            self.connection['connect'][tab]['clientSSH'].load_host_keys(os.path.expanduser(self.configJson['known-hosts']))                    
+            self.connection['connect'][tab]['clientSSH'].load_host_keys(os.path.expanduser(self.configJson['known-hosts']))
             self.connection['connect'][tab]['clientSSH'].set_missing_host_key_policy(paramiko.AutoAddPolicy())
             #self.connection['connect']['clientSSH'].load_system_host_keys(self.connection['cfg']['hostKey']) 
-            
-            self.connection['connect'][tab]['clientSSH'].connect(
-                    hostname=self.connection['cfg'][tab]['host'],
-                    username=self.connection['cfg'][tab]['user'],
-                    password=self.connection['cfg'][tab]['password'],
-                    port=self.connection['cfg'][tab]['port'],
-                    key_filename=self.connection['cfg'][tab]['hostKey']
-                    )
+
+            keyEncrypted=None
+            if tab == 'send':
+                keyEncrypted=self.keyEncrypted
+            if tab == 'get':
+                keyEncrypted=self.keyEncrypted_get
+
+            if keyEncrypted.isChecked() == True:
+                eKey=open(self.connection['cfg'][tab]['hostKey'],'rb').read() 
+                uKey=RSA.import_key(eKey,self.connection['cfg'][tab]['password'])                  
+                keyIO=io.StringIO(uKey.export_key().decode())
+                key=paramiko.RSAKey.from_private_key(keyIO)
+                self.connection['connect'][tab]['clientSSH'].connect(
+                        hostname=self.connection['cfg'][tab]['host'],
+                        username=self.connection['cfg'][tab]['user'],
+                        password=self.connection['cfg'][tab]['password'],
+                        port=self.connection['cfg'][tab]['port'],
+                        pkey=key,
+                        look_for_keys=False,
+                        allow_agent=False,
+                        )
+            else:       
+                self.connection['connect'][tab]['clientSSH'].connect(
+                        hostname=self.connection['cfg'][tab]['host'],
+                        username=self.connection['cfg'][tab]['user'],
+                        password=self.connection['cfg'][tab]['password'],
+                        port=self.connection['cfg'][tab]['port'],
+                        key_filename=self.connection['cfg'][tab]['hostKey'],
+                        look_for_keys=False,
+                        allow_agent=False,
+                        )
             return True
         except:
             print(self.sayit(tag=self.vul),sys.exc_info())
@@ -480,7 +506,8 @@ class ssh:
                 destination=self.destination,
                 hostKey=self.hostKey,
                 useKeys=self.useKeys,
-                sources=self.sources)
+                sources=self.sources,
+                encrypted=self.keyEncrypted)
         if tab == 'get':
             self.get_creds_v2(
                 tab=tab,
@@ -491,7 +518,8 @@ class ssh:
                 destination=self.destination_get_le,
                 hostKey=self.hostKey_get,
                 useKeys=self.useKeys_get,
-                sources=self.source_le)
+                sources=self.source_le,
+                encrypted=self.keyEncrypted_get)
         self.update_cnf(tab=tab)
         if updateHistory == True:
             self.transHistory_save()
@@ -505,6 +533,7 @@ class ssh:
         self.connection['cfg'][tab]['useHostKey']=self.in_config[tab]['useHostKey']
         self.connection['cfg'][tab]['destination']=self.in_config[tab]['destination']
         self.connection['cfg'][tab]['sources']=self.in_config[tab]['sources']
+        self.connection['cfg'][tab]['keyEncrypted']=self.in_config[tab]['keyEncrypted']
 
         for key in self.in_config[tab].keys():
             if key in self.in_config[tab].keys():
@@ -568,14 +597,37 @@ class ssh:
             self.connection['connect'][tab]['clientSSH'].load_host_keys(os.path.expanduser(self.configJson['known-hosts']))                    
             self.connection['connect'][tab]['clientSSH'].set_missing_host_key_policy(paramiko.AutoAddPolicy())
             #self.connection['connect']['clientSSH'].load_system_host_keys(self.connection['cfg']['hostKey']) 
-            
-            self.connection['connect'][tab]['clientSSH'].connect(
-                    hostname=self.connection['cfg'][tab]['host'],
-                    username=self.connection['cfg'][tab]['user'],
-                    password=self.connection['cfg'][tab]['password'],
-                    port=self.connection['cfg'][tab]['port'],
-                    key_filename=self.connection['cfg'][tab]['hostKey']
-                    )
+    
+            keyEncrypted=None
+            if tab == 'send':
+                keyEncrypted=self.keyEncrypted
+            if tab == 'get':
+                keyEncrypted=self.keyEncrypted_get
+
+            if keyEncrypted.isChecked() == True:
+                eKey=open(self.connection['cfg'][tab]['hostKey'],'rb').read() 
+                uKey=RSA.import_key(eKey,self.connection['cfg'][tab]['password'])                  
+                keyIO=io.StringIO(uKey.export_key().decode())
+                key=paramiko.RSAKey.from_private_key(keyIO)
+                self.connection['connect'][tab]['clientSSH'].connect(
+                        hostname=self.connection['cfg'][tab]['host'],
+                        username=self.connection['cfg'][tab]['user'],
+                        password=self.connection['cfg'][tab]['password'],
+                        port=self.connection['cfg'][tab]['port'],
+                        pkey=key,
+                        look_for_keys=False,
+                        allow_agent=False,
+                        )
+            else:
+                self.connection['connect'][tab]['clientSSH'].connect(
+                        hostname=self.connection['cfg'][tab]['host'],
+                        username=self.connection['cfg'][tab]['user'],
+                        port=self.connection['cfg'][tab]['port'],
+                        key_filename=self.connection['cfg'][tab]['hostKey'],
+                        look_for_keys=False,
+                        allow_agent=False,
+                        )
+
         except paramiko.ssh_exception.AuthenticationException as e:
             print(self.sayit(tag=self.vul),e)
             skipNext=True
