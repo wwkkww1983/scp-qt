@@ -1,5 +1,6 @@
 paramiko
 engfmt
+engineering_notation
 pyqt5
 Pillow
 opencv-contrib-python

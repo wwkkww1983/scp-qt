@@ -1,5 +1,14 @@
-import os,stat,engfmt
+import os,stat,sys
 from PyQt5 import QtWidgets
+
+sys.path.insert(0,'./lib')
+OS=os.uname().sysname
+if OS == 'windows':
+    from libengformat_wrapper import engfmt
+    engfmt=engfmt()
+else:
+    import engfmt
+
 class itemize:
     def total_transfer_send(self,p,gui=None):
         size=0

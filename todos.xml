@@ -61,8 +61,10 @@ need to add functionality to detect if keyfile is encrypted, and if so decrypt b
 </done>
 
 <pending>
-*detect what os software is being run on
-*create a drop-in replacement for engfmt so software can run on windows
+detect what os software is being run on
+->create a drop-in replacement for engfmt so software can run on windows
+	replacement component for engfmt might be engineering_notation.EngNumber(num,precision=prec)
+	*need to test new module
 remove unix specific paths for windows interoperability
 
 ensure soft. can work on windows as wells as on linux [linux only is the current state] -- engfmt needs windows support, so a wrapper will need to be created

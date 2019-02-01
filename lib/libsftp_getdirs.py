@@ -1,10 +1,19 @@
 #!/usr/bin/env python3
-import paramiko, os,sys,engfmt
+import paramiko, os,sys
 paramiko.util.log_to_file('/tmp/paramiko.log')
 from stat import S_ISDIR,S_ISREG
 from PyQt5 import QtWidgets
 import pathlib
 import libtotal_progress_send
+
+sys.path.insert(0,'./lib')
+OS=os.uname().sysname
+if OS == 'windows':
+    from libengformat_wrapper import engfmt
+    engfmt=engfmt()
+else:
+    import engfmt
+
 
 class sftp_get:
     fileGet=''

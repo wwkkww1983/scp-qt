@@ -1,7 +1,17 @@
-import paramiko,engfmt
+import paramiko
 import time,sys,os,hashlib,io
 from Crypto.PublicKey import RSA
 from PyQt5 import QtWidgets
+
+sys.path.insert(0,'./lib')
+OS=os.uname().sysname
+if OS == 'windows':
+    from libengformat_wrapper import engfmt
+    engfmt=engfmt()
+else:
+    import engfmt
+
+
 class ssh:
     def __init__(self):
         pass
