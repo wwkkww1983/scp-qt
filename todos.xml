@@ -61,9 +61,8 @@ need to add functionality to detect if keyfile is encrypted, and if so decrypt b
 </done>
 
 <pending>
-add a history viewer
-	create a logo for historyViewer
-
+*detect what os software is being run on
+*create a drop-in replacement for engfmt so software can run on windows
 remove unix specific paths for windows interoperability
 
 ensure soft. can work on windows as wells as on linux [linux only is the current state] -- engfmt needs windows support, so a wrapper will need to be created
