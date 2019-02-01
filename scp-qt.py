@@ -15,6 +15,7 @@ import json
 import libconfig
 import libstatements as state
 import config,libconfigure
+import genRSA,libgenrsa
 
 class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls,libdestination.dest,libsource.source,libsftp_getdirs.sftp_get,state.statements):
     iconPathTray='./icons/icon-tray.png'
@@ -135,19 +136,7 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
             if self.configJson['app-icon-path'] in fails:
                 self.configJson['app-icon-path']='./icons/scp-qt.png'
         else:
-            self.configJson['app-icon-path']='./icons/scp-qt.png'
-        #belongs in history
-        '''
-        if 'keyEncrypted' in self.configJson.keys():
-            if self.configJson['keyEncrypted'] in fails:
-                self.configJson['keyEncrypted']={'get':False,'send':False}
-            else:
-                for i in ['send','get']:
-                    if i not in self.configJson['keyEncrypted'].keys():
-                        self.configJson['keyEncrypted'][i]=False
-        else:
-            self.configJson['keyEncrypted']={'send':False,'get':False}
-        '''
+            self.configJson['app-icon-path']='./icons/scp-qt.png' 
         parts=[
                 [
                     'statusColor-bad',
@@ -205,6 +194,7 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
             exit(1)
         self.setupUi(self)
         self.setWindowIcon(QtGui.QIcon(self.configJson['app-icon-path']))
+        self.genRsaDialogSetup()
         self.controls_init()
         self.destination_init()
         self.source_init()
@@ -221,6 +211,7 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
         self.tray_context_menu()
         tray.setContextMenu(self.tray_menu)
         tray.show()
+        
 
     def closeAll(self):
         print('SCREAM! : User is Quitting!')
@@ -237,6 +228,13 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
         for tab in ['get','send']:
             self.stopTransfer(tab)
         self.closeAll()
+
+    def genRsaDialogSetup(self):
+        self.genrsa={}
+        self.genrsa['dialog']=QtWidgets.QDialog(self)
+        self.genrsa['obj']=genRSA.Ui_genRSA()
+        self.genrsa['obj'].setupUi(self.genrsa['dialog'])
+        self.genrsa['controls']=libgenrsa.genRSA_controls(self)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

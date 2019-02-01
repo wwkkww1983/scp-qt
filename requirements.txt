@@ -3,3 +3,4 @@ engfmt
 pyqt5
 Pillow
 opencv-contrib-python
+pycryptodome

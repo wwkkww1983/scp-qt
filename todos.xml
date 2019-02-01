@@ -42,20 +42,6 @@ add warning dialog for history viewer to warn user before clearing the history, 
 need a simple icon/logo for scp-qt
 add a dialog to configure config.json
 
-</done>
-<pending>
-add a history viewer
-	create a logo for historyViewer
-
-remove unix specific paths for windows interoperability
-
-ensure soft. can work on windows as wells as on linux [linux only is the current state] -- engfmt needs windows support, so a wrapper will need to be created
-
-need more phrases for statements.db
-
-add a method to lib/libconfigure.py to get supported image formats for PyQt5 icons
-
-add a warning dialog to remove-entry in history dialog to warn user about remove of entry and allow cancellation
 create a dialog to generate ssh-keys for users on windows (pycryptodome from Crypto.PublicKey import RSA) -- look at code block below
 <codeblock 
 	from="https://stackoverflow.com/questions/2466401/how-to-generate-ssh-key-pairs-with-python" 
@@ -71,5 +57,21 @@ with open("/tmp/public.key", 'w') as content_file:
     content_file.write(pubkey.exportKey('OpenSSH'))
 </codeblock>
 need to add functionality to detect if keyfile is encrypted, and if so decrypt by prompt
+
+</done>
+
+<pending>
+add a history viewer
+	create a logo for historyViewer
+
+remove unix specific paths for windows interoperability
+
+ensure soft. can work on windows as wells as on linux [linux only is the current state] -- engfmt needs windows support, so a wrapper will need to be created
+
+need more phrases for statements.db
+
+add a method to lib/libconfigure.py to get supported image formats for PyQt5 icons
+
+add a warning dialog to remove-entry in history dialog to warn user about remove of entry and allow cancellation
 </pending>
 </xml>

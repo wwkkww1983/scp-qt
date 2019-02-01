@@ -98,7 +98,7 @@
                               <rect>
                                <x>0</x>
                                <y>0</y>
-                               <width>232</width>
+                               <width>219</width>
                                <height>121</height>
                               </rect>
                              </property>
@@ -188,7 +188,7 @@
                            <rect>
                             <x>0</x>
                             <y>0</y>
-                            <width>380</width>
+                            <width>367</width>
                             <height>302</height>
                            </rect>
                           </property>
@@ -628,7 +628,7 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>799</width>
+                 <width>762</width>
                  <height>576</height>
                 </rect>
                </property>
@@ -727,7 +727,7 @@
                             <x>0</x>
                             <y>0</y>
                             <width>362</width>
-                            <height>302</height>
+                            <height>275</height>
                            </rect>
                           </property>
                           <layout class="QGridLayout" name="gridLayout_37">
@@ -973,8 +973,8 @@
                             <rect>
                              <x>0</x>
                              <y>0</y>
-                             <width>211</width>
-                             <height>187</height>
+                             <width>98</width>
+                             <height>90</height>
                             </rect>
                            </property>
                            <layout class="QGridLayout" name="gridLayout_33">
@@ -1188,7 +1188,7 @@
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
-     <string>Tools</string>
+     <string>&amp;Tools</string>
     </property>
     <addaction name="actionGenerate_RSA_Keys"/>
    </widget>
@@ -1221,7 +1221,16 @@
   </action>
   <action name="actionGenerate_RSA_Keys">
    <property name="text">
-    <string>Generate RSA Keys</string>
+    <string>&amp;Generate RSA Keys</string>
+   </property>
+   <property name="statusTip">
+    <string>Generate RSA Key Dialog</string>
+   </property>
+   <property name="shortcut">
+    <string comment="F1" extracomment="F1">F1</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::ApplicationShortcut</enum>
    </property>
   </action>
  </widget>
