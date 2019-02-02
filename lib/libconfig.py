@@ -11,8 +11,12 @@ class config_init:
     #maxSize=1024**2
 
     def newcfg(self,file):
-        with open(file,'w') as hist:
+        try:
+            with open(file,'w') as hist:
                 hist.write('{}')
+        except FileNotFoundError as e:
+            print(e)
+            self.parent.statusBar().showMessage('you need to set a valid history file! {}'.format(e))
 
     def configurator(self):
         tname=time.strftime(self.parent.configJson['dateformat'],time.localtime())
