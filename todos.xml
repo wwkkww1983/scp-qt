@@ -57,11 +57,11 @@ with open("/tmp/public.key", 'w') as content_file:
     content_file.write(pubkey.exportKey('OpenSSH'))
 </codeblock>
 need to add functionality to detect if keyfile is encrypted, and if so decrypt by prompt
-
+detect what os software is being run on
+added history icon configuration to config and libconfigure dialog
 </done>
 
 <pending>
-detect what os software is being run on
 ->create a drop-in replacement for engfmt so software can run on windows
 	replacement component for engfmt might be engineering_notation.EngNumber(num,precision=prec)
 	*need to test new module

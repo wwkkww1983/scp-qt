@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets,QtCore
+from PyQt5 import QtWidgets,QtCore,QtGui
 import json,os,sys
 
 libs=('./lib','./lib_widget')
@@ -7,6 +7,7 @@ for p in libs:
 
 import historyView,entryView
 import libstatements as state
+
 class history(state.statements):
     #history_file=None
     #path='.'
@@ -23,6 +24,7 @@ class history(state.statements):
         viewer['0']['dialog']=QtWidgets.QDialog(self)
         viewer['0']['obj']=historyView.Ui_configView()
         viewer['0']['obj'].setupUi(viewer['0']['dialog'])
+        viewer['0']['dialog'].setWindowIcon(QtGui.QIcon(self.configJson['history-icon-path']))
         return viewer
 
     def reload_history(class_self,self):

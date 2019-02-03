@@ -94,6 +94,7 @@ class configure:
         self.parent.conf_d['obj'].ssh_dir.textChanged.connect(lambda: self.assignVal(self.parent.conf_d['obj'].ssh_dir,self.parent.conf_d['obj'].ssh_dir.text()))
         self.parent.conf_d['obj'].known_hosts.textChanged.connect(lambda: self.assignVal(self.parent.conf_d['obj'].known_hosts,self.parent.conf_d['obj'].known_hosts.text()))
         self.parent.conf_d['obj'].app_icon_path.textChanged.connect(lambda: self.assignVal(self.parent.conf_d['obj'].app_icon_path,self.parent.conf_d['obj'].app_icon_path.text()))
+        self.parent.conf_d['obj'].history_icon_path.textChanged.connect(lambda: self.assignVal(self.parent.conf_d['obj'].history_icon_path,self.parent.conf_d['obj'].history_icon_path.text()))
 
     def assignVal(self,widget,val=None):
         #print(widget,val)
@@ -157,6 +158,10 @@ class configure:
                 [
                     'app_icon_path',
                     'app-icon-path'
+                ],
+                [
+                    'history_icon_path',
+                    'history-icon-path'
                 ]
             ]
         for field in conv: 
@@ -297,6 +302,11 @@ class configure:
                     'app_icon_path',
                     QtWidgets.QLineEdit,
                     self.config_temp['app-icon-path']
+                ],
+                [
+                    'history_icon_path',
+                    QtWidgets.QLineEdit,
+                    self.config_temp['history-icon-path']
                 ]
             ]
         for obj in fields:
@@ -353,6 +363,7 @@ class configure:
         dialog.browse_sshDir.clicked.connect(lambda: self.op(openFile(None,mode='dir',defaultDir=os.environ['HOME']),dialog.ssh_dir.setText))
         dialog.browse_knownHosts.clicked.connect(lambda: self.op(openFile(None,mode='file',defaultDir=os.path.join(os.environ['HOME'],'.ssh')),dialog.known_hosts.setText))
         dialog.browse_get.clicked.connect(lambda: self.op(openFile(None,mode='dir',defaultDir=os.environ['HOME']),dialog.defaultDir_get.setText))
+        dialog.browse_history_icon_path.clicked.connect(lambda: self.op(openFile(None,mode='file',defaultDir=path,Filter=supportedImgs),dialog.history_icon_path.setText))
 
     def timerActions(self):
         dialog=self.parent.conf_d['obj']

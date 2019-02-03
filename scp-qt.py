@@ -17,6 +17,7 @@ import libstatements as state
 import config,libconfigure
 import genRSA,libgenrsa
 
+
 class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls,libdestination.dest,libsource.source,libsftp_getdirs.sftp_get,state.statements):
     iconPathTray='./icons/icon-tray.png'
     tray_menu=None
@@ -30,6 +31,7 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
     configJsonFile='./config.json'
     dateformat='%S.%M.%H-%d.%m.%Y'
     conf_d={}
+
     def load_config(self):
         if os.path.exists(self.configJsonFile) and os.path.isfile(self.configJsonFile):
             with open(self.configJsonFile,'r') as cfg:
@@ -86,6 +88,13 @@ class scp(QtWidgets.QMainWindow,scp_qt.Ui_scp_qt,libssh.ssh,libcontrols.controls
                         )
                 if os.path.exists(iconPathConfig): 
                     self.iconPathTray=iconPathConfig
+        
+        if 'history-icon-path' in self.configJson.keys():
+            if self.configJson['history-icon-path'] in [False,None,'']:
+                self.configJson['history-icon-path']='./icon/history-icon.png'
+        else:
+                self.configJson['history-icon-path']='./icon/history-icon.png'
+
 
         if self.configJson['beColorful'] == False:
             #this is the tag that is used in the db to pull the phrases set

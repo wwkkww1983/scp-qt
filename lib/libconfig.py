@@ -1,6 +1,8 @@
 #! /usr/bin/env python3
 import os,sys
 import time
+from PyQt5 import QtWidgets
+
 class config_init:
     def __init__(self,parent):
         self.parent=parent
@@ -15,8 +17,18 @@ class config_init:
             with open(file,'w') as hist:
                 hist.write('{}')
         except FileNotFoundError as e:
-            print(e)
-            self.parent.statusBar().showMessage('you need to set a valid history file! {}'.format(e))
+            text='you need to set a valid history file! : {}\nDo it Now?'.format(e)
+            print(text)
+            msg=QtWidgets.QMessageBox(self.parent)
+            msg.setIcon(QtWidgets.QMessageBox.Warning)
+            msg.setStandardButtons(QtWidgets.QMessageBox.Yes|QtWidgets.QMessageBox.No)
+            msg.setText(text)
+            msg.show()
+            status=msg.exec()
+            if status == QtWidgets.QMessageBox.Yes:
+                self.parent.conf_d['controls'].show()
+            self.parent.statusBar().showMessage(text)
+
 
     def configurator(self):
         tname=time.strftime(self.parent.configJson['dateformat'],time.localtime())
