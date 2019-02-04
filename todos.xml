@@ -59,6 +59,8 @@ with open("/tmp/public.key", 'w') as content_file:
 need to add functionality to detect if keyfile is encrypted, and if so decrypt by prompt
 detect what os software is being run on
 added history icon configuration to config and libconfigure dialog
+add all tag supported for statements.db
+
 </done>
 
 <pending>
@@ -74,5 +76,6 @@ need more phrases for statements.db
 add a method to lib/libconfigure.py to get supported image formats for PyQt5 icons
 
 add a warning dialog to remove-entry in history dialog to warn user about remove of entry and allow cancellation
+add combox to config dialog that gets all tags in statements.db and allows selection to set the desired tag [add all tag into it]
 </pending>
 </xml>

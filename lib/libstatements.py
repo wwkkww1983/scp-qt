@@ -7,30 +7,53 @@ class statements:
     path="."
     vul='fiendish'
     enable_statements=True
+    db={'db':None,'cursor':None}
+
+    def db_init(self):
+        self.db['db']=sqlite3.connect(self.configJson['beColorfulDB'])
+        self.db['cursor']=self.db['db'].cursor()
+
+    def getAllTags(self):
+        sql='''select tag from statements group by tag;'''
+        self.db['cursor'].execute(sql)
+        tags=self.db['cursor'].fetchall()
+        tag=tags[random.randint(0,len(tags)-1)]
+        if tag not in [None,[],()]:
+            tag=tag[0]
+        return tag
+
+    def getRowID(self,tag):
+        sql='''select rowid from statements where tag=?;'''
+        self.db['cursor'].execute(sql,(tag,))
+        ids=self.db['cursor'].fetchall()
+        ID=ids[random.randint(0,len(ids)-1)][0]
+        return ID
 
     def sayit(self,tag,noPrint=True):
+        self.db_init()
+        all_temp=tag
         if tag == 'disable':
             return ''
+        if tag == 'all':
+            tag=self.getAllTags()
+            
         randomColor=random.randint(30,37)
         
-        db=sqlite3.connect(self.configJson['beColorfulDB'])
-        cursor=db.cursor()
-
         sql='select count(rowid) from statements;'
-        cursor.execute(sql)
-        top=cursor.fetchone()
+        self.db['cursor'].execute(sql)
+        top=self.db['cursor'].fetchone()
         if top not in [(),None]:
             top=top[0]
-
-        randomStatementAddr=random.randint(1,top)
-
-        sql='select phrase from statements where rowid = {} and tag = ?;'.format(randomStatementAddr)
-        cursor.execute(sql,(tag,))
-        statement=cursor.fetchone()
-        if statement not in [(),None,(None,)]:
-            statement=statement[0]
-        db.close()
-
+        #the line below has issues where rowid was not matched to tag, resulting in NoneType output
+        #using the new line, fixes this
+        #randomStatementAddr=random.randint(1,top)
+        randomStatementAddr=self.getRowID(tag)
+        
+        statement=self.getStatement(randomStatementAddr,tag)        
+        self.db['db'].close()
+        
+        if all_temp == 'all':
+            statement='[{}] {}'.format(tag,statement)
         if statement != None:
             phrase_color='''\033[1;{0};40m{1}\033[1;40;m'''.format(randomColor,statement)
             if noPrint == False:
@@ -38,6 +61,14 @@ class statements:
             return phrase_color
         else:
             return ''
+        
+    def getStatement(self,randomStatementAddr,tag):
+        sql='select phrase from statements where rowid = {} and tag = ?;'.format(randomStatementAddr)
+        self.db['cursor'].execute(sql,(tag,))
+        statement=self.db['cursor'].fetchone()
+        if statement not in [(),None,(None,)]:
+            statement=statement[0]
+        return statement
 
 if __name__ == "__main__":
     app = statements()
