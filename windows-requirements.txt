@@ -1,0 +1,6 @@
+paramiko
+engineering_notation
+pyqt5
+Pillow
+opencv-contrib-python
+pycryptodome
