@@ -120,13 +120,12 @@
                  </widget>
                 </item>
                 <item row="1" column="1">
-                 <widget class="QLineEdit" name="statements_tag">
-                  <property name="dragEnabled">
-                   <bool>true</bool>
-                  </property>
-                  <property name="clearButtonEnabled">
-                   <bool>true</bool>
-                  </property>
+                 <widget class="QComboBox" name="statements_tag">
+                  <item>
+                   <property name="text">
+                    <string>All</string>
+                   </property>
+                  </item>
                  </widget>
                 </item>
                </layout>

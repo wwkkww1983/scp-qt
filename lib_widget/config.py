@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file './ui/scp-qt-config.ui'
+# Form implementation generated from reading ui file 'ui/scp-qt-config.ui'
 #
 # Created by: PyQt5 UI code generator 5.11.3
 #
@@ -70,10 +70,9 @@ class Ui_configure(object):
         self.label_4 = QtWidgets.QLabel(self.frame_2)
         self.label_4.setObjectName("label_4")
         self.gridLayout_7.addWidget(self.label_4, 1, 0, 1, 1)
-        self.statements_tag = QtWidgets.QLineEdit(self.frame_2)
-        self.statements_tag.setDragEnabled(True)
-        self.statements_tag.setClearButtonEnabled(True)
+        self.statements_tag = QtWidgets.QComboBox(self.frame_2)
         self.statements_tag.setObjectName("statements_tag")
+        self.statements_tag.addItem("")
         self.gridLayout_7.addWidget(self.statements_tag, 1, 1, 1, 1)
         self.gridLayout_8.addLayout(self.gridLayout_7, 0, 0, 1, 1)
         self.gridLayout_3.addWidget(self.frame_2, 1, 0, 1, 1)
@@ -368,6 +367,7 @@ class Ui_configure(object):
         self.label_3.setText(_translate("configure", "Statements DB"))
         self.beColorful.setText(_translate("configure", "BeColorful"))
         self.label_4.setText(_translate("configure", "BeColorful Tag"))
+        self.statements_tag.setItemText(0, _translate("configure", "All"))
         self.browse_historyCache.setText(_translate("configure", "Browse"))
         self.label_7.setText(_translate("configure", "Max History File Size"))
         self.label_8.setText(_translate("configure", "History Cache Dir."))
@@ -377,7 +377,7 @@ class Ui_configure(object):
         self.label_14.setText(_translate("configure", "App. Icon"))
         self.label_5.setText(_translate("configure", "Tray Icon"))
         self.browse_app_icon_path.setText(_translate("configure", "Browse"))
-        self.browse_history_icon_path.setText(_translate("configure", "PushButton"))
+        self.browse_history_icon_path.setText(_translate("configure", "Browse"))
         self.label_15.setText(_translate("configure", "Hist. Icon"))
         self.useChecksum.setText(_translate("configure", "Use Checksum"))
         self.label_6.setText(_translate("configure", "Date Format"))

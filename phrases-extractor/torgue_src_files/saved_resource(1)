@@ -1,20 +1,0 @@
-
-var ftGUID_3589321="3936D816C74680";
-var ftConfID_3589321="12483357";
-var ftParams_3589321="ftx=&fty=&ftadz=&ftscw=&ft_custom=&ftOBA=1&ft_ifb=1&ft_domain=borderlands.fandom.com&ft_agentEnv=0&ft_referrer=https%3A%2F%2Fborderlands.fandom.com%2Fwiki%2FMr._Torgue&cachebuster=636460.7873333574";
-var ftKeyword_3589321="";
-var ftCustom_3589321="";
-var ftSection_3589321="";
-var ftSegment_3589321="tg1";
-var ftSegmentList_3589321=[{s:'tg1'}];
-var ftRuleMatch_3589321="0";
-var ftTimestamp_3589321="1549259770";
-var ftImp3589321 = {};
-ftImp3589321.privacy = "x";
-ftImp3589321.guidAge = "116";
-ftImp3589321.impID = "3E0B2DBD-EF63-F613-669E-43C460E70114";
-ftImp3589321.duid = "FT:3936D816C74680";
-ftImp3589321.ft_tpplid = "";
-ftImp3589321.ft_c = {};
-
-document.write('<scr'+'ipt src="https://cdn.flashtalking.com/xre/358/3589321/2510204/js/j-3589321-2510204.js" id="ftscript_m3589321" name="ftscript_m3589321"></scr'+'ipt>');

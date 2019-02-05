@@ -65,7 +65,8 @@ class configure:
     }
     def __init__(class_self,self):
         class_self.parent=self
-        
+        for i in self.getAllTags():
+            self.conf_d['obj'].statements_tag.addItem(i)       
         #load config defaults
         class_self.load_config()
 
@@ -82,7 +83,9 @@ class configure:
         self.parent.conf_d['obj'].defaultDir_send.textChanged.connect(lambda: self.assignVal(self.parent.conf_d['obj'].defaultDir_send,self.parent.conf_d['obj'].defaultDir_send.text()))
         self.parent.conf_d['obj'].defaultDir_get.textChanged.connect(lambda: self.assignVal(self.parent.conf_d['obj'].defaultDir_get,self.parent.conf_d['obj'].defaultDir_get.text()))
         self.parent.conf_d['obj'].statementsDB.textChanged.connect(lambda: self.assignVal(self.parent.conf_d['obj'].statementsDB,self.parent.conf_d['obj'].statementsDB.text()))
-        self.parent.conf_d['obj'].statements_tag.textChanged.connect(lambda: self.assignVal(self.parent.conf_d['obj'].statements_tag,self.parent.conf_d['obj'].statements_tag.text()))
+
+        self.parent.conf_d['obj'].statements_tag.currentIndexChanged.connect(lambda: self.assignVal(self.parent.conf_d['obj'].statements_tag,self.parent.conf_d['obj'].statements_tag.currentText()))
+        
         self.parent.conf_d['obj'].beColorful.toggled.connect(lambda: self.assignVal(self.parent.conf_d['obj'].beColorful,self.parent.conf_d['obj'].beColorful.isChecked()))
         self.parent.conf_d['obj'].useChecksum.toggled.connect(lambda: self.assignVal(self.parent.conf_d['obj'].useChecksum,self.parent.conf_d['obj'].useChecksum.isChecked()))
         self.parent.conf_d['obj'].checksumType.currentIndexChanged.connect(lambda: self.assignVal(self.parent.conf_d['obj'].checksumType,self.parent.conf_d['obj'].checksumType.currentText()))
@@ -211,6 +214,7 @@ class configure:
     def show(self):
         self.load_config()
         self.parent.conf_d['dialog'].show()
+        print(self.parent.getAllTags())
 
     def reset_config(self):
         print('reset clicked')
@@ -245,7 +249,7 @@ class configure:
                 ],
                 [
                     'statements_tag',
-                    QtWidgets.QLineEdit,
+                    QtWidgets.QComboBox,
                     self.config_temp['beColorful-tag']
                 ],
                 [
@@ -326,6 +330,10 @@ class configure:
                 index=obj[-1].findText(obj[2],QtCore.Qt.MatchExactly)
                 if index != None:
                     obj[-1].setCurrentIndex(index)
+                elif obj[0] == 'statements_tag':
+                    if index == None:
+                        index=obj[-1].findText('All',QtCore.Qt.MatchExactly)
+                        obj[-1].setCurrentIndex(index)
                 
         #print(fields)
 

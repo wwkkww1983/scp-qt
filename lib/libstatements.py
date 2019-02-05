@@ -8,12 +8,12 @@ class statements:
     vul='fiendish'
     enable_statements=True
     db={'db':None,'cursor':None}
-
+    fails=[None,[],()]
     def db_init(self):
         self.db['db']=sqlite3.connect(self.configJson['beColorfulDB'])
         self.db['cursor']=self.db['db'].cursor()
 
-    def getAllTags(self):
+    def getTag(self):
         sql='''select tag from statements group by tag;'''
         self.db['cursor'].execute(sql)
         tags=self.db['cursor'].fetchall()
@@ -29,13 +29,24 @@ class statements:
         ID=ids[random.randint(0,len(ids)-1)][0]
         return ID
 
+    def getAllTags(self):
+        sql='''select tag from statements group by tag;'''
+        db=sqlite3.connect(self.dbname)
+        cursor=db.cursor()
+        cursor.execute(sql)
+        tags=cursor.fetchall()
+
+        tags=[i[0] for i in tags if i not in self.fails]
+        return tags
+
     def sayit(self,tag,noPrint=True):
         self.db_init()
         all_temp=tag
         if tag == 'disable':
             return ''
-        if tag == 'all':
-            tag=self.getAllTags()
+        if tag == 'All':
+            tag=self.getTag()
+            all_temp='All'
             
         randomColor=random.randint(30,37)
         
@@ -52,7 +63,7 @@ class statements:
         statement=self.getStatement(randomStatementAddr,tag)        
         self.db['db'].close()
         
-        if all_temp == 'all':
+        if all_temp == 'All':
             statement='[{}] {}'.format(tag,statement)
         if statement != None:
             phrase_color='''\033[1;{0};40m{1}\033[1;40;m'''.format(randomColor,statement)
