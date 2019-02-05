@@ -76,7 +76,5 @@ ensure soft. can work on windows as wells as on linux [linux only is the current
 need more phrases for statements.db
 
 add a method to lib/libconfigure.py to get supported image formats for PyQt5 icons
-
-add a warning dialog to remove-entry in history dialog to warn user about remove of entry and allow cancellation
 </pending>
 </xml>
