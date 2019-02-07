@@ -22,7 +22,7 @@ class generator:
     def genPublic(self,path,file):
         pubkey = self.key.publickey()
         with open(os.path.join(path,file), 'wb') as content_file:
-            content_file.write(pubkey.exportKey('OpenSSH'))
+            content_file.write(pubkey.exportKey('OpenSSH')+b'\n')
 
     def dumpKey(self,privateKeyString,passphrase=None):
         return RSA.import_key(privateKeyString,passphrase).export_key().decode()

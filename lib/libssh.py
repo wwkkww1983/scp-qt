@@ -461,13 +461,17 @@ class ssh:
                         look_for_keys=False,
                         allow_agent=False,
                         )
-            else:       
+            else:
+                eKey=open(self.connection['cfg'][tab]['hostKey'],'rb').read() 
+                uKey=RSA.import_key(eKey)                  
+                keyIO=io.StringIO(uKey.export_key().decode())
+                key=paramiko.RSAKey.from_private_key(keyIO)
                 self.connection['connect'][tab]['clientSSH'].connect(
                         hostname=self.connection['cfg'][tab]['host'],
                         username=self.connection['cfg'][tab]['user'],
                         password=self.connection['cfg'][tab]['password'],
                         port=self.connection['cfg'][tab]['port'],
-                        key_filename=self.connection['cfg'][tab]['hostKey'],
+                        pkey=key,
                         look_for_keys=False,
                         allow_agent=False,
                         )
@@ -629,11 +633,15 @@ class ssh:
                         allow_agent=False,
                         )
             else:
+                eKey=open(self.connection['cfg'][tab]['hostKey'],'rb').read() 
+                uKey=RSA.import_key(eKey)                  
+                keyIO=io.StringIO(uKey.export_key().decode())
+                key=paramiko.RSAKey.from_private_key(keyIO)
                 self.connection['connect'][tab]['clientSSH'].connect(
                         hostname=self.connection['cfg'][tab]['host'],
                         username=self.connection['cfg'][tab]['user'],
                         port=self.connection['cfg'][tab]['port'],
-                        key_filename=self.connection['cfg'][tab]['hostKey'],
+                        pkey=key,
                         look_for_keys=False,
                         allow_agent=False,
                         )
